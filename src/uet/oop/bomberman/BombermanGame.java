@@ -10,7 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import uet.oop.bomberman.entities.Bomber;
+import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Grass;
 import uet.oop.bomberman.entities.Wall;
@@ -20,15 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BombermanGame extends Application {
-    
+
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
-    
+    //render
     private GraphicsContext gc;
     private Canvas canvas;
+    //entity
     private List<Entity> entities = new ArrayList<>();
     private List<Entity> stillObjects = new ArrayList<>();
 
+    public static Controller controller;
+    public  Scene gScene;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -62,37 +65,41 @@ public class BombermanGame extends Application {
         timer.start();
 
         createMap();
-
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        // test character: speed = 0, character no moving
+        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(),10);
         entities.add(bomberman);
 
+        controller = new Controller();
+        controller.handle(scene);
+
         //dieu khien nhan vat
-
         //Bomber bomber = loader.getController();
-
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
-            @Override
-            public void handle(KeyEvent event) {
-                //System.out.println(event.getCode());
-                switch (event.getCode()) {
-                    case W:
-                        entities.get(0).moveUp();
-                        break;
-                    case S:
-                        entities.get(0).moveDown();
-                        break;
-                    case A:
-                        entities.get(0).moveLeft();
-                        break;
-                    case D:
-                        entities.get(0).moveRight();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+        // test dieu khien nhan vat
+//        scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
+//            @Override
+//            public void handle(KeyEvent event) {
+//                //System.out.println(event.getCode());
+//                switch (event.getCode()) {
+//                    case W:
+//                        entities.get(0).moveUp();
+//                        break;
+//                    case S:
+//                        entities.get(0).moveDown();
+//                        break;
+//                    case A:
+//                        entities.get(0).moveLeft();
+//                        break;
+//                    case D:
+//                        entities.get(0).moveRight();
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        });
     }
+
+
     public void createMap() {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
