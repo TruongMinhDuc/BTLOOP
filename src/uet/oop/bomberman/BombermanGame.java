@@ -31,7 +31,7 @@ public class BombermanGame extends Application {
     private List<Entity> stillObjects = new ArrayList<>();
 
     public static Controller controller;
-    public  Scene gScene;
+    //public  Scene gScene;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -70,6 +70,7 @@ public class BombermanGame extends Application {
         entities.add(bomberman);
 
         controller = new Controller();
+
         controller.handle(scene);
 
         //dieu khien nhan vat
