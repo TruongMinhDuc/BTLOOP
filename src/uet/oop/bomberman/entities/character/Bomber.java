@@ -108,7 +108,7 @@ public class Bomber extends movement {
                 upFrameCount = 0;
             }
         }
-        this.y -= 10;
+        this.y -= speed;
     }
 
     @Override
@@ -126,7 +126,7 @@ public class Bomber extends movement {
                 downFrameCount = 0;
             }
         }
-        this.y += 10;
+        this.y += speed;
     }
 
     @Override
@@ -144,7 +144,7 @@ public class Bomber extends movement {
                 leftFrameCount = 0;
             }
         }
-        this.x -= 10;
+        this.x -= speed;
     }
 
     @Override
@@ -162,15 +162,14 @@ public class Bomber extends movement {
                 rightFrameCount = 0;
             }
         }
-        this.x += 10;
+        this.x += speed;
     }
 
     @Override
     public void update() {
-//        this.x = 3;
-//        this.y = 3;
-        this.setImg(Sprite.player_right.getFxImage());
-        isAlive = true;
+       if(isAlive) {
+            characterMovement();
+       }
     }
 
 
