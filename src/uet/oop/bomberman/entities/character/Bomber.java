@@ -30,39 +30,27 @@ public class Bomber extends movement {
 
     public void setFrameUp() {
         // đặt các frame di chuyên vào mảng đặt sẵn
-        Image u0 = Sprite.player_up.getFxImage();
-        Image u1 = Sprite.player_up_1.getFxImage();
-        Image u2 = Sprite.player_up_2.getFxImage();
-        frameUp[0] = u0;
-        frameUp[1] = u1;
-        frameUp[2] = u2;
+        frameUp[0] = Sprite.player_up.getFxImage();
+        frameUp[1] = Sprite.player_up_1.getFxImage();
+        frameUp[2] = Sprite.player_up_2.getFxImage();
     }
 
     public void setFrameDown() {
-        Image d0 = Sprite.player_down.getFxImage();
-        Image d1 = Sprite.player_down_1.getFxImage();
-        Image d2 = Sprite.player_down_2.getFxImage();
-        frameDown[0] = d0;
-        frameDown[1] = d1;
-        frameDown[2] = d2;
+        frameDown[0] = Sprite.player_down.getFxImage();
+        frameDown[1] = Sprite.player_down_1.getFxImage();
+        frameDown[2] = Sprite.player_down_2.getFxImage();
     }
 
     public void setFrameLeft() {
-        Image l0 = Sprite.player_left.getFxImage();
-        Image l1 = Sprite.player_left_1.getFxImage();
-        Image l2 = Sprite.player_left_2.getFxImage();
-        frameLeft[0] = l0;
-        frameLeft[1] = l1;
-        frameLeft[2] = l2;
+        frameLeft[0] = Sprite.player_left.getFxImage();
+        frameLeft[1] = Sprite.player_left_1.getFxImage();
+        frameLeft[2] = Sprite.player_left_2.getFxImage();
     }
 
     public void setFrameRight() {
-        Image r0 = Sprite.player_right.getFxImage();
-        Image r1 = Sprite.player_right_1.getFxImage();
-        Image r2 = Sprite.player_right_2.getFxImage();
-        frameRight[0] = r0;
-        frameRight[1] = r1;
-        frameRight[2] = r2;
+        frameRight[0] = Sprite.player_right.getFxImage();
+        frameRight[1] = Sprite.player_right_1.getFxImage();
+        frameRight[2] = Sprite.player_right_2.getFxImage();
     }
 
     public Bomber(int x, int y, Image img, double speed) {
@@ -167,9 +155,9 @@ public class Bomber extends movement {
 
     @Override
     public void update() {
-       if(isAlive) {
+        if (isAlive) {
             characterMovement();
-       }
+        }
     }
 
 
