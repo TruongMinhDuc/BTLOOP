@@ -1,5 +1,5 @@
 # Bài tập lớn lập trình hướng đối tượng.
-## DỰ án game BoomberMan.
+## Dự án game BoomberMan.
 ### Thành viên:
 * Trương Minh Đức 
 * Dương Khánh Toàn
