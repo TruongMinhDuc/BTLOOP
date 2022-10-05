@@ -17,13 +17,13 @@ public class Bomber extends movement {
     private int rightFrameCount = 0;
 
     Image[] frameUp = new Image[3];
-    ;
+
     Image[] frameDown = new Image[3];
-    ;
+
     Image[] frameLeft = new Image[3];
-    ;
+
     Image[] frameRight = new Image[3];
-    ;
+
 
     private final int maxFrame = 5;
 
