@@ -66,41 +66,16 @@ public class BombermanGame extends Application {
 
         createMap();
         // test character: speed = 0, character no moving
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(),0.5);
+        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(),1);
         entities.add(bomberman);
 
         controller = new Controller();
 
         controller.handle(scene);
 
-        //dieu khien nhan vat
-        //Bomber bomber = loader.getController();
-        // test dieu khien nhan vat
-//        scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
-//            @Override
-//            public void handle(KeyEvent event) {
-//                //System.out.println(event.getCode());
-//                switch (event.getCode()) {
-//                    case W:
-//                        entities.get(0).moveUp();
-//                        break;
-//                    case S:
-//                        entities.get(0).moveDown();
-//                        break;
-//                    case A:
-//                        entities.get(0).moveLeft();
-//                        break;
-//                    case D:
-//                        entities.get(0).moveRight();
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            }
-//        });
     }
 
-
+    // tạo map
     public void createMap() {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
