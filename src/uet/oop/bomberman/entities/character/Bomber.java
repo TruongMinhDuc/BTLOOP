@@ -130,7 +130,7 @@ public class Bomber extends movement {
         }
         this.x -= speed;
     }
-
+///
     @Override
     public void moveRight() {
         if (rightFrameCount < maxFrame) {

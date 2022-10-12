@@ -2,7 +2,7 @@ package uet.oop.bomberman;
 
 import uet.oop.bomberman.graphics.Sprite;
 import javafx.scene.Scene;
-
+//
 public class Controller {
     public boolean right, left, up, down, space;
     public Controller() {

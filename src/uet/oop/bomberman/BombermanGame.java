@@ -75,7 +75,7 @@ public class BombermanGame extends Application {
 
     }
 
-    // tạo map
+    //TODO: xử lí sự kiện trên map riêng
     public void createMap() {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
