@@ -72,29 +72,6 @@ public abstract class Entity {
     }
 
     public abstract void update();
-// hashset for something else in the future update
-//    public HashSet<String> movingHandle(Entity moving) {
-//        Image objFrame = moving.getImg();
-//        HashSet<String> ans = null;
-//        if(objFrame != null) {
-//            ans = new HashSet<String>();
-//            int cooX = (int) objFrame.getWidth();
-//            int cooY = (int) objFrame.getHeight();
-//
-//            PixelReader read = objFrame.getPixelReader();
-//
-//            int pix;
-//            for(int y = 0; y < cooY; y++) {
-//                for(int x = 0; x < cooX; x++) {
-//                    final  int argb = read.getArgb(x,y);
-//                    pix = (argb >> 24) & 0xff;
-//                    if(pix != 0) {
-//                        ans.add((int) (moving.getX() * 32) + x + "," + ((int) (moving.getY() * 32) - y));
-//                    }
-//                }
-//            }
-//        }
-//        return ans;
-//    }
+
 
 }
