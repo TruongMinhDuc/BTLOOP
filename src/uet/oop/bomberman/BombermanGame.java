@@ -16,6 +16,7 @@ import uet.oop.bomberman.entities.Grass;
 import uet.oop.bomberman.entities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class BombermanGame extends Application {
     public static List<Entity> stillObjects = new ArrayList<>();
 
     public static MapGen MG;
+    public static char[][] map = new char[WIDTH][HEIGHT];
 
     public static Controller controller;
     //public  Scene gScene;
@@ -68,10 +70,9 @@ public class BombermanGame extends Application {
         };
         timer.start();
 
-        MG.createMap();
-
+        createMap();
         // test character: speed = 0, character no moving
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 2);
+        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 1);
         entities.add(bomberman);
 
         controller = new Controller();
@@ -80,6 +81,13 @@ public class BombermanGame extends Application {
 
     }
 
+    public void createMap()  {
+        try{
+            MG.createMap();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     //TODO: xử lí sự kiện trên map riêng
