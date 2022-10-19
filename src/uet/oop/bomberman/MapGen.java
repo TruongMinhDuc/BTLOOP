@@ -42,27 +42,27 @@ public class MapGen {
 //        int mapWidth = sc.nextInt();
 
         //map load
-        int col = 0;
+        int he = 0;
         while(sc.hasNextLine()) {
             String tmp = sc.nextLine();
             //System.out.println(tmp.length());
             //System.out.println(row);
             for(int j = 0; j < tmp.length(); j++) {
-                BombermanGame.map[j][col] = tmp.charAt(j);
+                BombermanGame.map[he][j] = tmp.charAt(j);
             }
-            col++;
+            he++;
         }
-        //System.out.println(BombermanGame.map[1][2]);
+        //System.out.println(BombermanGame.map[][16]);
 
-        for(int i = 0; i < BombermanGame.WIDTH; i++) {
-            for(int j = 0; j < BombermanGame.HEIGHT; j++) {
+        for(int i = 0; i < BombermanGame.HEIGHT; i++) {
+            for(int j = 0; j < BombermanGame.WIDTH; j++) {
                 if(BombermanGame.map[i][j] == '#') {
                     Entity obj;
-                    obj = new  Wall(i, j, Sprite.wall.getFxImage());
+                    obj = new  Wall(j, i, Sprite.wall.getFxImage());
                     BombermanGame.stillObjects.add(obj);
                 } else {
                     Entity obj;
-                    obj = new Grass(i, j, Sprite.grass.getFxImage());
+                    obj = new Grass(j, i, Sprite.grass.getFxImage());
                     BombermanGame.stillObjects.add(obj);
                 }
             }
