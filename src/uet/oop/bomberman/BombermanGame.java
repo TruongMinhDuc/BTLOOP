@@ -34,7 +34,7 @@ public class BombermanGame extends Application {
     public static List<Entity> stillObjects = new ArrayList<>();
 
     public static MapGen MG;
-    public static char[][] map = new char[WIDTH][HEIGHT];
+    public static char[][] map = new char[HEIGHT][WIDTH];
 
     public static Controller controller;
     //public  Scene gScene;
@@ -72,7 +72,7 @@ public class BombermanGame extends Application {
 
         createMap();
         // test character: speed = 0, character no moving
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 1);
+        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 2);
         entities.add(bomberman);
 
         controller = new Controller();

@@ -60,25 +60,37 @@ public class Bomber extends movement {
     @Override
     public void characterMovement() {
         if (BombermanGame.controller.up) {
-            System.out.println("1");
-            moveUp();
+            if (!checkToMoveUp()) {
+                moveUp(0);
+            } else {
+                moveUp(speed);
+            }
         }
         if (BombermanGame.controller.down) {
-            System.out.println("2");
-            moveDown();
+            if (!checkToMoveDown()) {
+                moveDown(0);
+            } else {
+                moveDown(speed);
+            }
         }
         if (BombermanGame.controller.left) {
-            System.out.println("3");
-            moveLeft();
+            if (!checkToMoveLeft()) {
+                moveLeft(0);
+            } else {
+                moveLeft(speed);
+            }
         }
         if (BombermanGame.controller.right) {
-            System.out.println("4");
-            moveRight();
+            if (!checkToMoveRight()) {
+                moveRight(0);
+            } else {
+                moveRight(speed);
+            }
         }
     }
 
     @Override
-    public void moveUp() {
+    public void moveUp(double tmpSpeed) {
         if (upFrameCount < maxFrame) {
             this.setImg(frameUp[0]);
             upFrameCount++;
@@ -92,11 +104,22 @@ public class Bomber extends movement {
                 upFrameCount = 0;
             }
         }
-        this.y -= speed;
+        this.y -= tmpSpeed;
+    }
+
+    public boolean checkToMoveUp() {
+        int posX = x / Sprite.SCALED_SIZE;
+        int posY = y / Sprite.SCALED_SIZE ;
+
+        System.out.println(posY + " " + posX);
+        if (BombermanGame.map[posY][posX] == '#') {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void moveDown() {
+    public void moveDown(double tmpSpeed) {
         if (downFrameCount < maxFrame) {
             this.setImg(frameDown[0]);
             downFrameCount++;
@@ -110,11 +133,17 @@ public class Bomber extends movement {
                 downFrameCount = 0;
             }
         }
-        this.y += speed;
+        this.y += tmpSpeed;
+    }
+
+    public boolean checkToMoveDown() {
+
+        return true;
+
     }
 
     @Override
-    public void moveLeft() {
+    public void moveLeft(double tmpSpeed) {
         if (leftFrameCount < maxFrame) {
             this.setImg(frameLeft[0]);
             leftFrameCount++;
@@ -128,11 +157,18 @@ public class Bomber extends movement {
                 leftFrameCount = 0;
             }
         }
-        this.x -= speed;
+        this.x -= tmpSpeed;
     }
-///
+
+    public boolean checkToMoveLeft() {
+
+        return true;
+
+    }
+
+    ///
     @Override
-    public void moveRight() {
+    public void moveRight(double tmpSpeed) {
         if (rightFrameCount < maxFrame) {
             this.setImg(frameRight[0]);
             rightFrameCount++;
@@ -146,7 +182,13 @@ public class Bomber extends movement {
                 rightFrameCount = 0;
             }
         }
-        this.x += speed;
+        this.x += tmpSpeed;
+    }
+
+    public boolean checkToMoveRight() {
+
+        return true;
+
     }
 
     @Override

@@ -29,10 +29,10 @@ public abstract class movement extends Entity {
         this.speed = speed;
     }
 
-    public abstract void moveUp();
-    public abstract void moveDown();
-    public abstract void moveLeft();
-    public abstract void moveRight();
+    public abstract void moveUp(double tmpSpeed);
+    public abstract void moveDown(double tmpSpeed);
+    public abstract void moveLeft(double tmpSpeed);
+    public abstract void moveRight(double tmpSpeed);
 
     @Override
     public void update() {
