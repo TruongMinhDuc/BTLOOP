@@ -6,11 +6,11 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
 
 public abstract class movement extends Entity {
-    public int up = 0;
-    public int down = 0;
-    public int left = 0;
-    public int right = 0;
-    public final int frame = 5;
+    public int upFrameCount = 0;
+    public int downFrameCount = 0;
+    public int leftFrameCount = 0;
+    public int rightFrameCount = 0;
+    public final int maxFrame = 5;
     public double speed;
     public boolean isAlive = true;
 
