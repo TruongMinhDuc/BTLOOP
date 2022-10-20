@@ -1,14 +1,12 @@
 package uet.oop.bomberman.entities.character;
 
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.graphics.Sprite;
-import uet.oop.bomberman.BombermanGame;
+
+import static uet.oop.bomberman.BombermanGame.eventHandler;
 
 public class Bomber extends movement {
     private int upFrameCount = 0;
@@ -21,7 +19,7 @@ public class Bomber extends movement {
     Image[] frameLeft = new Image[3];
     Image[] frameRight = new Image[3];
 
-    private final int maxFrame = 5;
+    //private final int maxFrame = 5;
 
 
     public void setFrameUp() {
@@ -60,31 +58,31 @@ public class Bomber extends movement {
     @Override
     public void characterMovement() {
         if (BombermanGame.controller.up) {
-            if (!checkToMoveUp()) {
-                moveUp(0);
-            } else {
+            if (checkToMoveUp()) {
                 moveUp(speed);
+            } else {
+                moveUp(0);
             }
         }
         if (BombermanGame.controller.down) {
-            if (!checkToMoveDown()) {
-                moveDown(0);
-            } else {
+            if (checkToMoveDown()) {
                 moveDown(speed);
+            } else {
+                moveDown(0);
             }
         }
         if (BombermanGame.controller.left) {
-            if (!checkToMoveLeft()) {
-                moveLeft(0);
+            if(checkToMoveLeft()) {
+            moveLeft(speed);
             } else {
-                moveLeft(speed);
+            moveLeft(0);
             }
         }
         if (BombermanGame.controller.right) {
-            if (!checkToMoveRight()) {
-                moveRight(0);
-            } else {
+            if (checkToMoveRight()) {
                 moveRight(speed);
+            } else {
+                moveRight(0);
             }
         }
     }
@@ -108,12 +106,25 @@ public class Bomber extends movement {
     }
 
     public boolean checkToMoveUp() {
-        int posX = x / Sprite.SCALED_SIZE;
-        int posY = y / Sprite.SCALED_SIZE ;
+        double widthFrame = 24;
+        double dis = widthFrame / Sprite.SCALED_SIZE;
 
-        System.out.println(posY + " " + posX);
-        if (BombermanGame.map[posY][posX] == '#') {
-            return false;
+        int xPos = (int) (x);
+        int xPos2 = (int) (x + dis);
+        int yPos = (int) (y);
+        int yPos2 = (int) (y - speed);
+
+        if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
+            if (eventHandler.map[yPos2][xPos] != ' ' || eventHandler.map[yPos2][xPos2] != ' ') {
+                if (eventHandler.map[yPos2][xPos] != ' ') {
+                    System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
+                    return false;
+                } else if (eventHandler.map[yPos2][xPos2] != ' ') {
+                    System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
+                    return false;
+                }
+
+            }
         }
         return true;
     }
@@ -137,9 +148,25 @@ public class Bomber extends movement {
     }
 
     public boolean checkToMoveDown() {
+        double widthFrame = 24;
 
+        double dis = widthFrame / Sprite.SCALED_SIZE;
+        int xPos = (int) x;
+        int xPos2 = (int) (x + dis);
+
+        int yPos = (int) (y + speed);
+        int yPos2 = (int) (y + 1 + speed);
+
+        if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
+            if (eventHandler.map[yPos2][xPos] != ' ' || eventHandler.map[yPos2][xPos2] != ' ') {
+                if (eventHandler.map[(int) (y + 1)][xPos] != ' ') {
+                    return false;
+                } else if (eventHandler.map[(int) (y + 1)][xPos2] != ' ') {
+                    return false;
+                }
+            }
+        }
         return true;
-
     }
 
     @Override
@@ -162,8 +189,28 @@ public class Bomber extends movement {
 
     public boolean checkToMoveLeft() {
 
-        return true;
+        double widthFrame = 24;
 
+        double dis = widthFrame / (double) Sprite.SCALED_SIZE;
+
+        int xPos = (int) (x - speed);
+        int xPos2 = (int) (x - speed + dis);
+
+        int yPos = (int) y;
+        int yPos2 = (int) (y + dis);
+
+        if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
+            if (eventHandler.map[yPos][xPos] != ' ' || eventHandler.map[yPos2][xPos] != ' ') {
+                if (eventHandler.map[(int) y][xPos] != ' ') {
+                    //System.out.println(y + " " + xPos);
+                    return false;
+                } else if (eventHandler.map[(int) (y + 1)][xPos] != ' ') {
+                    //System.out.println(y + 1 + " " + xPos);
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     ///
@@ -186,10 +233,36 @@ public class Bomber extends movement {
     }
 
     public boolean checkToMoveRight() {
+        double widthFrame = 24;
 
+        double dis = widthFrame / (double) Sprite.SCALED_SIZE;
+
+        int xPos = (int) (x + speed);
+        int xPos2 = (int) (x + speed + dis);
+        int yPos = (int) y;
+        int yPos2 = (int) (y + dis);
+
+        if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
+            if (eventHandler.map[yPos][xPos2] != ' ' || eventHandler.map[yPos2][xPos2] != ' ') {
+                if (eventHandler.map[(int) y][xPos2] != ' ') {
+                    //System.out.println("cho nay la (" + eventHandler.map[(int) (y)][xPos2] + ")");
+                    return false;
+                } else {
+                    int tmp =(int) y + 1;
+                    if (eventHandler.map[(int) (tmp)][xPos2] != ' ') {
+//                        System.out.println("loi 2");
+//                        System.out.println(tmp + " " + xPos2);
+//                        System.out.println("cho nay la (" + eventHandler.map[(int) (tmp)][xPos2] + ")");
+                        return false;
+                    }
+                }
+            }
+        }
+        //System.out.println("Loi 1" + y + " " + xPos2);
+        //System.out.println("Loi 2" + y + " " + xPos2);
         return true;
-
     }
+
 
     @Override
     public void update() {
