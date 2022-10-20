@@ -115,12 +115,13 @@ public class Bomber extends movement {
         int yPos2 = (int) (y - speed);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (eventHandler.map[yPos2][xPos] != ' ' || eventHandler.map[yPos2][xPos2] != ' ') {
+            if (eventHandler.map[yPos2][xPos] == '#' || eventHandler.map[yPos2][xPos2] == '#'||
+                    eventHandler.map[yPos2][xPos] == '*' || eventHandler.map[yPos2][xPos2] == '*') {
                 if (eventHandler.map[yPos2][xPos] != ' ') {
-                    System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
+                    //System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
                     return false;
                 } else if (eventHandler.map[yPos2][xPos2] != ' ') {
-                    System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
+                    //System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
                     return false;
                 }
 
@@ -158,7 +159,8 @@ public class Bomber extends movement {
         int yPos2 = (int) (y + 1 + speed);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (eventHandler.map[yPos2][xPos] != ' ' || eventHandler.map[yPos2][xPos2] != ' ') {
+            if (eventHandler.map[yPos2][xPos] == '#' || eventHandler.map[yPos2][xPos2] == '#' ||
+                    eventHandler.map[yPos2][xPos] == '*' || eventHandler.map[yPos2][xPos2] == '*') {
                 if (eventHandler.map[(int) (y + 1)][xPos] != ' ') {
                     return false;
                 } else if (eventHandler.map[(int) (y + 1)][xPos2] != ' ') {
@@ -200,7 +202,8 @@ public class Bomber extends movement {
         int yPos2 = (int) (y + dis);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (eventHandler.map[yPos][xPos] != ' ' || eventHandler.map[yPos2][xPos] != ' ') {
+            if (eventHandler.map[yPos][xPos] == '#' || eventHandler.map[yPos2][xPos] == '#' ||
+                    eventHandler.map[yPos][xPos] == '*' || eventHandler.map[yPos2][xPos] == '*') {
                 if (eventHandler.map[(int) y][xPos] != ' ') {
                     //System.out.println(y + " " + xPos);
                     return false;
@@ -243,7 +246,8 @@ public class Bomber extends movement {
         int yPos2 = (int) (y + dis);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (eventHandler.map[yPos][xPos2] != ' ' || eventHandler.map[yPos2][xPos2] != ' ') {
+            if (eventHandler.map[yPos][xPos2] == '#' || eventHandler.map[yPos2][xPos2] == '#' ||
+                    eventHandler.map[yPos][xPos2] == '*' || eventHandler.map[yPos2][xPos2] == '*') {
                 if (eventHandler.map[(int) y][xPos2] != ' ') {
                     //System.out.println("cho nay la (" + eventHandler.map[(int) (y)][xPos2] + ")");
                     return false;

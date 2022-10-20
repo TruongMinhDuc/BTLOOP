@@ -65,7 +65,8 @@ public class BombermanGame extends Application {
 
         createMap();
         // test character: speed = 0, character no moving
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 0.025);
+        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 0.05);
+
         entities.add(bomberman);
 
         controller = new Controller();
