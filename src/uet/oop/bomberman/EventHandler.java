@@ -25,7 +25,7 @@ public class EventHandler {
     //public static int countDownTime = 181 * 60;
     //public static int scorePrevious;
 
-    private static List<Entity> entities = new ArrayList<>();
+    private static List<Entity> entitiesList = new ArrayList<>();
     private static List<Entity> stillObjects = new ArrayList<>();
     //private static List<Enemy> enemies = new ArrayList<>();
     public static double speedOfEnemy = 0.025;
@@ -60,8 +60,8 @@ public class EventHandler {
 //    }
 
     public Entity getEntity(double x, double y) {
-        for (int i = 0; i < entities.size(); i++) {
-            Entity temp = entities.get(i);
+        for (int i = 0; i < entitiesList.size(); i++) {
+            Entity temp = entitiesList.get(i);
             if (temp.getX() == x && temp.getY() == y) {
                 return temp;
             }
@@ -70,17 +70,17 @@ public class EventHandler {
     }
 
     public void removeEntityAt(double x, double y) {
-        for (int i = 0; i < entities.size(); i++) {
-            Entity temp = entities.get(i);
+        for (int i = 0; i < entitiesList.size(); i++) {
+            Entity temp = entitiesList.get(i);
             if (temp.getX() == x && temp.getY() == y) {
-                entities.remove(i);
+                entitiesList.remove(i);
                 break;
             }
         }
     }
 
     public static void addEntity(Entity object) {
-        entities.add(object);
+        entitiesList.add(object);
     }
 
     public void addStillObject(Entity object) {
@@ -88,7 +88,7 @@ public class EventHandler {
     }
 
     public List<Entity> getEntities() {
-        return this.entities;
+        return this.entitiesList;
     }
 
     public List<Entity> getStillObjects() {
@@ -130,8 +130,8 @@ public class EventHandler {
 //    }
 
     public int index(double x, double y) {
-        for (int i = 0; i < entities.size(); i++) {
-            Entity temp = entities.get(i);
+        for (int i = 0; i < entitiesList.size(); i++) {
+            Entity temp = entitiesList.get(i);
             if (temp.getX() == x && temp.getY() == y) {
                 return i;
             }
@@ -160,8 +160,8 @@ public class EventHandler {
 //    }
 
     public void update() {
-        for (int i = 0; i < entities.size(); i++) {
-            entities.get(i).update();
+        for (int i = 0; i < entitiesList.size(); i++) {
+            entitiesList.get(i).update();
         }
 //        for (int i = 0; i < enemies.size(); i++) {
 //            enemies.get(i).update();
