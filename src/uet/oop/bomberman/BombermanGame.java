@@ -2,22 +2,17 @@ package uet.oop.bomberman;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.Grass;
-import uet.oop.bomberman.entities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +27,9 @@ public class BombermanGame extends Application {
     //entity
     private List<Entity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
-
     public static MapGen MG;
-    public static char[][] map = new char[HEIGHT][WIDTH];
-
     public static Controller controller;
+    public static EventHandler eventHandler;
     //public  Scene gScene;
 
     public static void main(String[] args) {
@@ -72,7 +65,7 @@ public class BombermanGame extends Application {
 
         createMap();
         // test character: speed = 0, character no moving
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 2);
+        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 0.025);
         entities.add(bomberman);
 
         controller = new Controller();
@@ -88,23 +81,6 @@ public class BombermanGame extends Application {
             e.printStackTrace();
         }
     }
-
-
-    //TODO: xử lí sự kiện trên map riêng
-//    public void createMap() {
-//        for (int i = 0; i < WIDTH; i++) {
-//            for (int j = 0; j < HEIGHT; j++) {
-//                Entity object;
-//                if (j == 0 || j == HEIGHT - 1 || i == 0 || i == WIDTH - 1) {
-//                    object = new Wall(i, j, Sprite.wall.getFxImage());
-//                }
-//                else {
-//                    object = new Grass(i, j, Sprite.grass.getFxImage());
-//                }
-//                stillObjects.add(object);
-//            }
-//        }
-//    }
 
     public void update() {
         entities.forEach(Entity::update);
