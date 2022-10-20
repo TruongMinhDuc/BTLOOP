@@ -1,21 +1,22 @@
 package uet.oop.bomberman;
 
-import javafx.scene.chart.Chart;
-import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.Grass;
-import uet.oop.bomberman.entities.Wall;
+import uet.oop.bomberman.entities.MapEntities.Brick;
+import uet.oop.bomberman.entities.MapEntities.Grass;
+import uet.oop.bomberman.entities.MapEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 //TODO: đọc từ file các kí tự text thêm vào obj
 public class MapGen {
     public static int level = 1;
+    private EventHandler eventHandler;
+    public MapGen(EventHandler eventHandler) {
+        this.eventHandler = eventHandler;
+    }
     //public static char[][] map = new char[BombermanGame.HEIGHT][BombermanGame.WIDTH];
 
     public static void createMap() throws FileNotFoundException {
@@ -48,7 +49,7 @@ public class MapGen {
             //System.out.println(tmp.length());
             //System.out.println(row);
             for(int j = 0; j < tmp.length(); j++) {
-                BombermanGame.map[he][j] = tmp.charAt(j);
+                EventHandler.map[he][j] = tmp.charAt(j);
             }
             he++;
         }
@@ -56,14 +57,21 @@ public class MapGen {
 
         for(int i = 0; i < BombermanGame.HEIGHT; i++) {
             for(int j = 0; j < BombermanGame.WIDTH; j++) {
-                if(BombermanGame.map[i][j] == '#') {
+                if(EventHandler.map[i][j] == '#') {
                     Entity obj;
                     obj = new  Wall(j, i, Sprite.wall.getFxImage());
                     BombermanGame.stillObjects.add(obj);
+                    //EventHandler.addEntity(obj);
                 } else {
                     Entity obj;
                     obj = new Grass(j, i, Sprite.grass.getFxImage());
                     BombermanGame.stillObjects.add(obj);
+                    //EventHandler.addEntity(obj);
+                }
+                if(EventHandler.map[i][j] == '*') {
+                        Entity obj = new Brick(j, i, Sprite.brick.getFxImage());
+                        BombermanGame.stillObjects.add(obj);
+                        EventHandler.addEntity(obj);
                 }
             }
         }
