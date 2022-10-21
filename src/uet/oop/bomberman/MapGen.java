@@ -12,14 +12,14 @@ import java.util.Scanner;
 
 //TODO: đọc từ file các kí tự text thêm vào obj
 public class MapGen {
-    public static int level = 1;
+    //public static int level = 1;
     private EventHandler eventHandler;
     public MapGen(EventHandler eventHandler) {
         this.eventHandler = eventHandler;
     }
     //public static char[][] map = new char[BombermanGame.HEIGHT][BombermanGame.WIDTH];
 
-    public static void createMap() throws FileNotFoundException {
+    public static void createMap(int level) throws FileNotFoundException {
         //mapExample
 //        for (int i = 0; i < BombermanGame.WIDTH; i++) {
 //            for (int j = 0; j < BombermanGame.HEIGHT; j++) {

@@ -31,9 +31,9 @@ public class EventHandler {
     public static double speedOfEnemy = 0.025;
     private double speedOfPlayer = 0.05;
     private static Bomber player;
-    private MapGen gameLevel;
-    private int level;
-    public static File file = new File("res/levels/save.txt");
+    private MapGen gameLevel ;
+    private int level ;
+    //public static File file = new File("res/levels/save.txt");
 
 
     public EventHandler() {
@@ -167,6 +167,8 @@ public class EventHandler {
 //            enemies.get(i).update();
 //        }
     }
+
+
 
 //    public void loadLevel() {
 //        try {

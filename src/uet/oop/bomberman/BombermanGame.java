@@ -77,7 +77,7 @@ public class BombermanGame extends Application {
 
     public void createMap()  {
         try{
-            MG.createMap();
+            MG.createMap(1);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
