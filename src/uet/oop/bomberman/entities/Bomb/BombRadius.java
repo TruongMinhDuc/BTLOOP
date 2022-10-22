@@ -8,7 +8,7 @@ import uet.oop.bomberman.entities.Entity;
 import java.util.stream.IntStream;
 
 public class BombRadius extends Entity {
-    protected ExplosionRender[] explosionList;
+    protected ExplosionRender[] explosionImg;
     protected int direction;
     private boolean removable = false;
     boolean last;
@@ -17,32 +17,40 @@ public class BombRadius extends Entity {
         this.x = x;
         this.y = y;
         this.direction = direction;
-        explosionList = new ExplosionRender[radius()];
+        explosionImg = new ExplosionRender[radius()];
         explosionCreate();
 
     }
 
     private int radius() {
-        int radius1 = 0;
-        int x1 = (int) x;
-        int y1 = (int) y;
-        while (radius1 < EventHandler.bombRadius) {
-            if (direction == 0) y1--;
-            if (direction == 1) x1++;
-            if (direction == 2) y1++;
-            if (direction == 3) x1--;
-            if (EventHandler.map[y1][x1] == ' ') {
-                radius1++;
+        int rad = 0;
+        int xPos = (int) x;
+        int yPos = (int) y;
+        while (rad < EventHandler.bombRadius) {
+            if (direction == 0) {
+                yPos--;
             }
-            if (EventHandler.map[y1][x1] == '#') {
+            if (direction == 1) {
+                xPos++;
+            }
+            if (direction == 2) {
+                yPos++;
+            }
+            if (direction == 3) {
+                xPos--;
+            }
+            if (EventHandler.map[yPos][xPos] == ' ') {
+                rad++;
+            }
+            if (EventHandler.map[yPos][xPos] == '#') {
                 break;
             }
-            if (EventHandler.map[y1][x1] == '*') {
-                radius1++;
+            if (EventHandler.map[yPos][xPos] == '*') {
+                rad++;
             }
-            if (EventHandler.map[y1][x1] != '#' && EventHandler.map[y1][x1] != ' ') {
+            if (EventHandler.map[yPos][xPos] != '#' && EventHandler.map[yPos][xPos] != ' ') {
                 for (Entity temp : BombermanGame.eventHandler.getEntities()) {
-                    if (temp.getX() == x1 && temp.getY() == y1) {
+                    if (temp.getX() == xPos && temp.getY() == yPos) {
                         temp.setRemovable(true);
                         break;
                     }
@@ -52,42 +60,46 @@ public class BombRadius extends Entity {
 
         }
 
-        return radius1;
+        return rad;
 
     }
 
     public void explosionCreate() {
-        int x1 = (int) x;
-        int y1 = (int) y;
-        for (int i = 0; i < explosionList.length; i++) {
-            last = i == explosionList.length - 1;
+        int xPos = (int) x;
+        int yPos = (int) y;
+        for (int i = 0; i < explosionImg.length; i++) {
+            last = i == explosionImg.length - 1;
             switch (direction) {
                 case 0:
-                    y1--;
+                    //up
+                    yPos--;
                     break;
                 case 1:
-                    x1++;
+                    //right
+                    xPos++;
                     break;
                 case 2:
-                    y1++;
+                    //down
+                    yPos++;
                     break;
                 case 3:
-                    x1--;
+                    //left
+                    xPos--;
                     break;
             }
-            explosionList[i] = new ExplosionRender(x1, y1, direction, last);
+            explosionImg[i] = new ExplosionRender(xPos, yPos, direction, last);
         }
     }
 
     public void update(int duration) {
-        for (int i = 0; i < explosionList.length; i++) {
-            explosionList[i].update(direction, duration);
+        for (int i = 0; i < explosionImg.length; i++) {
+            explosionImg[i].update(direction, duration);
         }
     }
 
     @Override
     public void render(GraphicsContext gc) {
-        IntStream.range(0, explosionList.length).filter(i -> !removable).forEach(i -> explosionList[i].render(gc));
+        IntStream.range(0, explosionImg.length).filter(i -> !removable).forEach(i -> explosionImg[i].render(gc));
     }
 
 

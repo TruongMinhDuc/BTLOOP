@@ -81,9 +81,9 @@ public abstract class Entity {
 
     public HashSet<String> blockEntity(Entity obj) {
         Image imgObj = obj.getImg();
-        HashSet<String> wall = null;
+        HashSet<String> block = null;
         if (imgObj != null) {
-            wall = new HashSet<String>();
+            block = new HashSet<String>();
             int W = (int) imgObj.getWidth();
             int H = (int) imgObj.getHeight();
 
@@ -95,12 +95,12 @@ public abstract class Entity {
                     int argb = reader.getArgb(x, y);
                     a = (argb >> 24) & 0xff;
                     if (a != 0) {
-                        wall.add((int) (obj.getX() * 32) + x + "," + ((int) (obj.getY() * 32) - y));
+                        block.add((int) (obj.getX() * 32) + x + "," + ((int) (obj.getY() * 32) - y));
                     }
                 }
             }
         }
-        return wall;
+        return block;
     }
 
 }

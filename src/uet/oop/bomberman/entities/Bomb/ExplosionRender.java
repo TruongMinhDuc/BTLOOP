@@ -68,12 +68,10 @@ public class ExplosionRender extends Entity {
     @Override
     public void render(GraphicsContext gc) {
         if(EventHandler.map[(int)y][(int)x] != 'B') super.render(gc);
-
     }
 
     @Override
     public void update() {
-
     }
 
 

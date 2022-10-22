@@ -11,19 +11,16 @@ import java.util.stream.IntStream;
 
 public class Bomb extends Entity {
 
-    protected double timeToExplode = 1000;
+    protected double timeToExplode = 130;
 
     protected int timeExplode = 50;
 
     protected boolean isExplode = false;
 
-    protected BombRadius[] explosions = new BombRadius[4];
+    protected BombRadius[] explosionsDirection = new BombRadius[4];
 
     private int frame = 0;
 
-    public Bomb() {
-        removable = true;
-    }
 
     public Bomb(double x, double y, Image img, boolean remove) {
         super(x, y, img);
@@ -32,14 +29,14 @@ public class Bomb extends Entity {
 
     protected void explosion() {
         isExplode = true;
-        for (int i = 0; i < explosions.length; i++) {
-            explosions[i] = new BombRadius((int) x, (int) y, i);
+        for (int i = 0; i < explosionsDirection.length; i++) {
+            explosionsDirection[i] = new BombRadius((int) x, (int) y, i);
         }
     }
 
 
-    public void updateExplosions() {
-        for (BombRadius explosion : explosions) {
+    public void explosionsDuration() {
+        for (BombRadius explosion : explosionsDirection) {
             explosion.update(timeExplode);
         }
     }
@@ -55,7 +52,7 @@ public class Bomb extends Entity {
                     explosion();
                 } if (timeExplode > 0) {
                     timeExplode--;
-                    updateExplosions();
+                    explosionsDuration();
                 } else {
                     removable = true;
                 }
@@ -77,13 +74,15 @@ public class Bomb extends Entity {
             int duration = timeExplode % 30;
             if (duration >= 20) {
                 setImg(Sprite.bomb_exploded2.getFxImage());
-            } else if (duration >= 10) {
-                setImg(Sprite.bomb_exploded1.getFxImage());
             } else {
-                setImg(Sprite.bomb_exploded.getFxImage());
+                if (duration >= 10) {
+                    setImg(Sprite.bomb_exploded1.getFxImage());
+                } else {
+                    setImg(Sprite.bomb_exploded.getFxImage());
+                }
             }
             super.render(gc);
-            IntStream.range(0, explosions.length).forEach(i -> explosions[i].render(gc));
+            IntStream.range(0, explosionsDirection.length).forEach(i -> explosionsDirection[i].render(gc));
         }
     }
 

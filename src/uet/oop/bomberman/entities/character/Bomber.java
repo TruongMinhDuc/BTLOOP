@@ -286,11 +286,11 @@ public class Bomber extends movement {
 
     @Override
     public void update() {
+        for (int i = 0; i< bombsList.size(); i++) {
+            bombPass(bombsList.get(i));
+            bombsList.get(i).update();
+        }
         if (isAlive) {
-            for (int i = 0; i< bombsList.size(); i++) {
-                bombPass(bombsList.get(i));
-                bombsList.get(i).update();
-            }
             characterMovement();
             plantBomb();
             //bombsList.forEach(Bomb::update);
