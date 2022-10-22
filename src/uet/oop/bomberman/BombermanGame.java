@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
+import uet.oop.bomberman.entities.Bomb.Bomb;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
@@ -22,14 +23,15 @@ public class BombermanGame extends Application {
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
     //render
-    private GraphicsContext gc;
-    private Canvas canvas;
+    public static GraphicsContext gc;
+    public static Canvas canvas;
     //entity
     private List<Entity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
     public static MapGen MG;
     public static Controller controller;
     public static EventHandler eventHandler;
+    public static Bomb bomb;
     //public  Scene gScene;
 
     public static void main(String[] args) {
@@ -57,8 +59,8 @@ public class BombermanGame extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                render();
-                update();
+              render();
+              update();
             }
         };
         timer.start();
@@ -100,6 +102,7 @@ public class BombermanGame extends Application {
 
     public void update() {
         entities.forEach(Entity::update);
+
     }
 
     public void render() {
