@@ -221,10 +221,10 @@ public class Bomber extends movement {
                     EventHandler.map[yPos][xPos] == '*' || EventHandler.map[yPos2][xPos] == '*' ||
                     EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
             ) {
-                if (EventHandler.map[(int) y][xPos] != ' ') {
+                if (EventHandler.map[yPos][xPos] != ' ') {
                     //System.out.println("loi 1");
                     return false;
-                } else if (EventHandler.map[(int) (y + 1)][xPos] != ' ') {
+                } else if (EventHandler.map[yPos2][xPos] != ' ') {
                     //System.out.println("loi2");
 
                     return false;
@@ -268,7 +268,7 @@ public class Bomber extends movement {
             if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
                     EventHandler.map[yPos][xPos2] == '*' || EventHandler.map[yPos2][xPos2] == '*' ||
                     EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
-                if (EventHandler.map[(int) y][xPos2] != ' ') {
+                if (EventHandler.map[yPos][xPos2] != ' ') {
                     //System.out.println("cho nay la (" + eventHandler.map[(int) (y)][xPos2] + ")");
                     return false;
                 } else {
