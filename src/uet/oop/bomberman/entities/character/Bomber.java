@@ -271,6 +271,10 @@ public class Bomber extends movement {
                 if (EventHandler.map[(int) y][xPos2] != ' ') {
                     //System.out.println("cho nay la (" + eventHandler.map[(int) (y)][xPos2] + ")");
                     return false;
+                } else {
+                    if(EventHandler.map[yPos2][xPos2]  != ' ') {
+                        return  false;
+                    }
                 }
             }
         }
