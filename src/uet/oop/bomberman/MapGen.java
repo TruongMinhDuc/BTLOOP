@@ -19,7 +19,7 @@ public class MapGen {
     }
     //public static char[][] map = new char[BombermanGame.HEIGHT][BombermanGame.WIDTH];
 
-    public static void createMap(int level) throws FileNotFoundException {
+    public void createMap(int level) throws FileNotFoundException {
         //mapExample
 //        for (int i = 0; i < BombermanGame.WIDTH; i++) {
 //            for (int j = 0; j < BombermanGame.HEIGHT; j++) {

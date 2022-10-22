@@ -63,13 +63,23 @@ public class BombermanGame extends Application {
         };
         timer.start();
 
-        createMap();
-        // test character: speed = 0, character no moving
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 0.05);
-
-        entities.add(bomberman);
-
-        controller = new Controller();
+//        new EventHandler();
+//
+//        //createMap();
+//        // test character: speed = 0, character no moving
+//        //Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 0.05);
+//
+//
+//
+//        entities.add(EventHandler.getPlayer());
+//
+//        controller = new Controller();
+        try {
+            newGame();
+            entities.add(EventHandler.getPlayer());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         controller.handle(scene);
 
@@ -81,6 +91,11 @@ public class BombermanGame extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    public void newGame() throws FileNotFoundException {
+            eventHandler = new EventHandler();
+            controller = new Controller();
+            eventHandler.getGameLevel().createMap(1);
     }
 
     public void update() {

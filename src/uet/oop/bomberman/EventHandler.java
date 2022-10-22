@@ -32,7 +32,7 @@ public class EventHandler {
     private double speedOfPlayer = 0.05;
     private static Bomber player;
     private MapGen gameLevel ;
-    private int level ;
+    private int level;
     //public static File file = new File("res/levels/save.txt");
 
 
