@@ -1,14 +1,23 @@
 package uet.oop.bomberman.entities.character;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.EventHandler;
+import uet.oop.bomberman.entities.Bomb.Bomb;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import static uet.oop.bomberman.BombermanGame.bomb;
 import static uet.oop.bomberman.BombermanGame.eventHandler;
 
 public class Bomber extends movement {
+    private boolean isDie = false;
     private int upFrameCount = 0;
     private int downFrameCount = 0;
     private int leftFrameCount = 0;
@@ -19,7 +28,9 @@ public class Bomber extends movement {
     Image[] frameLeft = new Image[3];
     Image[] frameRight = new Image[3];
 
-    //private final int maxFrame = 5;
+    private final int maxFrame = 10;
+
+    private List<Bomb> bombsList = new ArrayList<>();
 
 
     public void setFrameUp() {
@@ -72,10 +83,10 @@ public class Bomber extends movement {
             }
         }
         if (BombermanGame.controller.left) {
-            if(checkToMoveLeft()) {
-            moveLeft(speed);
+            if (checkToMoveLeft()) {
+                moveLeft(speed);
             } else {
-            moveLeft(0);
+                moveLeft(0);
             }
         }
         if (BombermanGame.controller.right) {
@@ -102,7 +113,7 @@ public class Bomber extends movement {
                 upFrameCount = 0;
             }
         }
-        this.y -= tmpSpeed;
+        this.y -= tmpSpeed ;
     }
 
     public boolean checkToMoveUp() {
@@ -115,8 +126,10 @@ public class Bomber extends movement {
         int yPos2 = (int) (y - speed);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (eventHandler.map[yPos2][xPos] == '#' || eventHandler.map[yPos2][xPos2] == '#'||
-                    eventHandler.map[yPos2][xPos] == '*' || eventHandler.map[yPos2][xPos2] == '*') {
+            if (eventHandler.map[yPos2][xPos] == '#' || eventHandler.map[yPos2][xPos2] == '#' ||
+                    eventHandler.map[yPos2][xPos] == '*' || eventHandler.map[yPos2][xPos2] == '*' ||
+                    eventHandler.map[yPos2][xPos] == 'B' || eventHandler.map[yPos2][xPos2] == 'B'
+            ) {
                 if (eventHandler.map[yPos2][xPos] != ' ') {
                     //System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
                     return false;
@@ -160,7 +173,9 @@ public class Bomber extends movement {
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
             if (eventHandler.map[yPos2][xPos] == '#' || eventHandler.map[yPos2][xPos2] == '#' ||
-                    eventHandler.map[yPos2][xPos] == '*' || eventHandler.map[yPos2][xPos2] == '*') {
+                    eventHandler.map[yPos2][xPos] == '*' || eventHandler.map[yPos2][xPos2] == '*' ||
+                    eventHandler.map[yPos2][xPos] == 'B' || eventHandler.map[yPos2][xPos2] == 'B'
+            ) {
                 if (eventHandler.map[(int) (y + 1)][xPos] != ' ') {
                     return false;
                 } else if (eventHandler.map[(int) (y + 1)][xPos2] != ' ') {
@@ -196,19 +211,22 @@ public class Bomber extends movement {
         double dis = widthFrame / (double) Sprite.SCALED_SIZE;
 
         int xPos = (int) (x - speed);
-        int xPos2 = (int) (x - speed + dis);
+        int xPos2 = (int) (x - speed);
 
         int yPos = (int) y;
         int yPos2 = (int) (y + dis);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (eventHandler.map[yPos][xPos] == '#' || eventHandler.map[yPos2][xPos] == '#' ||
-                    eventHandler.map[yPos][xPos] == '*' || eventHandler.map[yPos2][xPos] == '*') {
-                if (eventHandler.map[(int) y][xPos] != ' ') {
-                    //System.out.println(y + " " + xPos);
+            if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#' ||
+                    EventHandler.map[yPos][xPos] == '*' || EventHandler.map[yPos2][xPos] == '*' ||
+                    EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
+            ) {
+                if (EventHandler.map[(int) y][xPos] != ' ') {
+                    //System.out.println("loi 1");
                     return false;
-                } else if (eventHandler.map[(int) (y + 1)][xPos] != ' ') {
-                    //System.out.println(y + 1 + " " + xPos);
+                } else if (EventHandler.map[(int) (y + 1)][xPos] != ' ') {
+                    //System.out.println("loi2");
+
                     return false;
                 }
             }
@@ -242,23 +260,17 @@ public class Bomber extends movement {
 
         int xPos = (int) (x + speed);
         int xPos2 = (int) (x + speed + dis);
+
         int yPos = (int) y;
         int yPos2 = (int) (y + dis);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (eventHandler.map[yPos][xPos2] == '#' || eventHandler.map[yPos2][xPos2] == '#' ||
-                    eventHandler.map[yPos][xPos2] == '*' || eventHandler.map[yPos2][xPos2] == '*') {
-                if (eventHandler.map[(int) y][xPos2] != ' ') {
+            if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                    EventHandler.map[yPos][xPos2] == '*' || EventHandler.map[yPos2][xPos2] == '*' ||
+                    EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                if (EventHandler.map[(int) y][xPos2] != ' ') {
                     //System.out.println("cho nay la (" + eventHandler.map[(int) (y)][xPos2] + ")");
                     return false;
-                } else {
-                    int tmp =(int) y + 1;
-                    if (eventHandler.map[(int) (tmp)][xPos2] != ' ') {
-//                        System.out.println("loi 2");
-//                        System.out.println(tmp + " " + xPos2);
-//                        System.out.println("cho nay la (" + eventHandler.map[(int) (tmp)][xPos2] + ")");
-                        return false;
-                    }
                 }
             }
         }
@@ -271,9 +283,89 @@ public class Bomber extends movement {
     @Override
     public void update() {
         if (isAlive) {
+            for (int i = 0; i< bombsList.size(); i++) {
+                bombPass(bombsList.get(i));
+                bombsList.get(i).update();
+            }
             characterMovement();
+            plantBomb();
+            //bombsList.forEach(Bomb::update);
         }
     }
 
+    public void render(GraphicsContext gc) {
+        if (!isDie) {
+            super.render(gc);
+        } else {
+            if (eventHandler.countDownTime % 4 == 0 || eventHandler.countDownTime % 4 == 1) {
+                super.render(gc);
+            }
+        }
+        for (Bomb bomb : bombsList) {
+            bomb.render(gc);
+        }
+    }
 
+    // có khả năng chạy sinh ra lỗi trong tương lai
+    public void removeBombAt(double x, double y) {
+        for (int i = 0; i < bombsList.size(); i++) {
+            Bomb tmp = bombsList.get(i);
+            if (tmp.getY() == y && tmp.getX() == x) {
+                bombsList.remove(i);
+                eventHandler.map[(int) tmp.getY()][(int) tmp.getX()] = ' ';
+                break;
+            }
+        }
+    }
+
+    public void plantBomb() {
+        if (BombermanGame.controller.space && bombsList.size() < EventHandler.bombCount) {
+            if (!(eventHandler.getEntity(xPosBomb(), yPosBomb()) instanceof Brick)) {
+                Bomb bomb = new Bomb(xPosBomb(), yPosBomb(), Sprite.bomb.getFxImage(), false);
+                //System.out.println("plant");
+                addBomb(bomb);
+            }
+        }
+    }
+
+    public int xPosBomb() {
+        if (this.x == (int) this.x) return (int) this.x;
+        double difference = this.x - (int) this.x;
+        return (difference >= 0.64) ? (int) this.x + 1 : (int) this.x;
+
+    }
+
+    public int yPosBomb() {
+        if (this.y == (int) this.y) return (int) this.y;
+        double difference = this.y - (int) this.y;
+        return (difference >= 0.64) ? (int) this.y + 1 : (int) this.y;
+    }
+
+    public void addBomb(Bomb bomb) {
+        boolean check = true;
+        for (Bomb temp : bombsList) {
+            if (temp.getX() == bomb.getX() && temp.getY() == bomb.getY()) {
+                check = false;
+                //System.out.println("cant");
+                break;
+            }
+        }
+        if (check) {
+            bombsList.add(bomb);
+
+            //EventHandler.map[yPosBomb()][xPosBomb()] = 'B';
+            //System.out.println(1);
+
+        }
+    }
+    public void bombPass(Bomb bomb) {
+        if (isAlive) {
+            HashSet<String> hideBomb = blockEntity(bomb);
+            HashSet<String> hidePlayer = blockEntity(this);
+            hideBomb.retainAll(hidePlayer);
+            if (hideBomb.size() == 0 && !EventHandler.bombPass) {
+                EventHandler.map[(int) bomb.getY()][(int) bomb.getX()] = 'B';
+            }
+        }
+    }
 }

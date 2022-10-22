@@ -18,19 +18,23 @@ public class Controller {
             switch (event.getCode()) {
                 case W:
                     up = true;
-                    System.out.println("up");
+//                    System.out.println("up");
                     break;
                 case S:
                     down = true;
-                    System.out.println("down");
+//                    System.out.println("down");
                     break;
                 case A:
                     left = true;
-                    System.out.println("left");
+//                    System.out.println("left");
                     break;
                 case D:
                     right = true;
-                    System.out.println("right");
+//                    System.out.println("right");
+                    break;
+                case SPACE:
+                    space = true;
+                    System.out.println("space");
                     break;
             }
         });
@@ -49,6 +53,10 @@ public class Controller {
                 case D:
                     right = false;
                     break;
+                case SPACE:
+                    space = false;
+                    break;
+
             }
         });
     }

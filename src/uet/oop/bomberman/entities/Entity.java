@@ -16,13 +16,17 @@ public abstract class Entity {
     //Tọa độ Y tính từ góc trái trên trong Canvas
     protected double y;
     protected Image img;
+
+    public boolean removable = false;
+
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
     public Entity() {
 
     }
+
     public Entity(double xUnit, double yUnit, Image img) {
-        this.x = xUnit ;
-        this.y = yUnit ;
+        this.x = xUnit;
+        this.y = yUnit;
         this.img = img;
     }
 
@@ -50,8 +54,10 @@ public abstract class Entity {
         this.img = img;
     }
 
-
-    //    public void moveUp() {
+    public void setRemovable(boolean removable) {
+        this.removable = removable;
+    }
+//    public void moveUp() {
 //        y = y - 10;
 //    }
 //
@@ -68,10 +74,33 @@ public abstract class Entity {
 //    }
 
     public void render(GraphicsContext gc) {
-        gc.drawImage(img, x* Sprite.SCALED_SIZE, y* Sprite.SCALED_SIZE );
+        gc.drawImage(img, x * Sprite.SCALED_SIZE, y * Sprite.SCALED_SIZE);
     }
 
     public abstract void update();
 
+    public HashSet<String> blockEntity(Entity obj) {
+        Image imgObj = obj.getImg();
+        HashSet<String> wall = null;
+        if (imgObj != null) {
+            wall = new HashSet<String>();
+            int W = (int) imgObj.getWidth();
+            int H = (int) imgObj.getHeight();
+
+            PixelReader reader = imgObj.getPixelReader();
+
+            int a;
+            for (int y = 0; y < H; y++) {
+                for (int x = 0; x < W; x++) {
+                    int argb = reader.getArgb(x, y);
+                    a = (argb >> 24) & 0xff;
+                    if (a != 0) {
+                        wall.add((int) (obj.getX() * 32) + x + "," + ((int) (obj.getY() * 32) - y));
+                    }
+                }
+            }
+        }
+        return wall;
+    }
 
 }
