@@ -38,7 +38,7 @@ public class Brick extends Entity {
          } else {
             if(Anicount != 0) {
                 int duration = Anicount % 50;
-                System.out.println(duration);
+                //System.out.println(duration);
                 if (duration >= 35) {
                     setImg(Sprite.brick_exploded.getFxImage());
                     super.render(gc);

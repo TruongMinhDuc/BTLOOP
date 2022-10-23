@@ -88,14 +88,13 @@ public abstract class Entity {
             int H = (int) imgObj.getHeight();
 
             PixelReader reader = imgObj.getPixelReader();
-
-            int a;
-            for (int y = 0; y < H; y++) {
-                for (int x = 0; x < W; x++) {
-                    int argb = reader.getArgb(x, y);
-                    a = (argb >> 24) & 0xff;
-                    if (a != 0) {
-                        block.add((int) (obj.getX() * 32) + x + "," + ((int) (obj.getY() * 32) - y));
+            int tmp;
+            for (int i = 0; i < H; i++) {
+                for (int j = 0; j < W; j++) {
+                    int argb = reader.getArgb(j, i);
+                    tmp = (argb >> 24) & 0xff;
+                    if (tmp != 0) {
+                        block.add((int) (obj.getX() * 32) + j + "," + ((int) (obj.getY() * 32) - i));
                     }
                 }
             }

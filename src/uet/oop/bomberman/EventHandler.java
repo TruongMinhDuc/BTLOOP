@@ -31,9 +31,9 @@ public class EventHandler {
     public static double speedOfEnemy = 0.025;
     private double speedOfPlayer = 0.05;
     private static Bomber player;
-    private MapGen gameLevel ;
+    private MapGen gameLevel;
     private int level;
-    //public static File file = new File("res/levels/save.txt");
+
 
 
     public EventHandler() {
@@ -139,34 +139,19 @@ public class EventHandler {
         return 0;
     }
 
-//    public void setLevel(int level) {
-//        this.level = level;
-//    }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-//    public int getLevel() {
-//        return this.level;
-//    }
+    public int getLevel() {
+        return this.level;
+    }
 
     public MapGen getGameLevel() {
         return this.gameLevel;
     }
 
-//    public void render() {
-//        BombermanGame.gc.clearRect(0, 0, BombermanGame.canvas.getWidth(), BombermanGame.canvas.getHeight());
-//        BombermanGame.gcForPlayer.clearRect(0, 0, BombermanGame.canvas.getWidth(), BombermanGame.canvas.getHeight());
-//        BombermanGame.board.getStillObjects().forEach(g -> g.render(BombermanGame.gc));
-//        BombermanGame.board.getEntities().forEach(g -> g.render(BombermanGame.gcForPlayer));
-//        BombermanGame.board.getEnemies().forEach(g -> g.render(BombermanGame.gcForPlayer));
-//    }
 
-//    public void update() {
-//        for (int i = 0; i < entitiesList.size(); i++) {
-//            entitiesList.get(i).update();
-//        }
-////        for (int i = 0; i < enemies.size(); i++) {
-////            enemies.get(i).update();
-////        }
-//    }
     public void update() {
         getEntitiesList().forEach(Entity::update);
     }
@@ -177,27 +162,5 @@ public class EventHandler {
         getEntitiesList().forEach(g -> g.render(BombermanGame.gc));
     }
 
-
-//    public void loadLevel() {
-//        try {
-//            Scanner scanner = new Scanner(file);
-//            level = scanner.nextInt();
-//            int left = scanner.nextInt();
-//            scorePrevious = scanner.nextInt();
-//            if (left == 0) {
-//                left = 3;
-//                level = 1;
-//                EventHandler.scorePrevious = 0;
-//            }
-//            player.setHealth(left);
-//            scanner.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public boolean getIsDie() {
-//        return getPlayer().isDie();
-//    }
 
 }

@@ -49,7 +49,7 @@ public class BombRadius extends Entity {
                 rad++;
             }
             if (EventHandler.map[yPos][xPos] != '#' && EventHandler.map[yPos][xPos] != ' ') {
-                for (Entity temp : BombermanGame.eventHandler.getEntitiesList()) {
+                for (Entity temp : EventHandler.getEntitiesList()) {
                     if (temp.getX() == xPos && temp.getY() == yPos) {
                         temp.setRemovable(true);
                         break;

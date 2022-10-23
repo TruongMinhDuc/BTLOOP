@@ -113,7 +113,7 @@ public class Bomber extends movement {
                 upFrameCount = 0;
             }
         }
-        this.y -= tmpSpeed ;
+        this.y -= tmpSpeed;
     }
 
     public boolean checkToMoveUp() {
@@ -126,14 +126,14 @@ public class Bomber extends movement {
         int yPos2 = (int) (y - speed);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (eventHandler.map[yPos2][xPos] == '#' || eventHandler.map[yPos2][xPos2] == '#' ||
-                    eventHandler.map[yPos2][xPos] == '*' || eventHandler.map[yPos2][xPos2] == '*' ||
-                    eventHandler.map[yPos2][xPos] == 'B' || eventHandler.map[yPos2][xPos2] == 'B'
+            if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                    EventHandler.map[yPos2][xPos] == '*' || EventHandler.map[yPos2][xPos2] == '*' ||
+                    EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
             ) {
-                if (eventHandler.map[yPos2][xPos] != ' ') {
+                if (EventHandler.map[yPos2][xPos] != ' ') {
                     //System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
                     return false;
-                } else if (eventHandler.map[yPos2][xPos2] != ' ') {
+                } else if (EventHandler.map[yPos2][xPos2] != ' ') {
                     //System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
                     return false;
                 }
@@ -172,13 +172,13 @@ public class Bomber extends movement {
         int yPos2 = (int) (y + 1 + speed);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (eventHandler.map[yPos2][xPos] == '#' || eventHandler.map[yPos2][xPos2] == '#' ||
-                    eventHandler.map[yPos2][xPos] == '*' || eventHandler.map[yPos2][xPos2] == '*' ||
-                    eventHandler.map[yPos2][xPos] == 'B' || eventHandler.map[yPos2][xPos2] == 'B'
+            if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                    EventHandler.map[yPos2][xPos] == '*' || EventHandler.map[yPos2][xPos2] == '*' ||
+                    EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
             ) {
-                if (eventHandler.map[(int) (y + 1)][xPos] != ' ') {
+                if (EventHandler.map[(int) (y + 1)][xPos] != ' ') {
                     return false;
-                } else if (eventHandler.map[(int) (y + 1)][xPos2] != ' ') {
+                } else if (EventHandler.map[(int) (y + 1)][xPos2] != ' ') {
                     return false;
                 }
             }
@@ -226,7 +226,6 @@ public class Bomber extends movement {
                     return false;
                 } else if (EventHandler.map[yPos2][xPos] != ' ') {
                     //System.out.println("loi2");
-
                     return false;
                 }
             }
@@ -272,8 +271,8 @@ public class Bomber extends movement {
                     //System.out.println("cho nay la (" + eventHandler.map[(int) (y)][xPos2] + ")");
                     return false;
                 } else {
-                    if(EventHandler.map[yPos2][xPos2]  != ' ') {
-                        return  false;
+                    if (EventHandler.map[yPos2][xPos2] != ' ') {
+                        return false;
                     }
                 }
             }
@@ -286,7 +285,7 @@ public class Bomber extends movement {
 
     @Override
     public void update() {
-        for (int i = 0; i< bombsList.size(); i++) {
+        for (int i = 0; i < bombsList.size(); i++) {
             bombPass(bombsList.get(i));
             bombsList.get(i).update();
         }
@@ -300,23 +299,24 @@ public class Bomber extends movement {
     public void render(GraphicsContext gc) {
         if (!isDie) {
             super.render(gc);
-        } else {
-            if (eventHandler.countDownTime % 4 == 0 || eventHandler.countDownTime % 4 == 1) {
-                super.render(gc);
-            }
         }
+        //else {
+//            if (EventHandler.countDownTime % 4 == 0 || EventHandler.countDownTime % 4 == 1) {
+//                super.render(gc);
+//            }
+//        }
         for (Bomb bomb : bombsList) {
             bomb.render(gc);
         }
     }
 
-    // có khả năng chạy sinh ra lỗi trong tương lai
+
     public void removeBombAt(double x, double y) {
         for (int i = 0; i < bombsList.size(); i++) {
             Bomb tmp = bombsList.get(i);
             if (tmp.getY() == y && tmp.getX() == x) {
                 bombsList.remove(i);
-                eventHandler.map[(int) tmp.getY()][(int) tmp.getX()] = ' ';
+                EventHandler.map[(int) tmp.getY()][(int) tmp.getX()] = ' ';
                 break;
             }
         }
@@ -362,6 +362,7 @@ public class Bomber extends movement {
 
         }
     }
+
     public void bombPass(Bomb bomb) {
         if (isAlive) {
             HashSet<String> hideBomb = blockEntity(bomb);

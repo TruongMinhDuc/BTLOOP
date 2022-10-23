@@ -12,10 +12,8 @@ import java.util.Scanner;
 
 //TODO: đọc từ file các kí tự text thêm vào obj
 public class MapGen {
-    //public static int level = 1;
-    private EventHandler eventHandler;
     public MapGen(EventHandler eventHandler) {
-        this.eventHandler = eventHandler;
+        //public static int level = 1;
     }
     //public static char[][] map = new char[BombermanGame.HEIGHT][BombermanGame.WIDTH];
 
