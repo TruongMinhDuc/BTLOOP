@@ -323,7 +323,7 @@ public class Bomber extends movement {
     }
 
     public void plantBomb() {
-        if (BombermanGame.controller.space && bombsList.size() < EventHandler.bombCount) {
+        if (BombermanGame.controller.space && bombsList.size() < Bomb.bombCount) {
             if (!(eventHandler.getEntity(xPosBomb(), yPosBomb()) instanceof Brick)) {
                 Bomb bomb = new Bomb(xPosBomb(), yPosBomb(), Sprite.bomb.getFxImage(), false);
                 //System.out.println("plant");
@@ -367,7 +367,7 @@ public class Bomber extends movement {
             HashSet<String> hideBomb = blockEntity(bomb);
             HashSet<String> hidePlayer = blockEntity(this);
             hideBomb.retainAll(hidePlayer);
-            if (hideBomb.size() == 0 && !EventHandler.bombPass) {
+            if (hideBomb.size() == 0 && !Bomb.bombPass) {
                 EventHandler.map[(int) bomb.getY()][(int) bomb.getX()] = 'B';
             }
         }

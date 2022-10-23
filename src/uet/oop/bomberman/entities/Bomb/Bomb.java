@@ -10,7 +10,9 @@ import uet.oop.bomberman.graphics.Sprite;
 import java.util.stream.IntStream;
 
 public class Bomb extends Entity {
-
+    public static int bombCount = 2;
+    public static int bombRadius = 10;
+    public static boolean bombPass = false;
     protected double timeToExplode = 130;
 
     protected int timeExplode = 50;

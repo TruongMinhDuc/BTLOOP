@@ -16,11 +16,10 @@ public class EventHandler {
     public static final int MAX_LEVEL = 3;
     public static char[][] map = new char[HEIGHT][WIDTH];
 
-    public static int bombCount = 2;
-    public static int bombRadius = 1;
+
     public static int score = 0;
     public static boolean flamePass = false;
-    public static boolean bombPass = false;
+
     public static boolean wallPass = false;
     public static int countDownTime = 181 * 60;
     //public static int scorePrevious;

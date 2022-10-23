@@ -26,7 +26,7 @@ public class BombRadius extends Entity {
         int rad = 0;
         int xPos = (int) x;
         int yPos = (int) y;
-        while (rad < EventHandler.bombRadius) {
+        while (rad < Bomb.bombRadius) {
             if (direction == 0) {
                 yPos--;
             }
