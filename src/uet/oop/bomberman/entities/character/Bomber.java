@@ -321,9 +321,12 @@ public class Bomber extends movement {
             }
         }
     }
+    public  List<Bomb> getBombsList() {
+        return bombsList;
+    }
 
     public void plantBomb() {
-        if (BombermanGame.controller.space && bombsList.size() < Bomb.bombCount) {
+        if (BombermanGame.controller.space && bombsList.size() < Bomb.maxBomb) {
             if (!(eventHandler.getEntity(xPosBomb(), yPosBomb()) instanceof Brick)) {
                 Bomb bomb = new Bomb(xPosBomb(), yPosBomb(), Sprite.bomb.getFxImage(), false);
                 //System.out.println("plant");

@@ -8,7 +8,7 @@ import uet.oop.bomberman.entities.Entity;
 import java.util.stream.IntStream;
 
 public class BombRadius extends Entity {
-    protected ExplosionRender[] explosionImg;
+    protected ExplosionRender[] explosionFrame;
     protected int direction;
     private boolean removable = false;
     boolean time;
@@ -17,16 +17,16 @@ public class BombRadius extends Entity {
         this.x = x;
         this.y = y;
         this.direction = direction;
-        explosionImg = new ExplosionRender[radius()];
-        explosionCreate();
+        explosionFrame = new ExplosionRender[radius()];
+        explosionSize();
 
     }
 
     private int radius() {
-        int rad = 0;
+        int blast = 0;
         int xPos = (int) x;
         int yPos = (int) y;
-        while (rad < Bomb.bombRadius) {
+        while (blast < Bomb.blastLength) {
             if (direction == 0) {
                 yPos--;
             }
@@ -40,13 +40,16 @@ public class BombRadius extends Entity {
                 xPos--;
             }
             if (EventHandler.map[yPos][xPos] == ' ') {
-                rad++;
+                blast++;
             }
             if (EventHandler.map[yPos][xPos] == '#') {
                 break;
             }
             if (EventHandler.map[yPos][xPos] == '*') {
-                rad++;
+                blast++;
+            }
+            if(EventHandler.map[yPos][xPos] == 'B') {
+                blast++;
             }
             if (EventHandler.map[yPos][xPos] != '#' && EventHandler.map[yPos][xPos] != ' ') {
                 for (Entity temp : EventHandler.getEntitiesList()) {
@@ -60,15 +63,15 @@ public class BombRadius extends Entity {
 
         }
 
-        return rad;
+        return blast;
 
     }
 
-    public void explosionCreate() {
+    public void explosionSize() {
         int xPos = (int) x;
         int yPos = (int) y;
-        for (int i = 0; i < explosionImg.length; i++) {
-            time = i == explosionImg.length - 1;
+        for (int i = 0; i < explosionFrame.length; i++) {
+            time = i == explosionFrame.length - 1;
             switch (direction) {
                 case 0:
                     //up
@@ -87,19 +90,19 @@ public class BombRadius extends Entity {
                     xPos--;
                     break;
             }
-            explosionImg[i] = new ExplosionRender(xPos, yPos, direction, time);
+            explosionFrame[i] = new ExplosionRender(xPos, yPos, direction, time);
         }
     }
 
     public void update(int duration) {
-        for (int i = 0; i < explosionImg.length; i++) {
-            explosionImg[i].update(direction, duration);
+        for (int i = 0; i < explosionFrame.length; i++) {
+            explosionFrame[i].update(direction, duration);
         }
     }
 
     @Override
     public void render(GraphicsContext gc) {
-        IntStream.range(0, explosionImg.length).filter(i -> !removable).forEach(i -> explosionImg[i].render(gc));
+        IntStream.range(0, explosionFrame.length).filter(i -> !removable).forEach(i -> explosionFrame[i].render(gc));
     }
 
 

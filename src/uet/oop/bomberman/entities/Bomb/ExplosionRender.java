@@ -31,6 +31,12 @@ public class ExplosionRender extends Entity {
     }
 
     public void update(int direction, int duration) {
+
+        int sizeBomb = EventHandler.getPlayer().getBombsList().size();
+        for (int i = 0; i < sizeBomb; i++) {
+            EventHandler.getPlayer().getBombsList().get(i).blastImpactBomb(this);
+        }
+
         duration %= 30;
         if (duration > 10 && duration <= 20) {
             switch (direction) {

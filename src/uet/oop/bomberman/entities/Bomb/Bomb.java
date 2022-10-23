@@ -7,11 +7,12 @@ import uet.oop.bomberman.EventHandler;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.util.HashSet;
 import java.util.stream.IntStream;
 
 public class Bomb extends Entity {
-    public static int bombCount = 2;
-    public static int bombRadius = 10;
+    public static int maxBomb = 2;
+    public static int blastLength = 10;
     public static boolean bombPass = false;
     protected double timeToExplode = 130;
 
@@ -36,6 +37,14 @@ public class Bomb extends Entity {
         }
     }
 
+    public void blastImpactBomb(Entity obj) {
+        HashSet<String> bomb1 = blockEntity(this);
+        HashSet<String> bomb2 = blockEntity(obj);
+        bomb1.retainAll(bomb2);
+        if (bomb1.size() > 0) {
+            timeToExplode = 0;
+        }
+    }
 
     public void explosionsDuration() {
         for (BombRadius explosion : explosionsDirection) {
