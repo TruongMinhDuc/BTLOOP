@@ -19,7 +19,7 @@ public class EventHandler {
 
     public static int score = 0;
 
-    public static int countDownTime = 181 * 60;
+    //public static int countDownTime = 181 * 60;
     //public static int scorePrevious;
 
     private static List<Entity> entitiesList = new ArrayList<>();
