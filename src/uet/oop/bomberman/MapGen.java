@@ -4,6 +4,8 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.MapEntities.Grass;
 import uet.oop.bomberman.entities.MapEntities.Wall;
+import uet.oop.bomberman.entities.item.Portal;
+import uet.oop.bomberman.entities.item.SpeedItem;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
@@ -12,6 +14,7 @@ import java.util.Scanner;
 
 //TODO: đọc từ file các kí tự text thêm vào obj
 public class MapGen {
+    private EventHandler eventHandler;
     public MapGen(EventHandler eventHandler) {
         //public static int level = 1;
     }
@@ -66,10 +69,26 @@ public class MapGen {
                     EventHandler.addStillObject(obj);
                     //EventHandler.addEntity(obj);
                 }
-                if(EventHandler.map[i][j] == '*') {
-                        Entity obj = new Brick(j, i, Sprite.brick.getFxImage());
-                        EventHandler.addStillObject(obj);
-                        EventHandler.addEntity(obj);
+                switch (EventHandler.map[i][j]) {
+                    case '*':
+                        Brick brick = new Brick(j, i, Sprite.brick.getFxImage());
+                        EventHandler.addEntity(brick);
+                        break;
+
+                    case 's':
+                        Brick brickCoverS = new Brick(j, i, Sprite.brick.getFxImage());
+                        SpeedItem hiddenItem = new SpeedItem(j, i, Sprite.powerup_speed.getFxImage());
+                        EventHandler.addEntity(brickCoverS);
+                        brickCoverS.addEntityBelow(hiddenItem);
+                        break;
+
+                    case 'x':
+                        Brick brickCoverX = new Brick(j, i, Sprite.brick.getFxImage());
+                        SpeedItem portal = new SpeedItem(j, i, Sprite.portal.getFxImage());
+                        EventHandler.addEntity(brickCoverX);
+                        brickCoverX.addEntityBelow(portal);
+                        break;
+
                 }
             }
         }

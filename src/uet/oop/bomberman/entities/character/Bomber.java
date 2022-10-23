@@ -7,16 +7,20 @@ import uet.oop.bomberman.EventHandler;
 import uet.oop.bomberman.entities.Bomb.Bomb;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.MapEntities.Brick;
+import uet.oop.bomberman.entities.item.Item;
+import uet.oop.bomberman.entities.item.Portal;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static uet.oop.bomberman.BombermanGame.bomb;
 import static uet.oop.bomberman.BombermanGame.eventHandler;
 
 public class Bomber extends movement {
+    private boolean win = false;
     private boolean isDie = false;
     private int upFrameCount = 0;
     private int downFrameCount = 0;
@@ -127,7 +131,7 @@ public class Bomber extends movement {
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
             if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                    EventHandler.map[yPos2][xPos] == '*' || EventHandler.map[yPos2][xPos2] == '*' ||
+                    (eventHandler.getEntity(xPos2,yPos) instanceof  Brick) || (eventHandler.getEntity(xPos2,yPos2) instanceof  Brick) ||
                     EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
             ) {
                 if (EventHandler.map[yPos2][xPos] != ' ') {
@@ -173,7 +177,7 @@ public class Bomber extends movement {
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
             if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                    EventHandler.map[yPos2][xPos] == '*' || EventHandler.map[yPos2][xPos2] == '*' ||
+                    (eventHandler.getEntity(xPos2,yPos) instanceof  Brick) || (eventHandler.getEntity(xPos2,yPos2) instanceof  Brick)||
                     EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
             ) {
                 if (EventHandler.map[(int) (y + 1)][xPos] != ' ') {
@@ -218,7 +222,7 @@ public class Bomber extends movement {
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
             if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#' ||
-                    EventHandler.map[yPos][xPos] == '*' || EventHandler.map[yPos2][xPos] == '*' ||
+                    (eventHandler.getEntity(xPos2,yPos) instanceof  Brick) || (eventHandler.getEntity(xPos2,yPos2) instanceof  Brick)||
                     EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
             ) {
                 if (EventHandler.map[yPos][xPos] != ' ') {
@@ -265,7 +269,7 @@ public class Bomber extends movement {
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
             if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                    EventHandler.map[yPos][xPos2] == '*' || EventHandler.map[yPos2][xPos2] == '*' ||
+                    (eventHandler.getEntity(xPos2,yPos) instanceof  Brick) || (eventHandler.getEntity(xPos2,yPos2) instanceof  Brick) ||
                     EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
                 if (EventHandler.map[yPos][xPos2] != ' ') {
                     //System.out.println("cho nay la (" + eventHandler.map[(int) (y)][xPos2] + ")");
@@ -285,6 +289,7 @@ public class Bomber extends movement {
 
     @Override
     public void update() {
+        impact();
         for (int i = 0; i < bombsList.size(); i++) {
             bombPass(bombsList.get(i));
             bombsList.get(i).update();
@@ -321,6 +326,7 @@ public class Bomber extends movement {
             }
         }
     }
+
     public  List<Bomb> getBombsList() {
         return bombsList;
     }
@@ -373,6 +379,53 @@ public class Bomber extends movement {
             hideBomb.retainAll(hidePlayer);
             if (hideBomb.size() == 0 && !Bomb.bombPass) {
                 EventHandler.map[(int) bomb.getY()][(int) bomb.getX()] = 'B';
+            }
+        }
+    }
+    public void impact() {
+        for (int i = 0; i < EventHandler.getEntitiesList().size(); i++) {
+            if (EventHandler.getEntitiesList().get(i) instanceof Item) {
+                collideWithItem((Item) EventHandler.getEntitiesList().get(i));
+            }
+        }
+    }
+
+    public void collideWithItem(Item obj) {
+        if (isAlive) {
+            HashSet<String> maskPlayer1 = blockEntity(this);
+            HashSet<String> maskPlayer2 = blockEntity(obj);
+            maskPlayer1.retainAll(maskPlayer2);
+//            if (obj instanceof Portal) {
+//                Portal other = (Portal) obj;
+//                if (other.getActive()) {
+//                    if (maskPlayer1.size() > 300) {
+//                        if (eventHandler.getLevel() == EventHandler.MAX_LEVEL) {
+//                            win = true;
+//                        } else {
+//                            //Sound.play("CRYST_UP");
+//                            eventHandler.countDownTime = 181 * 60;
+//                            int newLevel = eventHandler.getLevel() + 1;
+//                            //eventHandler.scorePrevious += eventHandler.score;
+//                            //eventHandler.changeLevel(newLevel);
+//                            eventHandler.setLevel(newLevel);
+//
+//                        }
+//                        try {
+//                            TimeUnit.SECONDS.sleep(1);
+//                            this.setImg(Sprite.player_right.getFxImage());
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                }
+//            } else {
+                if (!(obj instanceof Portal) && !obj.isObtain()) {
+                    if (maskPlayer1.size() > 0) {
+                        obj.setObtain(true);
+                        //Sound.play("Item");
+                    }
+                //}
             }
         }
     }

@@ -71,10 +71,12 @@ public class EventHandler {
 
     public void removeEntityAt(double x, double y) {
         for (int i = 0; i < entitiesList.size(); i++) {
-            Entity temp = entitiesList.get(i);
-            if (temp.getX() == x && temp.getY() == y) {
-                entitiesList.remove(i);
-                break;
+            Entity tmp = entitiesList.get(i);
+            if (tmp != null) {
+                if (tmp.getX() == x && tmp.getY() == y) {
+                    entitiesList.remove(i);
+                    break;
+                }
             }
         }
     }
@@ -153,7 +155,9 @@ public class EventHandler {
 
 
     public void update() {
-        getEntitiesList().forEach(Entity::update);
+        for (int i = 0; i < entitiesList.size(); i++) {
+            entitiesList.get(i).update();
+        }
     }
 
     public void render() {
