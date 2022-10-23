@@ -56,6 +56,8 @@ public class BombermanGame extends Application {
         stage.setScene(scene);
         stage.show();
 
+
+
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
