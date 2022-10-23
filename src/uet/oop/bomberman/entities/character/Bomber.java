@@ -417,7 +417,6 @@ public class Bomber extends movement {
         }
         if (check) {
             bombsList.add(bomb);
-
             //EventHandler.map[yPosBomb()][xPosBomb()] = 'B';
             //System.out.println(1);
 
@@ -476,7 +475,6 @@ public class Bomber extends movement {
             if (!(obj instanceof Portal) && !obj.isObtain()) {
                 if (maskPlayer1.size() > 0) {
                     obj.setObtain(true);
-                    //Sound.play("Item");
                 }
                 //}
             }
