@@ -20,6 +20,12 @@ import static uet.oop.bomberman.BombermanGame.bomb;
 import static uet.oop.bomberman.BombermanGame.eventHandler;
 
 public class Bomber extends movement {
+
+    public static boolean flamePass = false;
+
+    public static boolean brickPass = false;
+    public static boolean bombPassItem = false;
+
     private boolean win = false;
     private boolean isDie = false;
     private int upFrameCount = 0;
@@ -130,18 +136,26 @@ public class Bomber extends movement {
         int yPos2 = (int) (y - speed);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                    (eventHandler.getEntity(xPos2,yPos) instanceof  Brick) || (eventHandler.getEntity(xPos2,yPos2) instanceof  Brick) ||
-                    EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
-            ) {
-                if (EventHandler.map[yPos2][xPos] != ' ') {
-                    //System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
-                    return false;
-                } else if (EventHandler.map[yPos2][xPos2] != ' ') {
-                    //System.out.println("cho nay la" + eventHandler.map[yPos2][xPos]);
+            if(brickPass && !bombPassItem) {
+                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
                     return false;
                 }
-
+            } else if (!brickPass && bombPassItem) {
+                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                        (eventHandler.getEntity(xPos, yPos2) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick)) {
+                    return false;
+                }
+            } else if (!brickPass && !bombPassItem) {
+                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                        (eventHandler.getEntity(xPos, yPos2) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick) ||
+                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                    return false;
+                }
+            } else if (brickPass && bombPassItem) {
+                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#') {
+                    return false;
+                }
             }
         }
         return true;
@@ -173,16 +187,30 @@ public class Bomber extends movement {
         int xPos2 = (int) (x + dis);
 
         int yPos = (int) (y + speed);
-        int yPos2 = (int) (y + 1 + speed);
+        int yPos2 = (int) (y + 1);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                    (eventHandler.getEntity(xPos2,yPos) instanceof  Brick) || (eventHandler.getEntity(xPos2,yPos2) instanceof  Brick)||
-                    EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
-            ) {
-                if (EventHandler.map[(int) (y + 1)][xPos] != ' ') {
+            if(brickPass && !bombPassItem) {
+                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
                     return false;
-                } else if (EventHandler.map[(int) (y + 1)][xPos2] != ' ') {
+
+                }
+            } else if(!brickPass && bombPassItem) {
+                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                        (eventHandler.getEntity(xPos, yPos2) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick)) {
+                    return false;
+                }
+            } else if(!brickPass && !bombPassItem) {
+                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                        (eventHandler.getEntity(xPos, yPos2) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick) ||
+                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                    //if (!brickPass) {
+                    return false;
+                    //}
+                }
+            } else if (brickPass && brickPass) {
+                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#') {
                     return false;
                 }
             }
@@ -221,15 +249,28 @@ public class Bomber extends movement {
         int yPos2 = (int) (y + dis);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#' ||
-                    (eventHandler.getEntity(xPos2,yPos) instanceof  Brick) || (eventHandler.getEntity(xPos2,yPos2) instanceof  Brick)||
-                    EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B'
-            ) {
-                if (EventHandler.map[yPos][xPos] != ' ') {
-                    //System.out.println("loi 1");
+            if(brickPass && !bombPassItem) {
+                if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#' ||
+                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+
                     return false;
-                } else if (EventHandler.map[yPos2][xPos] != ' ') {
-                    //System.out.println("loi2");
+
+                }
+            } else if (!brickPass && bombPassItem) {
+                if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#' ||
+                        (eventHandler.getEntity(xPos2, yPos) instanceof Brick) || (eventHandler.getEntity(xPos, yPos2) instanceof Brick)) {
+
+                    return false;
+
+                }
+            } else if(!brickPass && !bombPassItem) {
+                if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#' ||
+                        (eventHandler.getEntity(xPos2, yPos) instanceof Brick) || (eventHandler.getEntity(xPos, yPos2) instanceof Brick) ||
+                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                    return false;
+                }
+            } else if (brickPass && bombPassItem) {
+                if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#') {
                     return false;
                 }
             }
@@ -237,7 +278,7 @@ public class Bomber extends movement {
         return true;
     }
 
-    ///
+
     @Override
     public void moveRight(double tmpSpeed) {
         if (rightFrameCount < maxFrame) {
@@ -268,23 +309,34 @@ public class Bomber extends movement {
         int yPos2 = (int) (y + dis);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                    (eventHandler.getEntity(xPos2,yPos) instanceof  Brick) || (eventHandler.getEntity(xPos2,yPos2) instanceof  Brick) ||
-                    EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
-                if (EventHandler.map[yPos][xPos2] != ' ') {
-                    //System.out.println("cho nay la (" + eventHandler.map[(int) (y)][xPos2] + ")");
+            if (brickPass && !bombPassItem) {
+                if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                        EventHandler.map[yPos2][xPos2] == 'B' || EventHandler.map[yPos][xPos2] == 'B') {
                     return false;
-                } else {
-                    if (EventHandler.map[yPos2][xPos2] != ' ') {
-                        return false;
-                    }
+                }
+            } else if (!brickPass && bombPassItem) {
+                if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                        (eventHandler.getEntity(xPos2, yPos) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick)) {
+                    return false;
+                }
+
+        } else if (!brickPass && !bombPassItem) {
+            if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
+                    (eventHandler.getEntity(xPos2, yPos) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick) ||
+                    EventHandler.map[yPos2][xPos2] == 'B' || EventHandler.map[yPos][xPos2] == 'B') {
+                return false;
+            }
+        } else if (brickPass && bombPassItem) {
+                if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#') {
+                    return false;
                 }
             }
+
         }
-        //System.out.println("Loi 1" + y + " " + xPos2);
-        //System.out.println("Loi 2" + y + " " + xPos2);
+    //System.out.println("Loi 1" + y + " " + xPos2);
+    //System.out.println("Loi 2" + y + " " + xPos2);
         return true;
-    }
+}
 
 
     @Override
@@ -327,7 +379,7 @@ public class Bomber extends movement {
         }
     }
 
-    public  List<Bomb> getBombsList() {
+    public List<Bomb> getBombsList() {
         return bombsList;
     }
 
@@ -382,6 +434,7 @@ public class Bomber extends movement {
             }
         }
     }
+
     public void impact() {
         for (int i = 0; i < EventHandler.getEntitiesList().size(); i++) {
             if (EventHandler.getEntitiesList().get(i) instanceof Item) {
@@ -420,11 +473,11 @@ public class Bomber extends movement {
 //                    }
 //                }
 //            } else {
-                if (!(obj instanceof Portal) && !obj.isObtain()) {
-                    if (maskPlayer1.size() > 0) {
-                        obj.setObtain(true);
-                        //Sound.play("Item");
-                    }
+            if (!(obj instanceof Portal) && !obj.isObtain()) {
+                if (maskPlayer1.size() > 0) {
+                    obj.setObtain(true);
+                    //Sound.play("Item");
+                }
                 //}
             }
         }
