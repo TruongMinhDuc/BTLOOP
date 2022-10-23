@@ -4,10 +4,7 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.MapEntities.Grass;
 import uet.oop.bomberman.entities.MapEntities.Wall;
-import uet.oop.bomberman.entities.item.BombPassItem;
-import uet.oop.bomberman.entities.item.Portal;
-import uet.oop.bomberman.entities.item.SpeedItem;
-import uet.oop.bomberman.entities.item.WallPass;
+import uet.oop.bomberman.entities.item.*;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
@@ -86,7 +83,7 @@ public class MapGen {
 
                     case 'x':
                         Brick brickCoverX = new Brick(j, i, Sprite.brick.getFxImage());
-                        SpeedItem portal = new SpeedItem(j, i, Sprite.portal.getFxImage());
+                        Portal portal = new Portal(j, i, Sprite.portal.getFxImage());
                         EventHandler.addEntity(brickCoverX);
                         brickCoverX.addEntityBelow(portal);
                         break;
@@ -102,6 +99,19 @@ public class MapGen {
                         EventHandler.addEntity(brickCoverI);
                         brickCoverI.addEntityBelow(bombPassItem);
                         break;
+                    case 'f':
+                        Brick brickCoverF = new Brick(j, i, Sprite.brick.getFxImage());
+                        FlameUp flameUp = new FlameUp(j, i, Sprite.powerup_flames.getFxImage());
+                        EventHandler.addEntity(brickCoverF);
+                        brickCoverF.addEntityBelow(flameUp);
+                        break;
+                    case 'b':
+                        Brick brickCoverB = new Brick(j, i, Sprite.brick.getFxImage());
+                        BombPluss bombPluss = new BombPluss(j, i, Sprite.powerup_bombs.getFxImage());
+                        EventHandler.addEntity(brickCoverB);
+                        brickCoverB.addEntityBelow(bombPluss);
+                        break;
+
                 }
             }
         }
