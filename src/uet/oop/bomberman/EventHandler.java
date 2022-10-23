@@ -13,14 +13,12 @@ import java.util.Scanner;
 public class EventHandler {
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
-    public static final int MAX_LEVEL = 3;
+    //public static final int MAX_LEVEL = 3;
     public static char[][] map = new char[HEIGHT][WIDTH];
 
 
     public static int score = 0;
-    public static boolean flamePass = false;
 
-    public static boolean wallPass = false;
     public static int countDownTime = 181 * 60;
     //public static int scorePrevious;
 

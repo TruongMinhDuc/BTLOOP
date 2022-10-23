@@ -4,8 +4,10 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.MapEntities.Grass;
 import uet.oop.bomberman.entities.MapEntities.Wall;
+import uet.oop.bomberman.entities.item.BombPassItem;
 import uet.oop.bomberman.entities.item.Portal;
 import uet.oop.bomberman.entities.item.SpeedItem;
+import uet.oop.bomberman.entities.item.WallPass;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
@@ -88,7 +90,18 @@ public class MapGen {
                         EventHandler.addEntity(brickCoverX);
                         brickCoverX.addEntityBelow(portal);
                         break;
-
+                    case 'w':
+                        Brick brickCoverW = new Brick(j, i, Sprite.brick.getFxImage());
+                        WallPass wallPass = new WallPass(j, i, Sprite.powerup_wallpass.getFxImage());
+                        EventHandler.addEntity(brickCoverW);
+                        brickCoverW.addEntityBelow(wallPass);
+                        break;
+                    case 'i':
+                        Brick brickCoverI = new Brick(j, i, Sprite.brick.getFxImage());
+                        BombPassItem bombPassItem = new BombPassItem(j, i, Sprite.powerup_bombpass.getFxImage());
+                        EventHandler.addEntity(brickCoverI);
+                        brickCoverI.addEntityBelow(bombPassItem);
+                        break;
                 }
             }
         }
