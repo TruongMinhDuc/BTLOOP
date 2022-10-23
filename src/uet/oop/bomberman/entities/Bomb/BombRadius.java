@@ -11,7 +11,7 @@ public class BombRadius extends Entity {
     protected ExplosionRender[] explosionImg;
     protected int direction;
     private boolean removable = false;
-    boolean last;
+    boolean time;
 
     public BombRadius(double x, double y, int direction) {
         this.x = x;
@@ -49,7 +49,7 @@ public class BombRadius extends Entity {
                 rad++;
             }
             if (EventHandler.map[yPos][xPos] != '#' && EventHandler.map[yPos][xPos] != ' ') {
-                for (Entity temp : BombermanGame.eventHandler.getEntities()) {
+                for (Entity temp : BombermanGame.eventHandler.getEntitiesList()) {
                     if (temp.getX() == xPos && temp.getY() == yPos) {
                         temp.setRemovable(true);
                         break;
@@ -68,7 +68,7 @@ public class BombRadius extends Entity {
         int xPos = (int) x;
         int yPos = (int) y;
         for (int i = 0; i < explosionImg.length; i++) {
-            last = i == explosionImg.length - 1;
+            time = i == explosionImg.length - 1;
             switch (direction) {
                 case 0:
                     //up
@@ -87,7 +87,7 @@ public class BombRadius extends Entity {
                     xPos--;
                     break;
             }
-            explosionImg[i] = new ExplosionRender(xPos, yPos, direction, last);
+            explosionImg[i] = new ExplosionRender(xPos, yPos, direction, time);
         }
     }
 

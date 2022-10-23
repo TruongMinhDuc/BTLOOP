@@ -26,6 +26,7 @@ public class EventHandler {
 
     private static List<Entity> entitiesList = new ArrayList<>();
     private static List<Entity> stillObjects = new ArrayList<>();
+
     //private static List<Enemy> enemies = new ArrayList<>();
     public static double speedOfEnemy = 0.025;
     private double speedOfPlayer = 0.05;
@@ -82,16 +83,16 @@ public class EventHandler {
         entitiesList.add(object);
     }
 
-    public void addStillObject(Entity object) {
+    public static void addStillObject(Entity object) {
         stillObjects.add(object);
     }
 
-    public List<Entity> getEntities() {
-        return this.entitiesList;
+    public static List<Entity> getEntitiesList() {
+        return entitiesList;
     }
 
     public List<Entity> getStillObjects() {
-        return this.stillObjects;
+        return stillObjects;
     }
 
     public static Bomber getPlayer() {
@@ -102,9 +103,9 @@ public class EventHandler {
 //        return getPlayer().getHealth();
 //    }
 
-    public void setPlayer(Bomber player) {
-        this.player = player;
-    }
+//    public void setPlayer(Bomber player) {
+//        this.player = player;
+//    }
 
 //    public List<Enemy> getEnemies() {
 //        return enemies;
@@ -138,13 +139,13 @@ public class EventHandler {
         return 0;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
+//    public void setLevel(int level) {
+//        this.level = level;
+//    }
 
-    public int getLevel() {
-        return this.level;
-    }
+//    public int getLevel() {
+//        return this.level;
+//    }
 
     public MapGen getGameLevel() {
         return this.gameLevel;
@@ -158,15 +159,23 @@ public class EventHandler {
 //        BombermanGame.board.getEnemies().forEach(g -> g.render(BombermanGame.gcForPlayer));
 //    }
 
-    public void update() {
-        for (int i = 0; i < entitiesList.size(); i++) {
-            entitiesList.get(i).update();
-        }
-//        for (int i = 0; i < enemies.size(); i++) {
-//            enemies.get(i).update();
+//    public void update() {
+//        for (int i = 0; i < entitiesList.size(); i++) {
+//            entitiesList.get(i).update();
 //        }
+////        for (int i = 0; i < enemies.size(); i++) {
+////            enemies.get(i).update();
+////        }
+//    }
+    public void update() {
+        getEntitiesList().forEach(Entity::update);
     }
 
+    public void render() {
+        BombermanGame.gc.clearRect(0, 0, BombermanGame.canvas.getWidth(), BombermanGame.canvas.getHeight());
+        stillObjects.forEach(g -> g.render(BombermanGame.gc));
+        getEntitiesList().forEach(g -> g.render(BombermanGame.gc));
+    }
 
 
 //    public void loadLevel() {

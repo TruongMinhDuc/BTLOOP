@@ -26,8 +26,8 @@ public class BombermanGame extends Application {
     public static GraphicsContext gc;
     public static Canvas canvas;
     //entity
-    private List<Entity> entities = new ArrayList<>();
-    public static List<Entity> stillObjects = new ArrayList<>();
+
+    //public static List<Entity> stillObjects = new ArrayList<>();
     public static MapGen MG;
     public static Controller controller;
     public static EventHandler eventHandler;
@@ -59,8 +59,8 @@ public class BombermanGame extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-              render();
-              update();
+              eventHandler.render();
+              eventHandler.update();
             }
         };
         timer.start();
@@ -78,7 +78,7 @@ public class BombermanGame extends Application {
 //        controller = new Controller();
         try {
             newGame();
-            entities.add(EventHandler.getPlayer());
+            eventHandler.addEntity(EventHandler.getPlayer());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -87,27 +87,18 @@ public class BombermanGame extends Application {
 
     }
 
-    public void createMap()  {
-        try{
-            MG.createMap(1);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void createMap()  {
+//        try{
+//            MG.createMap(1);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void newGame() throws FileNotFoundException {
             eventHandler = new EventHandler();
             controller = new Controller();
             eventHandler.getGameLevel().createMap(1);
     }
 
-    public void update() {
-        entities.forEach(Entity::update);
 
-    }
-
-    public void render() {
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        stillObjects.forEach(g -> g.render(gc));
-        entities.forEach(g -> g.render(gc));
-    }
 }

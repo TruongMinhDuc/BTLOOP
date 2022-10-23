@@ -60,17 +60,17 @@ public class MapGen {
                 if(EventHandler.map[i][j] == '#') {
                     Entity obj;
                     obj = new  Wall(j, i, Sprite.wall.getFxImage());
-                    BombermanGame.stillObjects.add(obj);
+                    EventHandler.addStillObject(obj);
                     //EventHandler.addEntity(obj);
                 } else {
                     Entity obj;
                     obj = new Grass(j, i, Sprite.grass.getFxImage());
-                    BombermanGame.stillObjects.add(obj);
+                    EventHandler.addStillObject(obj);
                     //EventHandler.addEntity(obj);
                 }
                 if(EventHandler.map[i][j] == '*') {
                         Entity obj = new Brick(j, i, Sprite.brick.getFxImage());
-                        BombermanGame.stillObjects.add(obj);
+                        EventHandler.addStillObject(obj);
                         EventHandler.addEntity(obj);
                 }
             }
