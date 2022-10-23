@@ -9,7 +9,7 @@ import uet.oop.bomberman.graphics.Sprite;
 import java.util.EmptyStackException;
 
 public class Brick extends Entity {
-    private int Anicount = 130;
+    private int Anicount = 200;
 
     Image[] brickBreakFrame = new Image[3];
 
@@ -19,11 +19,14 @@ public class Brick extends Entity {
 
     @Override
     public void update() {
+
+        brickBreakFrame[0] = Sprite.brick_exploded.getFxImage();
+        brickBreakFrame[1] = Sprite.brick_exploded1.getFxImage();
+        brickBreakFrame[2] = Sprite.brick_exploded2.getFxImage();
+
         if(removable && Anicount == 0) {
             EventHandler.map[(int) y][(int) x] = ' ';
-            brickBreakFrame[0] = Sprite.brick_exploded.getFxImage();
-            brickBreakFrame[1] = Sprite.brick_exploded1.getFxImage();
-            brickBreakFrame[2] = Sprite.brick_exploded2.getFxImage();
+
         }
     }
 
@@ -35,12 +38,12 @@ public class Brick extends Entity {
          } else {
             if(Anicount != 0) {
                 int duration = Anicount % 50;
-                //System.out.println(duration);
-                if (duration >= 30) {
+                System.out.println(duration);
+                if (duration >= 35) {
                     setImg(Sprite.brick_exploded.getFxImage());
                     super.render(gc);
                     Anicount--;
-                } else if (duration >= 10) {
+                } else if (duration >= 25) {
                     setImg(Sprite.brick_exploded1.getFxImage());
                     super.render(gc);
                     Anicount--;
