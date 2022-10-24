@@ -1,0 +1,19 @@
+Mỗi kí tự đại diện cho một đối tượng trên bản đồ:
+Tiles:
+# - Wall
+* - Brick
+x - Portal
+
+Character:
+p - Bomber
+1 - Balloon
+2 - Oneal
+
+Items:
+b - Bomb Item
+f - Flame Item
+s - Speed Item
+w - Wall pass Item
+i - Bomb pass Item 
+
+Kí tự khác các kí tự trên - Grass

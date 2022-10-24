@@ -5,18 +5,16 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.EventHandler;
 import uet.oop.bomberman.entities.Bomb.Bomb;
-import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.item.Item;
 import uet.oop.bomberman.entities.item.Portal;
+import uet.oop.bomberman.entities.movement;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import static uet.oop.bomberman.BombermanGame.bomb;
 import static uet.oop.bomberman.BombermanGame.eventHandler;
 
 public class Bomber extends movement {

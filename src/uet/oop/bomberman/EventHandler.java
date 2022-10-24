@@ -2,6 +2,7 @@ package uet.oop.bomberman;
 
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
+import uet.oop.bomberman.entities.npc.Enemy;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
@@ -25,7 +26,7 @@ public class EventHandler {
     private static List<Entity> entitiesList = new ArrayList<>();
     private static List<Entity> stillObjects = new ArrayList<>();
 
-    //private static List<Enemy> enemies = new ArrayList<>();
+    private static List<Enemy> enemyList = new ArrayList<>();
     public static double speedOfEnemy = 0.025;
     private double speedOfPlayer = 0.05;
     private static Bomber player;
@@ -107,9 +108,9 @@ public class EventHandler {
 //        this.player = player;
 //    }
 
-//    public List<Enemy> getEnemies() {
-//        return enemies;
-//    }
+    public List<Enemy> getEnemyList() {
+        return enemyList;
+    }
 //
 //    public void removeEnemyAt(double x, double y) {
 //        for (int i = 0; i < enemies.size(); i++) {
@@ -120,9 +121,9 @@ public class EventHandler {
 //        }
 //    }
 
-//    public void addEnemy(Enemy newEnemy) {
-//        enemies.add(newEnemy);
-//    }
+    public static void addEnemy(Enemy newEnemy) {
+        enemyList.add(newEnemy);
+    }
 
 //    public int countDown() {
 //        countDownTime--;
@@ -156,12 +157,17 @@ public class EventHandler {
         for (int i = 0; i < entitiesList.size(); i++) {
             entitiesList.get(i).update();
         }
+        for(int i = 0; i < enemyList.size(); i++) {
+            //System.out.println(enemyList.size());
+            enemyList.get(i).update();
+        }
     }
 
     public void render() {
         BombermanGame.gc.clearRect(0, 0, BombermanGame.canvas.getWidth(), BombermanGame.canvas.getHeight());
         stillObjects.forEach(g -> g.render(BombermanGame.gc));
         getEntitiesList().forEach(g -> g.render(BombermanGame.gc));
+        getEnemyList().forEach(g -> g.render(BombermanGame.gc));
     }
 
 

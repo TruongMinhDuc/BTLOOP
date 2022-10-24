@@ -5,6 +5,7 @@ import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.MapEntities.Grass;
 import uet.oop.bomberman.entities.MapEntities.Wall;
 import uet.oop.bomberman.entities.item.*;
+import uet.oop.bomberman.entities.npc.Balloom;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
@@ -111,7 +112,14 @@ public class MapGen {
                         EventHandler.addEntity(brickCoverB);
                         brickCoverB.addEntityBelow(bombPluss);
                         break;
-
+                    case '1':
+                        EventHandler.map[i][j] = ' ';
+                        Balloom balloom = new Balloom(j,i,Sprite.balloom_left1.getFxImage(), 0.025);
+                        EventHandler.addEnemy(balloom);
+                        break;
+                    case '2':
+                        EventHandler.map[i][j] = ' ';
+                        break;
                 }
             }
         }
