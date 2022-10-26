@@ -52,7 +52,7 @@ public class BombRadius extends Entity {
                 blast++;
             }
             if (EventHandler.map[yPos][xPos] != '#' && EventHandler.map[yPos][xPos] != ' ') {
-                for (Entity temp : EventHandler.getEntitiesList()) {
+                for (Entity temp :  BombermanGame.eventHandler.getEntitiesList()) {
                     if (temp.getX() == xPos && temp.getY() == yPos) {
                         temp.setRemovable(true);
                         break;
