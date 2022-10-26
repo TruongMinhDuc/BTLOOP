@@ -27,8 +27,8 @@ public class EventHandler {
     private static List<Entity> stillObjects = new ArrayList<>();
 
     private static List<Enemy> enemyList = new ArrayList<>();
-    public static double speedOfEnemy = 0.025;
-    private double speedOfPlayer = 0.05;
+
+    private double playerSpeed = 0.05;
     private static Bomber player;
     private MapGen gameLevel;
     private int level;
@@ -36,7 +36,7 @@ public class EventHandler {
 
 
     public EventHandler() {
-        player = new Bomber(1, 1, Sprite.player_right.getFxImage(), speedOfPlayer);
+        player = new Bomber(1, 1, Sprite.player_right.getFxImage(), playerSpeed);
         //loadLevel();
         gameLevel = new MapGen(this);
     }
@@ -80,15 +80,15 @@ public class EventHandler {
         }
     }
 
-    public static void addEntity(Entity object) {
+    public void addEntity(Entity object) {
         entitiesList.add(object);
     }
 
-    public static void addStillObject(Entity object) {
+    public void addStillObject(Entity object) {
         stillObjects.add(object);
     }
 
-    public static List<Entity> getEntitiesList() {
+    public List<Entity> getEntitiesList() {
         return entitiesList;
     }
 
@@ -96,7 +96,7 @@ public class EventHandler {
         return stillObjects;
     }
 
-    public static Bomber getPlayer() {
+    public Bomber getPlayer() {
         return player;
     }
 
@@ -112,16 +112,16 @@ public class EventHandler {
         return enemyList;
     }
 //
-//    public void removeEnemyAt(double x, double y) {
-//        for (int i = 0; i < enemies.size(); i++) {
-//            Enemy temp = enemies.get(i);
-//            if (temp.getX() == x && temp.getY() == y) {
-//                enemies.remove(temp);
-//            }
-//        }
-//    }
+    public void removeEnemyAt(double x, double y) {
+        for (int i = 0; i < enemyList.size(); i++) {
+            Enemy temp = enemyList.get(i);
+            if (temp.getX() == x && temp.getY() == y) {
+                enemyList.remove(temp);
+            }
+        }
+    }
 
-    public static void addEnemy(Enemy newEnemy) {
+    public void addEnemy(Enemy newEnemy) {
         enemyList.add(newEnemy);
     }
 

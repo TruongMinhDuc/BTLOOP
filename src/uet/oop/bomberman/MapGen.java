@@ -6,6 +6,8 @@ import uet.oop.bomberman.entities.MapEntities.Grass;
 import uet.oop.bomberman.entities.MapEntities.Wall;
 import uet.oop.bomberman.entities.item.*;
 import uet.oop.bomberman.entities.npc.Balloom;
+import uet.oop.bomberman.entities.npc.Enemy;
+import uet.oop.bomberman.entities.npc.Oneal;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
@@ -50,7 +52,7 @@ public class MapGen {
             //System.out.println(tmp.length());
             //System.out.println(row);
             for(int j = 0; j < tmp.length(); j++) {
-                EventHandler.map[he][j] = tmp.charAt(j);
+                BombermanGame.eventHandler.map[he][j] = tmp.charAt(j);
             }
             he++;
         }
@@ -61,64 +63,66 @@ public class MapGen {
                 if(EventHandler.map[i][j] == '#') {
                     Entity obj;
                     obj = new  Wall(j, i, Sprite.wall.getFxImage());
-                    EventHandler.addStillObject(obj);
+                    BombermanGame.eventHandler.addStillObject(obj);
                     //EventHandler.addEntity(obj);
                 } else {
                     Entity obj;
                     obj = new Grass(j, i, Sprite.grass.getFxImage());
-                    EventHandler.addStillObject(obj);
+                    BombermanGame.eventHandler.addStillObject(obj);
                     //EventHandler.addEntity(obj);
                 }
                 switch (EventHandler.map[i][j]) {
                     case '*':
                         Brick brick = new Brick(j, i, Sprite.brick.getFxImage());
-                        EventHandler.addEntity(brick);
+                        BombermanGame.eventHandler.addEntity(brick);
                         break;
 
                     case 's':
                         Brick brickCoverS = new Brick(j, i, Sprite.brick.getFxImage());
                         SpeedItem hiddenItem = new SpeedItem(j, i, Sprite.powerup_speed.getFxImage());
-                        EventHandler.addEntity(brickCoverS);
+                        BombermanGame.eventHandler.addEntity(brickCoverS);
                         brickCoverS.addEntityBelow(hiddenItem);
                         break;
 
                     case 'x':
                         Brick brickCoverX = new Brick(j, i, Sprite.brick.getFxImage());
                         Portal portal = new Portal(j, i, Sprite.portal.getFxImage());
-                        EventHandler.addEntity(brickCoverX);
+                        BombermanGame.eventHandler.addEntity(brickCoverX);
                         brickCoverX.addEntityBelow(portal);
                         break;
                     case 'w':
                         Brick brickCoverW = new Brick(j, i, Sprite.brick.getFxImage());
                         WallPass wallPass = new WallPass(j, i, Sprite.powerup_wallpass.getFxImage());
-                        EventHandler.addEntity(brickCoverW);
+                        BombermanGame.eventHandler.addEntity(brickCoverW);
                         brickCoverW.addEntityBelow(wallPass);
                         break;
                     case 'i':
                         Brick brickCoverI = new Brick(j, i, Sprite.brick.getFxImage());
                         BombPassItem bombPassItem = new BombPassItem(j, i, Sprite.powerup_bombpass.getFxImage());
-                        EventHandler.addEntity(brickCoverI);
+                        BombermanGame.eventHandler.addEntity(brickCoverI);
                         brickCoverI.addEntityBelow(bombPassItem);
                         break;
                     case 'f':
                         Brick brickCoverF = new Brick(j, i, Sprite.brick.getFxImage());
                         FlameUp flameUp = new FlameUp(j, i, Sprite.powerup_flames.getFxImage());
-                        EventHandler.addEntity(brickCoverF);
+                        BombermanGame.eventHandler.addEntity(brickCoverF);
                         brickCoverF.addEntityBelow(flameUp);
                         break;
                     case 'b':
                         Brick brickCoverB = new Brick(j, i, Sprite.brick.getFxImage());
                         BombPluss bombPluss = new BombPluss(j, i, Sprite.powerup_bombs.getFxImage());
-                        EventHandler.addEntity(brickCoverB);
+                        BombermanGame.eventHandler.addEntity(brickCoverB);
                         brickCoverB.addEntityBelow(bombPluss);
                         break;
                     case '1':
                         EventHandler.map[i][j] = ' ';
-                        Balloom balloom = new Balloom(j,i,Sprite.balloom_left1.getFxImage(), 0.025);
-                        EventHandler.addEnemy(balloom);
+                        Balloom balloom = new Balloom(j,i,Sprite.balloom_left1.getFxImage(), Enemy.enemySpeed);
+                        BombermanGame.eventHandler.addEnemy(balloom);
                         break;
                     case '2':
                         EventHandler.map[i][j] = ' ';
+                        Oneal oneal = new Oneal(j, i, Sprite.oneal_left1.getFxImage(), Enemy.enemySpeed);
+                        BombermanGame.eventHandler.addEnemy(oneal);
                         break;
                 }
             }

@@ -80,7 +80,7 @@ public class BombermanGame extends Application {
 //        controller = new Controller();
         try {
             newGame();
-            EventHandler.addEntity(EventHandler.getPlayer());
+            BombermanGame.eventHandler.addEntity( BombermanGame.eventHandler.getPlayer());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

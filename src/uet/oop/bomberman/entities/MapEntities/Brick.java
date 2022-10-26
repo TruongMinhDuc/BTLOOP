@@ -35,12 +35,12 @@ public class Brick extends Entity {
 //            BombermanGame.board.removeEntityAt(this.x, this.y);
             if (hiddenItem != null) {
                 if (!(hiddenItem instanceof Portal)) {
-                    EventHandler.addEntity(hiddenItem);
+                    BombermanGame.eventHandler.addEntity(hiddenItem);
                     EventHandler.map[(int) this.y][(int) this.x] = ' ';
                     BombermanGame.eventHandler.removeEntityAt(this.x, this.y);
                 } else {
                     int index = BombermanGame.eventHandler.index(this.x, this.y);
-                    EventHandler.getEntitiesList().set(index, hiddenItem);
+                    BombermanGame.eventHandler.getEntitiesList().set(index, hiddenItem);
 //                   BombermanGame.board.addStillObject(entityBelow);
                 }
             } else {

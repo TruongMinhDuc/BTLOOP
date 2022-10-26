@@ -433,9 +433,9 @@ public class Bomber extends movement {
     }
 
     public void impact() {
-        for (int i = 0; i < EventHandler.getEntitiesList().size(); i++) {
-            if (EventHandler.getEntitiesList().get(i) instanceof Item) {
-                collideWithItem((Item) EventHandler.getEntitiesList().get(i));
+        for (int i = 0; i <  BombermanGame.eventHandler.getEntitiesList().size(); i++) {
+            if ( BombermanGame.eventHandler.getEntitiesList().get(i) instanceof Item) {
+                collideWithItem((Item)  BombermanGame.eventHandler.getEntitiesList().get(i));
             }
         }
     }
