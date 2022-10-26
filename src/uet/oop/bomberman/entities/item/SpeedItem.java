@@ -25,8 +25,8 @@ public class SpeedItem extends Item{
     public void update() {
         if (obtain) {
             removable = true;
-            double playerSpeed = EventHandler.getPlayer().getSpeed();
-            EventHandler.getPlayer().setSpeed(playerSpeed + 0.025);
+            double playerSpeed =  BombermanGame.eventHandler.getPlayer().getSpeed();
+            BombermanGame.eventHandler.getPlayer().setSpeed(playerSpeed + 0.025);
             BombermanGame.eventHandler.removeEntityAt(this.x, this.y);
         }
     }
