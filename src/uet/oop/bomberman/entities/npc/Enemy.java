@@ -21,6 +21,7 @@ public abstract class Enemy extends movement {
     }
 
     public abstract int getDirection();
+
     public abstract void dying();
 
     public void moveUp(double tmpSpeed) {
@@ -37,91 +38,123 @@ public abstract class Enemy extends movement {
         this.y -= tmpSpeed;
     }
 
-    public boolean checkToMoveUp() {
-        double widthFrame = 24;
-        double dis = widthFrame / Sprite.SCALED_SIZE;
-
+    public void checkToMoveUp() {
+        double distance = 1;
         int xPos = (int) (x);
-        int xPos2 = (int) (x + dis);
+        int xPos2 = (int) (x + distance);
+
         int yPos = (int) (y);
         int yPos2 = (int) (y - speed);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-            if (EventHandler.map[yPos][xPos] != ' ' || EventHandler.map[yPos2][xPos2] != ' ') {
-                return false;
+            if (EventHandler.map[yPos2][xPos] != ' ' || EventHandler.map[yPos2][xPos2] != ' ') {
+                if (EventHandler.map[yPos2][xPos] != ' ') {
+                    if (this.x - (int) x >= 0.7) {
+                        this.x = (int) x + 1;
+                    } else {
+                        this.y = yPos2 + distance;
+                    }
+                } else if (EventHandler.map[yPos2][xPos2] != ' ') {
+                    if (this.x - (int) x <= 0.45) {
+                        this.x = xPos;
+                    } else {
+                        this.y = yPos2 + distance;
+                    }
+                }
+
             }
         }
-        return true;
     }
 
-        public void moveDown(double tmpSpeed) {
-            if (downFrameCount < maxFrame) {
-                downFrameCount++;
-            } else if (downFrameCount < 2 * maxFrame) {
-                downFrameCount++;
-            } else {
-                downFrameCount++;
-                if (downFrameCount == 3 * maxFrame) {
-                    downFrameCount = 0;
-                }
+    public void moveDown(double tmpSpeed) {
+        if (downFrameCount < maxFrame) {
+            downFrameCount++;
+        } else if (downFrameCount < 2 * maxFrame) {
+            downFrameCount++;
+        } else {
+            downFrameCount++;
+            if (downFrameCount == 3 * maxFrame) {
+                downFrameCount = 0;
             }
-            this.y += tmpSpeed;
         }
+        this.y += tmpSpeed;
+    }
 
-        public boolean checkToMoveDown() {
-            double widthFrame = 24;
+    public void checkToMoveDown() {
 
-            double dis = widthFrame / Sprite.SCALED_SIZE;
-            int xPos = (int) x;
-            int xPos2 = (int) (x + dis);
+        double distance = 1;
+        int xPos = (int) x;
+        int xPos2 = (int) (x + distance);
 
-            int yPos = (int) (y + speed);
-            int yPos2 = (int) (y + 1);
+        int yPos = (int) (y + speed);
+        int yPos2 = (int) (y + 1 + speed);
 
-            if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-                if (EventHandler.map[yPos2][xPos] != ' ' || EventHandler.map[yPos2][xPos2] != ' ') {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-            public void moveLeft(double tmpSpeed) {
-                if (leftFrameCount < maxFrame) {
-                    this.setImg(frameLeft[0]);
-                    leftFrameCount++;
-                } else if (leftFrameCount < 2 * maxFrame) {
-                    this.setImg(frameLeft[1]);
-                    leftFrameCount++;
-                } else {
-                    this.setImg(frameLeft[2]);
-                    leftFrameCount++;
-                    if (leftFrameCount == 3 * maxFrame) {
-                        leftFrameCount = 0;
+        if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
+            if (EventHandler.map[yPos2][xPos] != ' ' || EventHandler.map[yPos2][xPos2] != ' ') {
+                if (EventHandler.map[(int) (y + 1)][xPos] != ' ') {
+                    if (this.x - (int) x >= 0.7) {
+                        this.x = xPos2;
+                    } else {
+                        this.y = yPos;
+                    }
+                } else if (EventHandler.map[(int) (y + 1)][xPos2] != ' ') {
+                    if (this.x - (int) x <= 0.45) {
+                        this.x = xPos;
+                    } else {
+                        this.y = yPos;
                     }
                 }
-                this.x -= tmpSpeed;
             }
+        }
+    }
 
-            public boolean checkToMoveLeft() {
+    public void moveLeft(double tmpSpeed) {
+        if (leftFrameCount < maxFrame) {
+            this.setImg(frameLeft[0]);
+            leftFrameCount++;
+        } else if (leftFrameCount < 2 * maxFrame) {
+            this.setImg(frameLeft[1]);
+            leftFrameCount++;
+        } else {
+            this.setImg(frameLeft[2]);
+            leftFrameCount++;
+            if (leftFrameCount == 3 * maxFrame) {
+                leftFrameCount = 0;
+            }
+        }
+        this.x -= tmpSpeed;
+    }
 
-                double widthFrame = 24;
+    public void checkToMoveLeft() {
+        int distance = 1;
+        int xPos = (int) (x - speed);
+        int xPos2 = (int) x + distance;
 
-                double dis = widthFrame / (double) Sprite.SCALED_SIZE;
+        int yPos = (int) y;
+        int yPos2 = (int) (y + distance);
 
-                int xPos = (int) (x - speed);
-                int xPos2 = (int) (x - speed);
-
-                int yPos = (int) y;
-                int yPos2 = (int) (y + dis);
-
-                if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
-                    if (EventHandler.map[yPos][xPos] != ' ' || EventHandler.map[yPos2][xPos] != ' ') {
-                        return false;
+        if (xPos >= 0 && xPos < 31 && yPos >= 0 && yPos2 < 13) {
+            if (EventHandler.map[yPos][xPos] != ' ' || EventHandler.map[yPos2][xPos] != ' ') {
+                if (EventHandler.map[yPos][xPos] != ' ') {
+                    if (this.y == (int) y) {
+                        this.x = xPos + 1;
+                    } else {
+                        if (this.y - (int) y >= 0.7) {
+                            this.y = yPos2;
+                        } else {
+                            this.x = xPos2;
+                        }
+                    }
+                } else if (EventHandler.map[(yPos2)][xPos] != ' ') {
+                    if (this.y - (int) y <= 0.3) {
+                        this.y = (int) y;
+                    } else {
+                        this.x = xPos2;
                     }
                 }
-                return true;
             }
+        }
+    }
 
     public void moveRight(double tmpSpeed) {
         if (rightFrameCount < maxFrame) {
@@ -140,68 +173,66 @@ public abstract class Enemy extends movement {
         this.x += tmpSpeed;
     }
 
-    public boolean checkToMoveRight() {
-        double widthFrame = 24;
-
-        double dis = widthFrame / (double) Sprite.SCALED_SIZE;
-
+    public void checkToMoveRight() {
+        double distance = 1;
         int xPos = (int) (x + speed);
-        int xPos2 = (int) (x + speed + 1);
+        int xPos2 = (int) (x + speed + distance);
 
         int yPos = (int) y;
-        int yPos2 = (int) (y + dis);
+        int yPos2 = (int) (y + distance);
 
         if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
             if (EventHandler.map[yPos][xPos2] != ' ' || EventHandler.map[yPos2][xPos2] != ' ') {
-                return false;
+                if (EventHandler.map[(int) y][xPos2] != ' ') {
+                    if (y == (int) y) {
+                        this.x = xPos2 - distance;
+                    } else {
+                        if (this.y - (int) y >= 0.7) {
+                            this.y = yPos2;
+                        } else {
+                            this.x = xPos2 - distance;
+                        }
+                    }
+                } else if (EventHandler.map[yPos2][xPos2] != 0) {
+                    if (this.y - (int) y <= 0.3) {
+                        this.y = (int) y;
+                    } else {
+                        this.x = xPos2 - distance;
+                    }
+                }
             }
         }
-        //System.out.println("Loi 1" + y + " " + xPos2);
-        //System.out.println("Loi 2" + y + " " + xPos2);
-        return true;
     }
 
 
-        public void characterMovement () {
+    public void characterMovement() {
         direction = getDirection();
-            switch (direction) {
-                case 0:
-                    if (checkToMoveUp()) {
-                        moveUp(speed);
-                    } else {
-                        moveUp(0);
-                    }
-                    break;
-                case 1:
-                    if (checkToMoveDown()) {
-                        moveDown(speed);
-                    } else {
-                        moveDown(0);
-                    }
-                    break;
-                case 2:
-                    if (checkToMoveLeft()) {
-                        moveLeft(speed);
-                    } else {
-                        moveLeft(0);
-                    }
-                    break;
-                case 3:
-                    if (checkToMoveRight()) {
-                        moveRight(speed);
-                    } else {
-                        moveRight(0);
-                    }
-                    break;
-            }
+        switch (direction) {
+            case 0:
+                moveUp(speed);
+                checkToMoveUp();
+                break;
+            case 1:
+                moveDown(speed);
+                checkToMoveDown();
+                break;
+            case 2:
+                moveLeft(speed);
+                checkToMoveLeft();
+                break;
+            case 3:
+                moveRight(speed);
+                checkToMoveRight();
+                break;
         }
-
-        public void update () {
-            if (isAlive) {
-                characterMovement();
-            } else {
-                dying();
-            }
-        }
-
     }
+
+    public void update() {
+        if (isAlive) {
+            characterMovement();
+        } else {
+            dying();
+        }
+    }
+
+}
