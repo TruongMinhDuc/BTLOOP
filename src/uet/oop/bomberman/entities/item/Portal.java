@@ -1,6 +1,7 @@
 package uet.oop.bomberman.entities.item;
 
 import javafx.scene.image.Image;
+import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.EventHandler;
 
 public class Portal extends Item{
@@ -17,6 +18,9 @@ public class Portal extends Item{
     }
 
     public void update() {
+        if(BombermanGame.eventHandler.getEnemyList().size() == 0) {
+            active = true;
+        }
         if (active) {
             EventHandler.map[(int) this.y][(int) this.x] = ' ';
         } else {

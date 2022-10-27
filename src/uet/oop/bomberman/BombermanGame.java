@@ -31,7 +31,7 @@ public class BombermanGame extends Application {
     public static MapGen MG;
     public static Controller controller;
     public static EventHandler eventHandler;
-    public static Bomb bomb;
+    //public static Bomb bomb;
     //public  Scene gScene;
 
     public static void main(String[] args) {

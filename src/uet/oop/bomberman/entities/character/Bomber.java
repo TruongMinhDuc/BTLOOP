@@ -11,14 +11,19 @@ import uet.oop.bomberman.entities.item.Portal;
 import uet.oop.bomberman.entities.movement;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static uet.oop.bomberman.BombermanGame.eventHandler;
 
 public class Bomber extends movement {
 
+    public static int left = 3;
     public static boolean flamePass = false;
 
     public static boolean brickPass = false;
@@ -37,6 +42,7 @@ public class Bomber extends movement {
     Image[] frameRight = new Image[3];
 
     private final int maxFrame = 10;
+
 
     private List<Bomb> bombsList = new ArrayList<>();
 
@@ -68,6 +74,7 @@ public class Bomber extends movement {
 
     public Bomber(int x, int y, Image img, double speed) {
         super(x, y, img, speed);
+
         setFrameDown();
         setFrameUp();
         setFrameLeft();
@@ -435,46 +442,61 @@ public class Bomber extends movement {
     public void impact() {
         for (int i = 0; i <  BombermanGame.eventHandler.getEntitiesList().size(); i++) {
             if ( BombermanGame.eventHandler.getEntitiesList().get(i) instanceof Item) {
-                collideWithItem((Item)  BombermanGame.eventHandler.getEntitiesList().get(i));
+                itemsObtained((Item) BombermanGame.eventHandler.getEntitiesList().get(i));
             }
         }
     }
+//    public void updateStatus() {
+//        eventHandler.file.delete();
+//        final String FILENAME = "res/levels/save.txt";
+//        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME, true))) {
+//            int nleft = left;
+//            bw.write(eventHandler.getLevel() + " " + nleft + " " + eventHandler.score);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    public void collideWithItem(Item obj) {
+
+
+    public void itemsObtained(Item obj) {
         if (isAlive) {
             HashSet<String> maskPlayer1 = blockEntity(this);
             HashSet<String> maskPlayer2 = blockEntity(obj);
             maskPlayer1.retainAll(maskPlayer2);
-//            if (obj instanceof Portal) {
-//                Portal other = (Portal) obj;
-//                if (other.getActive()) {
-//                    if (maskPlayer1.size() > 300) {
-//                        if (eventHandler.getLevel() == EventHandler.MAX_LEVEL) {
-//                            win = true;
-//                        } else {
-//                            //Sound.play("CRYST_UP");
-//                            eventHandler.countDownTime = 181 * 60;
-//                            int newLevel = eventHandler.getLevel() + 1;
-//                            //eventHandler.scorePrevious += eventHandler.score;
-//                            //eventHandler.changeLevel(newLevel);
-//                            eventHandler.setLevel(newLevel);
-//
-//                        }
-//                        try {
-//                            TimeUnit.SECONDS.sleep(1);
-//                            this.setImg(Sprite.player_right.getFxImage());
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                }
-//            } else {
+            if (obj instanceof Portal) {
+                Portal other = (Portal) obj;
+                if (other.getActive()) {
+                    if (maskPlayer1.size() > 300) {
+                        if (eventHandler.getLevel() == 3) {
+                            win = true;
+                        } else {
+                            //Sound.play("CRYST_UP");
+                            //eventHandler.countDownTime = 181 * 60;
+                            int newLevel = BombermanGame.eventHandler.getLevel() + 1;
+                            System.out.println(newLevel);
+                            //eventHandler.scorePrevious += eventHandler.score;
+                            BombermanGame.eventHandler.changeLevel(newLevel);
+                            BombermanGame.eventHandler.setLevel(newLevel);
+
+                            //updateStatus();
+                        }
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                            this.setImg(Sprite.player_right.getFxImage());
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+            } else {
             if (!(obj instanceof Portal) && !obj.isObtain()) {
                 if (maskPlayer1.size() > 0) {
                     obj.setObtain(true);
                 }
-                //}
+                }
             }
         }
     }

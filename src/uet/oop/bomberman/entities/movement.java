@@ -10,8 +10,8 @@ public abstract class movement extends Entity {
     public int downFrameCount = 0;
     public int leftFrameCount = 0;
     public int rightFrameCount = 0;
-    public final int maxFrame = 5;
-    public double speed;
+    public final int maxFrame = 10;
+    public static double speed;
     public boolean isAlive = true;
 
     public movement(int xUnit, int yUnit, Image img, double speed) {

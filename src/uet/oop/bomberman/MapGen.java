@@ -4,6 +4,7 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.MapEntities.Grass;
 import uet.oop.bomberman.entities.MapEntities.Wall;
+import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.item.*;
 import uet.oop.bomberman.entities.npc.Balloom;
 import uet.oop.bomberman.entities.npc.Enemy;
@@ -18,6 +19,7 @@ import java.util.Scanner;
 public class MapGen {
     private EventHandler eventHandler;
     public MapGen(EventHandler eventHandler) {
+        this.eventHandler = eventHandler;
         //public static int level = 1;
     }
     //public static char[][] map = new char[BombermanGame.HEIGHT][BombermanGame.WIDTH];
@@ -44,6 +46,17 @@ public class MapGen {
 //        int mapLevel = sc.nextInt();
 //        int mapHeight = sc.nextInt();
 //        int mapWidth = sc.nextInt();
+
+        EventHandler.getPlayer().setX(1);
+        EventHandler.getPlayer().setY(1);
+//        EventHandler.score = 0;
+//        BombermanGame.controller.right = false;
+//        BombermanGame.controller.left = false;
+//        BombermanGame.controller.up = false;
+//        BombermanGame.controller.down = false;
+        EventHandler.getPlayer().setImg(Sprite.player_right.getFxImage());
+//        eventHandler.getPlayer().setSpeed(Bomber.playerSpeed);
+        eventHandler.addEntity(eventHandler.getPlayer());
 
         //map load
         int he = 0;

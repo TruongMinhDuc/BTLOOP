@@ -31,7 +31,7 @@ public class FindPaths {
 
         double distance = Math.sqrt(diffX * diffX + diffY * diffY);
         //System.out.println(distance);
-        System.out.println(bomberPosY + " " + enemyPosY);
+        //System.out.println(bomberPosY + " " + enemyPosY);
         if (distance > 3) {
             //System.out.println("di tu do");
             enemy.setSpeed(Enemy.enemySpeed);

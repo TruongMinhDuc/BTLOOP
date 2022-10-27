@@ -1,5 +1,6 @@
 package uet.oop.bomberman;
 
+import uet.oop.bomberman.entities.Bomb.Bomb;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.npc.Enemy;
@@ -28,11 +29,11 @@ public class EventHandler {
 
     private static List<Enemy> enemyList = new ArrayList<>();
 
-    private double playerSpeed = 0.05;
-    private static Bomber player;
+   private double playerSpeed = 0.05;
+    private static Bomber player ;
     private MapGen gameLevel;
     private int level;
-
+    //public static File file = new File("res/levels/save.txt");
 
 
     public EventHandler() {
@@ -41,22 +42,27 @@ public class EventHandler {
         gameLevel = new MapGen(this);
     }
 
-//    public void changeLevel(int level) {
-//        entities.clear();
-//        enemies.clear();
-//        stillObjects.clear();
-//        try {
-//            gameLevel.createMapLevel(level);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
+    public void changeLevel(int level) {
+        entitiesList.clear();
+        enemyList.clear();
+        stillObjects.clear();
+        try {
+            gameLevel.createMap(level);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 //        bombCount = 1;
 //        bombRadius = 1;
 //        flamePass = false;
 //        bombPass = false;
 //        wallPass = false;
-//        this.level = level;
-//    }
+        Bomb.maxBomb = 1;
+        Bomb.blastLength = 1;
+        Bomber.bombPassItem = false;
+        Bomber.brickPass = false;
+        player.setSpeed(playerSpeed);
+        this.level = level;
+    }
 
     public Entity getEntity(double x, double y) {
         for (int i = 0; i < entitiesList.size(); i++) {
@@ -96,7 +102,7 @@ public class EventHandler {
         return stillObjects;
     }
 
-    public Bomber getPlayer() {
+    public static Bomber getPlayer() {
         return player;
     }
 
@@ -104,14 +110,15 @@ public class EventHandler {
 //        return getPlayer().getHealth();
 //    }
 
-//    public void setPlayer(Bomber player) {
-//        this.player = player;
-//    }
+    public void setPlayer(Bomber player) {
+        this.player = player;
+    }
 
     public List<Enemy> getEnemyList() {
         return enemyList;
     }
-//
+
+    //
     public void removeEnemyAt(double x, double y) {
         for (int i = 0; i < enemyList.size(); i++) {
             Enemy temp = enemyList.get(i);
@@ -157,7 +164,7 @@ public class EventHandler {
         for (int i = 0; i < entitiesList.size(); i++) {
             entitiesList.get(i).update();
         }
-        for(int i = 0; i < enemyList.size(); i++) {
+        for (int i = 0; i < enemyList.size(); i++) {
             //System.out.println(enemyList.size());
             enemyList.get(i).update();
         }
@@ -170,5 +177,21 @@ public class EventHandler {
         getEnemyList().forEach(g -> g.render(BombermanGame.gc));
     }
 
-
+//    public void loadLevel() {
+//        try {
+//            Scanner scanner = new Scanner(file);
+//            level = scanner.nextInt();
+//            int left = scanner.nextInt();
+//            score = scanner.nextInt();
+//            if (left == 0) {
+//                left = 100;
+//                level = 1;
+//                //Board.score = 0;
+//            }
+//           // player.setHealth(left);
+//            scanner.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
