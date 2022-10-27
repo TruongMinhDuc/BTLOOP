@@ -39,31 +39,34 @@ public class FindPaths {
             //direction = Math.abs(rand.nextInt() % 4);
             direction = simplePath(enemy, direction);
             //direction = 2;
-        } else {
+        } else
+        {
             //System.out.println("duoi nguoi choi");
-            enemy.setSpeed(Enemy.enemySpeed * 1.5);
             //System.out.println(bomberPosX + bomberPosY);
-            if ((int) enemyPosY == (int) bomberPosY) {
-                if (enemyPosX < bomberPosX) {
+            if (enemyPosX == (int) enemyPosX && enemyPosX == (int) enemyPosY) {
+                enemy.setSpeed(Enemy.enemySpeed * 1.5);
+                if ((int) enemyPosY == (int) bomberPosY) {
+                    if (enemyPosX < bomberPosX) {
 //                    System.out.println("di sang phai2");
-                    direction = 3;
-                } else {
+                        direction = 3;
+                    } else {
 //                    System.out.println("di sang trai2");
-                    direction = 2;
-                }
-            } else if (enemyPosY > bomberPosY) {
+                        direction = 2;
+                    }
+                } else if (enemyPosY > bomberPosY) {
 
-                System.out.println("can di len");
-                //if (enemyPosY == (int) enemyPosY) {
+                    //System.out.println("can di len");
+                    //if (enemyPosY == (int) enemyPosY) {
 //                    System.out.println("duoc di xuong2");
-                direction = 0;
-                //}
-            } else {
-                System.out.println("can di xuong");
-                //if (enemyPosY == (int) enemyPosY) {
+                    direction = 0;
+                    //}
+                } else {
+                    //System.out.println("can di xuong");
+                    //if (enemyPosY == (int) enemyPosY) {
 //                    System.out.println("duoc di len2");
-                direction = 1;
-                //}
+                    direction = 1;
+                    //}
+                }
             }
         }
         return direction;
