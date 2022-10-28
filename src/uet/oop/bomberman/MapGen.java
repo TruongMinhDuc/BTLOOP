@@ -117,6 +117,18 @@ public class MapGen {
                         BombermanGame.eventHandler.addEntity(brickCoverB);
                         brickCoverB.addEntityBelow(bombPluss);
                         break;
+                    case 'u' :
+                        Brick brickCoverU = new Brick(j, i, Sprite.brick.getFxImage());
+                        FlamePass flamePass = new FlamePass(j, i, Sprite.powerup_flamepass.getFxImage());
+                        BombermanGame.eventHandler.addEntity(brickCoverU);
+                        brickCoverU.addEntityBelow(flamePass);
+                        break;
+                    case 'd' :
+                        Brick brickCoverD = new Brick(j, i, Sprite.brick.getFxImage());
+                        Detonator detonator = new Detonator(j, i, Sprite.powerup_detonator.getFxImage());
+                        BombermanGame.eventHandler.addEntity(brickCoverD);
+                        brickCoverD.addEntityBelow(detonator);
+                        break;
                     case '1':
                         EventHandler.map[i][j] = ' ';
                         Balloom balloom = new Balloom(j,i,Sprite.balloom_left1.getFxImage(), Enemy.enemySpeed);
