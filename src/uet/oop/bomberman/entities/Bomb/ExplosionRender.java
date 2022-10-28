@@ -8,6 +8,8 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 
+import static uet.oop.bomberman.BombermanGame.eventHandler;
+
 public class ExplosionRender extends Entity {
 
     protected boolean last;
@@ -34,17 +36,17 @@ public class ExplosionRender extends Entity {
 
     public void update(int BlastDirection, int duration) {
 
-        int sizeBomb = EventHandler.getPlayer().getBombsList().size();
+        int sizeBomb = eventHandler.getPlayer().getBombsList().size();
         for (int i = 0; i < sizeBomb; i++) {
-            EventHandler.getPlayer().getBombsList().get(i).blastImpactBomb(this);
+            eventHandler.getPlayer().getBombsList().get(i).blastImpactBomb(this);
         }
 
-        int sizeEnemy = BombermanGame.eventHandler.getEnemyList().size();
+        int sizeEnemy = eventHandler.getEnemyList().size();
         for (int i = 0; i < sizeEnemy; i++) {
-            BombermanGame.eventHandler.getEnemyList().get(i).collideWithExplosion(this);
+            eventHandler.getEnemyList().get(i).collideWithExplosion(this);
         }
         if (!Bomber.flamePass) {
-            BombermanGame.eventHandler.getPlayer().bomberDie(this);
+            eventHandler.getPlayer().bomberDie(this);
         }
 
         duration %= 30;
