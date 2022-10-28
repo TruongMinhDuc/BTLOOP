@@ -26,14 +26,13 @@ public class EventHandler {
 
     private double playerSpeed = 0.05;
     private static Bomber player;
-    private MapGen gameLevel;
+    private MapGen game;
     private int level;
 
 
     public EventHandler() {
         player = new Bomber(1, 1, Sprite.player_right.getFxImage(), playerSpeed);
-
-        gameLevel = new MapGen(this);
+        game = new MapGen(this);
     }
 
     public void levelUp(int level) {
@@ -41,7 +40,7 @@ public class EventHandler {
         enemyList.clear();
         stillObjects.clear();
         try {
-            gameLevel.createMap(level);
+            game.createMap(level);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -57,6 +56,12 @@ public class EventHandler {
         }
         return null;
     }
+    public void addEntity(Entity object) {
+        entitiesList.add(object);
+    }
+    public List<Entity> getEntitiesList() {
+        return entitiesList;
+    }
 
     public void removeEntityAt(double x, double y) {
         for (int i = 0; i < entitiesList.size(); i++) {
@@ -70,16 +75,10 @@ public class EventHandler {
         }
     }
 
-    public void addEntity(Entity object) {
-        entitiesList.add(object);
-    }
+
 
     public void addStillObject(Entity object) {
         stillObjects.add(object);
-    }
-
-    public List<Entity> getEntitiesList() {
-        return entitiesList;
     }
 
     public List<Entity> getStillObjects() {
@@ -130,7 +129,7 @@ public class EventHandler {
     }
 
     public MapGen getGameLevel() {
-        return this.gameLevel;
+        return this.game;
     }
 
 
