@@ -11,7 +11,7 @@ public class FindPaths {
         double posY = (double) Math.round(enemy.getY() * 1000) / 1000;
         //System.out.println(tempX + " " + (int) tempX);
         if (posX == (int) posX && posY == (int) posY) {
-            Random rand = new Random(System.currentTimeMillis());
+            Random rand = new Random();
             direction = Math.abs(rand.nextInt() % 4);
         }
         return direction;
@@ -50,7 +50,6 @@ public class FindPaths {
                         direction = 2;
                     }
                 } else if (enemyPosY > bomberPosY) {
-
                     //System.out.println("can di len");
                     //if (enemyPosY == (int) enemyPosY) {
 //                    System.out.println("duoc di xuong2");
