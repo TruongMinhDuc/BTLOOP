@@ -21,6 +21,14 @@ public abstract class movement extends Entity {
 
     public abstract void characterMovement();
 
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
     public double getSpeed() {
         return speed;
     }

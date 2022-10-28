@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.EventHandler;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class ExplosionRender extends Entity {
@@ -33,14 +34,17 @@ public class ExplosionRender extends Entity {
 
     public void update(int direction, int duration) {
 
-        int sizeBomb =  BombermanGame.eventHandler.getPlayer().getBombsList().size();
+        int sizeBomb =  EventHandler.getPlayer().getBombsList().size();
         for (int i = 0; i < sizeBomb; i++) {
-            BombermanGame.eventHandler.getPlayer().getBombsList().get(i).blastImpactBomb(this);
+            EventHandler.getPlayer().getBombsList().get(i).blastImpactBomb(this);
         }
 
         int sizeEnemy = BombermanGame.eventHandler.getEnemyList().size();
         for (int i = 0; i < sizeEnemy; i++) {
             BombermanGame.eventHandler.getEnemyList().get(i).collideWithExplosion(this);
+        }
+        if(!Bomber.flamePass) {
+            BombermanGame.eventHandler.getPlayer().bomberDie(this);
         }
 
         duration %= 30;

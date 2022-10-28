@@ -162,7 +162,7 @@ public class EventHandler {
         for (int i = 0; i < entitiesList.size(); i++) {
             entitiesList.get(i).update();
         }
-        System.out.println(getPlayer().getSpeed());
+        //System.out.println(getPlayer().getSpeed());
         for (int i = 0; i < enemyList.size(); i++) {
             //System.out.println(enemyList.size());
             enemyList.get(i).update();
@@ -171,26 +171,9 @@ public class EventHandler {
 
     public void render() {
         BombermanGame.gc.clearRect(0, 0, BombermanGame.canvas.getWidth(), BombermanGame.canvas.getHeight());
+
         stillObjects.forEach(g -> g.render(BombermanGame.gc));
         BombermanGame.eventHandler.getEntitiesList().forEach(g -> g.render(BombermanGame.gc));
         BombermanGame.eventHandler.getEnemyList().forEach(g -> g.render(BombermanGame.gc));
     }
-
-//    public void loadLevel() {
-//        try {
-//            Scanner scanner = new Scanner(file);
-//            level = scanner.nextInt();
-//            int left = scanner.nextInt();
-//            score = scanner.nextInt();
-//            if (left == 0) {
-//                left = 100;
-//                level = 1;
-//                //Board.score = 0;
-//            }
-//           // player.setHealth(left);
-//            scanner.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

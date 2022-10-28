@@ -24,6 +24,7 @@ public class BombermanGame extends Application {
     public static final int HEIGHT = 13;
     //render
     public static GraphicsContext gc;
+
     public static Canvas canvas;
     //entity
 
@@ -44,6 +45,7 @@ public class BombermanGame extends Application {
         // Tao Canvas
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
+
 
         // Tao root container
         Group root = new Group();
@@ -99,7 +101,7 @@ public class BombermanGame extends Application {
     public void newGame() throws FileNotFoundException {
             eventHandler = new EventHandler();
             controller = new Controller();
-            eventHandler.getPlayer().setHealth(1);
+            eventHandler.getPlayer().setHealth(3);
             eventHandler.setLevel(1);
             eventHandler.getGameLevel().createMap(1);
     }

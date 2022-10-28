@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.EventHandler;
 import uet.oop.bomberman.entities.Bomb.Bomb;
+import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.item.Item;
 import uet.oop.bomberman.entities.item.Portal;
@@ -20,12 +21,14 @@ import static uet.oop.bomberman.BombermanGame.eventHandler;
 public class Bomber extends movement {
 
     public static int left = 3;
+    private int dieDuration = 0;
     public static boolean flamePass = false;
     private int health;
     public static boolean brickPass = false;
     public static boolean bombPassItem = false;
 
     private boolean win = false;
+    private boolean lose = false;
     private boolean isDie = false;
     private int upFrameCount = 0;
     private int downFrameCount = 0;
@@ -37,6 +40,7 @@ public class Bomber extends movement {
     Image[] frameLeft = new Image[3];
     Image[] frameRight = new Image[3];
 
+    Image[] frameDie = new Image[3];
     private final int maxFrame = 10;
 
 
@@ -82,6 +86,12 @@ public class Bomber extends movement {
         setFrameUp();
         setFrameLeft();
         setFrameRight();
+        setImgDie();
+    }
+    public void setImgDie() {
+        frameDie[0] = Sprite.player_dead1.getFxImage();
+        frameDie[1] = Sprite.player_dead2.getFxImage();
+        frameDie[2] = Sprite.player_dead3.getFxImage();
     }
 
     @Override
@@ -349,6 +359,7 @@ public class Bomber extends movement {
 
     @Override
     public void update() {
+        //int duration = 0;
         impact();
         for (int i = 0; i < bombsList.size(); i++) {
             bombPass(bombsList.get(i));
@@ -358,11 +369,43 @@ public class Bomber extends movement {
             characterMovement();
             plantBomb();
             //bombsList.forEach(Bomb::update);
+        } else {
+
+            if (dieDuration < 10) {
+                this.setImg(frameDie[0]);
+                dieDuration++;
+            } else if (dieDuration < 20) {
+                this.setImg(frameDie[1]);
+                dieDuration++;
+            } else if (dieDuration < 30) {
+                this.setImg(frameDie[2]);
+                dieDuration++;
+            } else if (dieDuration < 40) {
+                this.setImg(null);
+                dieDuration++;
+            } else {
+                if (health == 0) {
+                    lose = true;
+                    eventHandler.removeEntityAt(this.x, this.y);
+//                    try {
+//                        TimeUnit.SECONDS.sleep(10);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+                } else {
+                    this.x = 1;
+                    this.y = 1;
+                    isDie = true;
+                    this.setImg(Sprite.player_right.getFxImage());
+                    isAlive = true;
+                    dieDuration = 0;
+                }
+            }
         }
     }
 
     public void render(GraphicsContext gc) {
-        if (!isDie) {
+        if (!lose) {
             super.render(gc);
         }
         //else {
@@ -446,6 +489,28 @@ public class Bomber extends movement {
         for (int i = 0; i <  BombermanGame.eventHandler.getEntitiesList().size(); i++) {
             if ( BombermanGame.eventHandler.getEntitiesList().get(i) instanceof Item) {
                 itemsObtained((Item) BombermanGame.eventHandler.getEntitiesList().get(i));
+            }
+        }
+        for(int i = 0; i < eventHandler.getEnemyList().size(); i++) {
+            bomberDie(eventHandler.getEnemyList().get(i));
+        }
+    }
+
+    public void bomberDie(Entity tmp) {
+        if (isAlive&& !lose) {
+            HashSet<String> maskPlayer1 = blockEntity(this);
+            HashSet<String> maskPlayer2 = blockEntity(tmp);
+            maskPlayer1.retainAll(maskPlayer2);
+            if (maskPlayer1.size() > 0) {
+                health--;
+                //updateStatus();
+                if (health == 0) {
+                    setAlive(false);
+                    //Sound.play("endgame3");
+                } else {
+                    //Sound.play("AA126_11");
+                    setAlive(false);
+                }
             }
         }
     }
