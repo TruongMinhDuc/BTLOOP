@@ -53,9 +53,9 @@ public abstract class Enemy extends movement {
     }
 
     public void checkToMoveUp() {
-        double dis = 1;
+        double width = 1;
         int tmpX = (int) (x);
-        int tmpX2 = (int) (x + dis);
+        int tmpX2 = (int) (x + width);
 
         int tmpY = (int) (y);
         int tmpY2 = (int) (y - speed);
@@ -66,13 +66,13 @@ public abstract class Enemy extends movement {
                     if (this.x - (int) x >= 0.7) {
                         this.x = (int) x + 1;
                     } else {
-                        this.y = tmpY2 + dis;
+                        this.y = tmpY2 + width;
                     }
                 } else if (EventHandler.map[tmpY2][tmpX2] != ' ') {
                     if (this.x - (int) x <= 0.45) {
                         this.x = tmpX;
                     } else {
-                        this.y = tmpY2 + dis;
+                        this.y = tmpY2 + width;
                     }
                 }
 
@@ -98,9 +98,9 @@ public abstract class Enemy extends movement {
     }
 
     public void checkToMoveDown() {
-        double dis = 1;
+        double width = 1;
         int tmpX = (int) x;
-        int tmpX2 = (int) (x + dis);
+        int tmpX2 = (int) (x + width);
 
         int tmpY = (int) (y + speed);
         int tmpY2 = (int) (y + 1 + speed);
@@ -142,12 +142,12 @@ public abstract class Enemy extends movement {
     }
 
     public void checkToMoveLeft() {
-        int dis = 1;
+        int width = 1;
         int tmpX = (int) (x - speed);
-        int tmpX2 = (int) x + dis;
+        int tmpX2 = (int) x + width;
 
         int tmpY = (int) y;
-        int tmpY2 = (int) (y + dis);
+        int tmpY2 = (int) (y + width);
 
         if (tmpX >= 0 && tmpX < 31 && tmpY >= 0 && tmpY2 < 13) {
             if (EventHandler.map[tmpY][tmpX] != ' ' || EventHandler.map[tmpY2][tmpX] != ' ') {
@@ -190,30 +190,30 @@ public abstract class Enemy extends movement {
     }
 
     public void checkToMoveRight() {
-        double dis = 1;
+        double width = 1;
         int tmpX = (int) (x + speed);
-        int tmpX2 = (int) (x + speed + dis);
+        int tmpX2 = (int) (x + speed + width);
 
         int tmpY = (int) y;
-        int tmpY2 = (int) (y + dis);
+        int tmpY2 = (int) (y + width);
 
         if (tmpX >= 0 && tmpX2 < 31 && tmpY >= 0 && tmpY2 < 13) {
             if (EventHandler.map[tmpY][tmpX2] != ' ' || EventHandler.map[tmpY2][tmpX2] != ' ') {
                 if (EventHandler.map[(int) y][tmpX2] != ' ') {
                     if (y == (int) y) {
-                        this.x = tmpX2 - dis;
+                        this.x = tmpX2 - width;
                     } else {
                         if (this.y - (int) y >= 0.71) {
                             this.y = tmpY2;
                         } else {
-                            this.x = tmpX2 - dis;
+                            this.x = tmpX2 - width;
                         }
                     }
                 } else if (EventHandler.map[tmpY2][tmpX2] != 0) {
                     if (this.y - (int) y <= 0.31) {
                         this.y = (int) y;
                     } else {
-                        this.x = tmpX2 - dis;
+                        this.x = tmpX2 - width;
                     }
                 }
             }

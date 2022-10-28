@@ -25,11 +25,11 @@ public class Bomber extends movement {
     public static int left = 3;
     private int dieDuration = 0;
     public static boolean flamePass = false;
-    private int health;
+    private int life;
     public static boolean brickPass = false;
     public static boolean bombPassItem = false;
 
-    private boolean win = false;
+    //private boolean win = false;
     private boolean lose = false;
     private boolean isDie = false;
     private int upFrameCount = 0;
@@ -48,12 +48,12 @@ public class Bomber extends movement {
 
     private List<Bomb> bombsList = new ArrayList<>();
 
-    public int getHealth() {
-        return health;
+    public int getLife() {
+        return life;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setLife(int life) {
+        this.life = life;
     }
 
     public void setImgUp() {
@@ -81,13 +81,13 @@ public class Bomber extends movement {
         frameRight[2] = Sprite.player_right_2.getFxImage();
     }
 
-    public boolean isWin() {
-        return win;
-    }
+//    public boolean isWin() {
+//        return win;
+//    }
 
-    public void setWin(boolean win) {
-        this.win = win;
-    }
+//    public void setWin(boolean win) {
+//        this.win = win;
+//    }
 
     public boolean isLose() {
         return lose;
@@ -106,6 +106,7 @@ public class Bomber extends movement {
         setImgRight();
         setImgDie();
     }
+
     public void setImgDie() {
         frameDie[0] = Sprite.player_dead1.getFxImage();
         frameDie[1] = Sprite.player_dead2.getFxImage();
@@ -163,33 +164,33 @@ public class Bomber extends movement {
     }
 
     public boolean checkToMoveUp() {
-        double widthFrame = 24;
-        double dis = widthFrame / Sprite.SCALED_SIZE;
+        double pixel = 24;
+        double width = pixel / Sprite.SCALED_SIZE;
 
-        int xPos = (int) (x);
-        int xPos2 = (int) (x + dis);
-        int yPos = (int) (y);
-        int yPos2 = (int) (y - speed);
+        int tmpX = (int) (x);
+        int tmpX2 = (int) (x + width);
+        int tmpY = (int) (y);
+        int tmpY2 = (int) (y - speed);
 
-        if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
+        if (tmpX >= 0 && tmpX2 < 31 && tmpY >= 0 && tmpY2 < 13) {
             if (brickPass && !bombPassItem) {
-                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                if (EventHandler.map[tmpY2][tmpX] == '#' || EventHandler.map[tmpY2][tmpX2] == '#' ||
+                        EventHandler.map[tmpY2][tmpX] == 'B' || EventHandler.map[tmpY2][tmpX2] == 'B') {
                     return false;
                 }
             } else if (!brickPass && bombPassItem) {
-                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                        (eventHandler.getEntity(xPos, yPos2) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick)) {
+                if (EventHandler.map[tmpY2][tmpX] == '#' || EventHandler.map[tmpY2][tmpX2] == '#' ||
+                        (eventHandler.getEntity(tmpX, tmpY2) instanceof Brick) || (eventHandler.getEntity(tmpX2, tmpY2) instanceof Brick)) {
                     return false;
                 }
             } else if (!brickPass && !bombPassItem) {
-                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                        (eventHandler.getEntity(xPos, yPos2) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick) ||
-                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                if (EventHandler.map[tmpY2][tmpX] == '#' || EventHandler.map[tmpY2][tmpX2] == '#' ||
+                        (eventHandler.getEntity(tmpX, tmpY2) instanceof Brick) || (eventHandler.getEntity(tmpX2, tmpY2) instanceof Brick) ||
+                        EventHandler.map[tmpY2][tmpX] == 'B' || EventHandler.map[tmpY2][tmpX2] == 'B') {
                     return false;
                 }
             } else if (brickPass && bombPassItem) {
-                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#') {
+                if (EventHandler.map[tmpY2][tmpX] == '#' || EventHandler.map[tmpY2][tmpX2] == '#') {
                     return false;
                 }
             }
@@ -216,36 +217,36 @@ public class Bomber extends movement {
     }
 
     public boolean checkToMoveDown() {
-        double widthFrame = 24;
+        double pixel = 24;
 
-        double dis = widthFrame / Sprite.SCALED_SIZE;
-        int xPos = (int) x;
-        int xPos2 = (int) (x + dis);
+        double width = pixel / Sprite.SCALED_SIZE;
+        int tmpX = (int) x;
+        int tmpX2 = (int) (x + width);
 
-        int yPos = (int) (y + speed);
-        int yPos2 = (int) (y + 1);
+        int tmpY = (int) (y + speed);
+        int tmpY2 = (int) (y + 1);
 
-        if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
+        if (tmpX >= 0 && tmpX2 < 31 && tmpY >= 0 && tmpY2 < 13) {
             if (brickPass && !bombPassItem) {
-                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                if (EventHandler.map[tmpY2][tmpX] == '#' || EventHandler.map[tmpY2][tmpX2] == '#' ||
+                        EventHandler.map[tmpY2][tmpX] == 'B' || EventHandler.map[tmpY2][tmpX2] == 'B') {
                     return false;
 
                 }
             } else if (!brickPass && bombPassItem) {
-                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                        (eventHandler.getEntity(xPos, yPos2) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick)) {
+                if (EventHandler.map[tmpY2][tmpX] == '#' || EventHandler.map[tmpY2][tmpX2] == '#' ||
+                        (eventHandler.getEntity(tmpX, tmpY2) instanceof Brick) || (eventHandler.getEntity(tmpX2, tmpY2) instanceof Brick)) {
                     return false;
                 }
             } else if (!brickPass && !bombPassItem) {
-                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                        (eventHandler.getEntity(xPos, yPos2) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick) ||
-                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                if (EventHandler.map[tmpY2][tmpX] == '#' || EventHandler.map[tmpY2][tmpX2] == '#' ||
+                        (eventHandler.getEntity(tmpX, tmpY2) instanceof Brick) || (eventHandler.getEntity(tmpX2, tmpY2) instanceof Brick) ||
+                        EventHandler.map[tmpY2][tmpX] == 'B' || EventHandler.map[tmpY2][tmpX2] == 'B') {
                     return false;
 
                 }
             } else if (brickPass && brickPass) {
-                if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#') {
+                if (EventHandler.map[tmpY2][tmpX] == '#' || EventHandler.map[tmpY2][tmpX2] == '#') {
                     return false;
                 }
             }
@@ -273,39 +274,39 @@ public class Bomber extends movement {
 
     public boolean checkToMoveLeft() {
 
-        double widthFrame = 24;
+        double pixel = 24;
 
-        double dis = widthFrame / (double) Sprite.SCALED_SIZE;
+        double width = pixel / (double) Sprite.SCALED_SIZE;
 
-        int xPos = (int) (x - speed);
-        int xPos2 = (int) (x - speed);
+        int tmpX = (int) (x - speed);
+        int tmpX2 = (int) (x - speed);
 
-        int yPos = (int) y;
-        int yPos2 = (int) (y + dis);
+        int tmpY = (int) y;
+        int tmpY2 = (int) (y + width);
 
-        if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
+        if (tmpX >= 0 && tmpX2 < 31 && tmpY >= 0 && tmpY2 < 13) {
             if (brickPass && !bombPassItem) {
-                if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#' ||
-                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                if (EventHandler.map[tmpY][tmpX] == '#' || EventHandler.map[tmpY2][tmpX] == '#' ||
+                        EventHandler.map[tmpY2][tmpX] == 'B' || EventHandler.map[tmpY2][tmpX2] == 'B') {
 
                     return false;
 
                 }
             } else if (!brickPass && bombPassItem) {
-                if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#' ||
-                        (eventHandler.getEntity(xPos2, yPos) instanceof Brick) || (eventHandler.getEntity(xPos, yPos2) instanceof Brick)) {
+                if (EventHandler.map[tmpY][tmpX] == '#' || EventHandler.map[tmpY2][tmpX] == '#' ||
+                        (eventHandler.getEntity(tmpX2, tmpY) instanceof Brick) || (eventHandler.getEntity(tmpX, tmpY2) instanceof Brick)) {
 
                     return false;
 
                 }
             } else if (!brickPass && !bombPassItem) {
-                if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#' ||
-                        (eventHandler.getEntity(xPos2, yPos) instanceof Brick) || (eventHandler.getEntity(xPos, yPos2) instanceof Brick) ||
-                        EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
+                if (EventHandler.map[tmpY][tmpX] == '#' || EventHandler.map[tmpY2][tmpX] == '#' ||
+                        (eventHandler.getEntity(tmpX2, tmpY) instanceof Brick) || (eventHandler.getEntity(tmpX, tmpY2) instanceof Brick) ||
+                        EventHandler.map[tmpY2][tmpX] == 'B' || EventHandler.map[tmpY2][tmpX2] == 'B') {
                     return false;
                 }
             } else if (brickPass && bombPassItem) {
-                if (EventHandler.map[yPos][xPos] == '#' || EventHandler.map[yPos2][xPos] == '#') {
+                if (EventHandler.map[tmpY][tmpX] == '#' || EventHandler.map[tmpY2][tmpX] == '#') {
                     return false;
                 }
             }
@@ -333,36 +334,36 @@ public class Bomber extends movement {
     }
 
     public boolean checkToMoveRight() {
-        double widthFrame = 24;
+        double pixel = 24;
 
-        double dis = widthFrame / (double) Sprite.SCALED_SIZE;
+        double width = pixel / (double) Sprite.SCALED_SIZE;
 
-        int xPos = (int) (x + speed);
-        int xPos2 = (int) (x + speed + dis);
+        int tmpX = (int) (x + speed);
+        int tmpX2 = (int) (x + speed + width);
 
-        int yPos = (int) y;
-        int yPos2 = (int) (y + dis);
+        int tmpY = (int) y;
+        int tmpY2 = (int) (y + width);
 
-        if (xPos >= 0 && xPos2 < 31 && yPos >= 0 && yPos2 < 13) {
+        if (tmpX >= 0 && tmpX2 < 31 && tmpY >= 0 && tmpY2 < 13) {
             if (brickPass && !bombPassItem) {
-                if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                        EventHandler.map[yPos2][xPos2] == 'B' || EventHandler.map[yPos][xPos2] == 'B') {
+                if (EventHandler.map[tmpY][tmpX2] == '#' || EventHandler.map[tmpY2][tmpX2] == '#' ||
+                        EventHandler.map[tmpY2][tmpX2] == 'B' || EventHandler.map[tmpY][tmpX2] == 'B') {
                     return false;
                 }
             } else if (!brickPass && bombPassItem) {
-                if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                        (eventHandler.getEntity(xPos2, yPos) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick)) {
+                if (EventHandler.map[tmpY][tmpX2] == '#' || EventHandler.map[tmpY2][tmpX2] == '#' ||
+                        (eventHandler.getEntity(tmpX2, tmpY) instanceof Brick) || (eventHandler.getEntity(tmpX2, tmpY2) instanceof Brick)) {
                     return false;
                 }
 
             } else if (!brickPass && !bombPassItem) {
-                if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
-                        (eventHandler.getEntity(xPos2, yPos) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick) ||
-                        EventHandler.map[yPos2][xPos2] == 'B' || EventHandler.map[yPos][xPos2] == 'B') {
+                if (EventHandler.map[tmpY][tmpX2] == '#' || EventHandler.map[tmpY2][tmpX2] == '#' ||
+                        (eventHandler.getEntity(tmpX2, tmpY) instanceof Brick) || (eventHandler.getEntity(tmpX2, tmpY2) instanceof Brick) ||
+                        EventHandler.map[tmpY2][tmpX2] == 'B' || EventHandler.map[tmpY][tmpX2] == 'B') {
                     return false;
                 }
             } else if (brickPass && bombPassItem) {
-                if (EventHandler.map[yPos][xPos2] == '#' || EventHandler.map[yPos2][xPos2] == '#') {
+                if (EventHandler.map[tmpY][tmpX2] == '#' || EventHandler.map[tmpY2][tmpX2] == '#') {
                     return false;
                 }
             }
@@ -371,6 +372,21 @@ public class Bomber extends movement {
         return true;
     }
 
+    public void bomberDying() {
+        if (dieDuration < maxFrame) {
+            this.setImg(frameDie[0]);
+            dieDuration++;
+        } else if (dieDuration < maxFrame * 2) {
+            this.setImg(frameDie[1]);
+            dieDuration++;
+        } else if (dieDuration < maxFrame * 3) {
+            this.setImg(frameDie[2]);
+            dieDuration++;
+        } else if (dieDuration < maxFrame * 4) {
+            this.setImg(null);
+            dieDuration = 0;
+        }
+    }
 
     @Override
     public void update() {
@@ -385,21 +401,9 @@ public class Bomber extends movement {
             plantBomb();
             //bombsList.forEach(Bomb::update);
         } else {
-
-            if (dieDuration < 10) {
-                this.setImg(frameDie[0]);
-                dieDuration++;
-            } else if (dieDuration < 20) {
-                this.setImg(frameDie[1]);
-                dieDuration++;
-            } else if (dieDuration < 30) {
-                this.setImg(frameDie[2]);
-                dieDuration++;
-            } else if (dieDuration < 40) {
-                this.setImg(null);
-                dieDuration++;
-            } else {
-                if (health == 0) {
+            bomberDying();
+            if (dieDuration == 0) {
+                if (life == 0) {
                     lose = true;
                     eventHandler.removeEntityAt(this.x, this.y);
                 } else {
@@ -441,21 +445,21 @@ public class Bomber extends movement {
 
     public void plantBomb() {
         if (BombermanGame.controller.space && bombsList.size() < Bomb.maxBomb) {
-            if (!(eventHandler.getEntity(xPosBomb(), yPosBomb()) instanceof Brick)) {
-                Bomb bomb = new Bomb(xPosBomb(), yPosBomb(), Sprite.bomb.getFxImage(), false);
+            if (!(eventHandler.getEntity(tmpXBomb(), tmpYBomb()) instanceof Brick)) {
+                Bomb bomb = new Bomb(tmpXBomb(), tmpYBomb(), Sprite.bomb.getFxImage(), false);
                 addBomb(bomb);
             }
         }
     }
 
-    public int xPosBomb() {
+    public int tmpXBomb() {
         if (this.x == (int) this.x) return (int) this.x;
         double difference = this.x - (int) this.x;
         return (difference >= 0.64) ? (int) this.x + 1 : (int) this.x;
 
     }
 
-    public int yPosBomb() {
+    public int tmpYBomb() {
         if (this.y == (int) this.y) return (int) this.y;
         double difference = this.y - (int) this.y;
         return (difference >= 0.64) ? (int) this.y + 1 : (int) this.y;
@@ -502,8 +506,8 @@ public class Bomber extends movement {
             HashSet<String> maskPlayer2 = blockEntity(tmp);
             maskPlayer1.retainAll(maskPlayer2);
             if (maskPlayer1.size() > 0) {
-                health--;
-                if (health == 0) {
+                life--;
+                if (life == 0) {
                     setAlive(false);
                 } else {
                     setAlive(false);

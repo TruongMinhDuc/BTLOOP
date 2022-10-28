@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.Bomb.Bomb;
 import uet.oop.bomberman.entities.character.Bomber;
@@ -26,7 +27,6 @@ public class BombermanGame extends Application {
     public static GraphicsContext gc;
 
     public static Canvas canvas;
-
     public static Controller controller;
     public static EventHandler eventHandler;
 
@@ -47,7 +47,7 @@ public class BombermanGame extends Application {
         root.getChildren().add(canvas);
 
         // Tao scene
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 37 * Sprite.SCALED_SIZE, HEIGHT * Sprite.SCALED_SIZE, Color.BLACK );
 
         // Them scene vao stage
         stage.setScene(scene);
@@ -76,7 +76,7 @@ public class BombermanGame extends Application {
     public void newGame() throws FileNotFoundException {
             eventHandler = new EventHandler();
             controller = new Controller();
-            eventHandler.getPlayer().setHealth(3);
+            EventHandler.getPlayer().setLife(3);
             eventHandler.setLevel(1);
             eventHandler.getGameLevel().createMap(1);
     }
