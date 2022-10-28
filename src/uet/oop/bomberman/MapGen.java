@@ -131,10 +131,10 @@ public class MapGen {
             }
         }
 
-        EventHandler.getPlayer().setX(1);
-        EventHandler.getPlayer().setY(1);
+        eventHandler.getPlayer().setX(1);
+        eventHandler.getPlayer().setY(1);
 //        EventHandler.score = 0;
-        EventHandler.getPlayer().setImg(Sprite.player_right.getFxImage());
+        eventHandler.getPlayer().setImg(Sprite.player_right.getFxImage());
         eventHandler.addEntity(eventHandler.getPlayer());
         
     }
