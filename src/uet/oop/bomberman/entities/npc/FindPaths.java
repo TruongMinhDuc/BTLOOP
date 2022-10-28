@@ -33,8 +33,6 @@ public class FindPaths {
         if (distance > 3) {
             //System.out.println("di tu do");
             enemy.setSpeed(Enemy.enemySpeed);
-            //Random rand = new Random(System.currentTimeMillis());
-            //direction = Math.abs(rand.nextInt() % 4);
             direction = simplePath(enemy, direction);
             //direction = 2;
         } else

@@ -134,12 +134,7 @@ public class MapGen {
         EventHandler.getPlayer().setX(1);
         EventHandler.getPlayer().setY(1);
 //        EventHandler.score = 0;
-//        BombermanGame.controller.right = false;
-//        BombermanGame.controller.left = false;
-//        BombermanGame.controller.up = false;
-//        BombermanGame.controller.down = false;
         EventHandler.getPlayer().setImg(Sprite.player_right.getFxImage());
-//        eventHandler.getPlayer().setSpeed(Bomber.playerSpeed);
         eventHandler.addEntity(eventHandler.getPlayer());
         
     }

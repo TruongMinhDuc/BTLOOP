@@ -10,6 +10,7 @@ import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.item.Item;
 import uet.oop.bomberman.entities.item.Portal;
 import uet.oop.bomberman.entities.movement;
+import uet.oop.bomberman.entities.npc.Enemy;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
@@ -240,9 +241,8 @@ public class Bomber extends movement {
                 if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#' ||
                         (eventHandler.getEntity(xPos, yPos2) instanceof Brick) || (eventHandler.getEntity(xPos2, yPos2) instanceof Brick) ||
                         EventHandler.map[yPos2][xPos] == 'B' || EventHandler.map[yPos2][xPos2] == 'B') {
-                    //if (!brickPass) {
                     return false;
-                    //}
+
                 }
             } else if (brickPass && brickPass) {
                 if (EventHandler.map[yPos2][xPos] == '#' || EventHandler.map[yPos2][xPos2] == '#') {
@@ -368,8 +368,6 @@ public class Bomber extends movement {
             }
 
         }
-    //System.out.println("Loi 1" + y + " " + xPos2);
-    //System.out.println("Loi 2" + y + " " + xPos2);
         return true;
 }
 
@@ -404,11 +402,6 @@ public class Bomber extends movement {
                 if (health == 0) {
                     lose = true;
                     eventHandler.removeEntityAt(this.x, this.y);
-//                    try {
-//                        TimeUnit.SECONDS.sleep(10);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
                 } else {
                     this.x = 1;
                     this.y = 1;
@@ -425,11 +418,6 @@ public class Bomber extends movement {
         if (!lose) {
             super.render(gc);
         }
-        //else {
-//            if (EventHandler.countDownTime % 4 == 0 || EventHandler.countDownTime % 4 == 1) {
-//                super.render(gc);
-//            }
-//        }
         for (Bomb bomb : bombsList) {
             bomb.render(gc);
         }
@@ -455,7 +443,6 @@ public class Bomber extends movement {
         if (BombermanGame.controller.space && bombsList.size() < Bomb.maxBomb) {
             if (!(eventHandler.getEntity(xPosBomb(), yPosBomb()) instanceof Brick)) {
                 Bomb bomb = new Bomb(xPosBomb(), yPosBomb(), Sprite.bomb.getFxImage(), false);
-                //System.out.println("plant");
                 addBomb(bomb);
             }
         }
@@ -479,15 +466,11 @@ public class Bomber extends movement {
         for (Bomb temp : bombsList) {
             if (temp.getX() == bomb.getX() && temp.getY() == bomb.getY()) {
                 check = false;
-                //System.out.println("cant");
                 break;
             }
         }
         if (check) {
             bombsList.add(bomb);
-            //EventHandler.map[yPosBomb()][xPosBomb()] = 'B';
-            //System.out.println(1);
-
         }
     }
 
@@ -520,30 +503,14 @@ public class Bomber extends movement {
             maskPlayer1.retainAll(maskPlayer2);
             if (maskPlayer1.size() > 0) {
                 health--;
-                //updateStatus();
                 if (health == 0) {
                     setAlive(false);
-                    //Sound.play("endgame3");
                 } else {
-                    //Sound.play("AA126_11");
                     setAlive(false);
                 }
             }
         }
     }
-//    public void updateStatus() {
-//        eventHandler.file.delete();
-//        final String FILENAME = "res/levels/save.txt";
-//        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME, true))) {
-//            int nleft = left;
-//            bw.write(eventHandler.getLevel() + " " + nleft + " " + eventHandler.score);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
 
     public void itemsObtained(Item obj) {
         if (isAlive) {
@@ -551,21 +518,19 @@ public class Bomber extends movement {
             HashSet<String> maskPlayer2 = blockEntity(obj);
             maskPlayer1.retainAll(maskPlayer2);
             if (obj instanceof Portal) {
-                Portal other = (Portal) obj;
-                if (other.getActive()) {
+                Portal portal = (Portal) obj;
+                if (portal.getActive()) {
                     if (maskPlayer1.size() > 300) {
                         if (eventHandler.getLevel() == 3) {
-                            win = true;
+                            int newLevel = 1;
+                            Enemy.setEnemySpeed(Enemy.enemySpeed * 2);
+                            BombermanGame.eventHandler.setLevel(newLevel);
+                            BombermanGame.eventHandler.levelUp(newLevel);
                         } else {
-                            //Sound.play("CRYST_UP");
-                            //eventHandler.countDownTime = 181 * 60;
                             int newLevel = BombermanGame.eventHandler.getLevel() + 1;
                             System.out.println(newLevel);
-                            //eventHandler.scorePrevious += eventHandler.score;
-                            BombermanGame.eventHandler.changeLevel(newLevel);
+                            BombermanGame.eventHandler.levelUp(newLevel);
                             BombermanGame.eventHandler.setLevel(newLevel);
-
-                            //updateStatus();
                         }
                         try {
                             TimeUnit.SECONDS.sleep(1);

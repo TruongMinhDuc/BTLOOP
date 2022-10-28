@@ -5,23 +5,23 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.EventHandler;
 
 public class Portal extends Item{
-    private boolean active = false;
+    private boolean isActive = false;
     public Portal(double x, double y, Image img) {
         super(x, y, img);
         removable = false;
     }
     public boolean getActive() {
-        return this.active;
+        return this.isActive;
     }
     public void setActive(boolean active) {
-        this.active = active;
+        this.isActive = active;
     }
 
     public void update() {
         if(BombermanGame.eventHandler.getEnemyList().size() == 0) {
-            active = true;
+            isActive = true;
         }
-        if (active) {
+        if (isActive) {
             EventHandler.map[(int) this.y][(int) this.x] = ' ';
         } else {
             EventHandler.map[(int) this.y][(int) this.x] = '#';

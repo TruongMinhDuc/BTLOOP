@@ -21,20 +21,20 @@ public class ExplosionRender extends Entity {
                 img = last ? Sprite.explosion_vertical_top_last2.getFxImage() : Sprite.explosion_vertical2.getFxImage();
                 break;
             case 1:
-                img = last ? Sprite.explosion_horizontal_right_last2.getFxImage() : Sprite.explosion_horizontal2.getFxImage();
-                break;
-            case 2:
                 img = last ? Sprite.explosion_vertical_down_last2.getFxImage() : Sprite.explosion_vertical2.getFxImage();
                 break;
-            case 3:
+            case 2:
                 img = last ? Sprite.explosion_horizontal_left_last2.getFxImage() : Sprite.explosion_horizontal2.getFxImage();
+                break;
+            case 3:
+                img = last ? Sprite.explosion_horizontal_right_last2.getFxImage() : Sprite.explosion_horizontal2.getFxImage();
                 break;
         }
     }
 
-    public void update(int direction, int duration) {
+    public void update(int BlastDirection, int duration) {
 
-        int sizeBomb =  EventHandler.getPlayer().getBombsList().size();
+        int sizeBomb = EventHandler.getPlayer().getBombsList().size();
         for (int i = 0; i < sizeBomb; i++) {
             EventHandler.getPlayer().getBombsList().get(i).blastImpactBomb(this);
         }
@@ -43,47 +43,49 @@ public class ExplosionRender extends Entity {
         for (int i = 0; i < sizeEnemy; i++) {
             BombermanGame.eventHandler.getEnemyList().get(i).collideWithExplosion(this);
         }
-        if(!Bomber.flamePass) {
+        if (!Bomber.flamePass) {
             BombermanGame.eventHandler.getPlayer().bomberDie(this);
         }
 
         duration %= 30;
         if (duration > 10 && duration <= 20) {
-            switch (direction) {
+            switch (BlastDirection) {
                 case 0:
                     img = last ? Sprite.explosion_vertical_top_last1.getFxImage() : Sprite.explosion_vertical1.getFxImage();
                     break;
                 case 1:
-                    img = last ? Sprite.explosion_horizontal_right_last1.getFxImage() : Sprite.explosion_horizontal1.getFxImage();
-                    break;
-                case 2:
                     img = last ? Sprite.explosion_vertical_down_last1.getFxImage() : Sprite.explosion_vertical1.getFxImage();
                     break;
-                case 3:
+
+                case 2:
                     img = last ? Sprite.explosion_horizontal_left_last1.getFxImage() : Sprite.explosion_horizontal1.getFxImage();
+                    break;
+                case 3:
+                    img = last ? Sprite.explosion_horizontal_right_last1.getFxImage() : Sprite.explosion_horizontal1.getFxImage();
                     break;
             }
         }
         if (duration <= 10) {
-            switch (direction) {
+            switch (BlastDirection) {
                 case 0:
                     img = last ? Sprite.explosion_vertical_top_last.getFxImage() : Sprite.explosion_vertical.getFxImage();
                     break;
                 case 1:
-                    img = last ? Sprite.explosion_horizontal_right_last.getFxImage() : Sprite.explosion_horizontal.getFxImage();
-                    break;
-                case 2:
                     img = last ? Sprite.explosion_vertical_down_last.getFxImage() : Sprite.explosion_vertical.getFxImage();
                     break;
-                case 3:
+                case 2:
                     img = last ? Sprite.explosion_horizontal_left_last.getFxImage() : Sprite.explosion_horizontal.getFxImage();
+                    break;
+                case 3:
+                    img = last ? Sprite.explosion_horizontal_right_last.getFxImage() : Sprite.explosion_horizontal.getFxImage();
                     break;
             }
         }
     }
+
     @Override
     public void render(GraphicsContext gc) {
-        if(EventHandler.map[(int)y][(int)x] != 'B') super.render(gc);
+        if (EventHandler.map[(int) y][(int) x] != 'B') super.render(gc);
     }
 
     @Override

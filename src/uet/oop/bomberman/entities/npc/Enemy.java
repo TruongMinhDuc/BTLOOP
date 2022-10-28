@@ -27,6 +27,14 @@ public abstract class Enemy extends movement {
 
     public abstract void dying();
 
+    public static double getEnemySpeed() {
+        return enemySpeed;
+    }
+
+    public static void setEnemySpeed(double enemySpeed) {
+        Enemy.enemySpeed = enemySpeed;
+    }
+
     public void moveUp(double tmpSpeed) {
         if (upFrameCount < maxFrame) {
             this.setImg(frameRight[0]);

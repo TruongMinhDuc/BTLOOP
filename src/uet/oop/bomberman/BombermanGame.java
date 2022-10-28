@@ -26,14 +26,9 @@ public class BombermanGame extends Application {
     public static GraphicsContext gc;
 
     public static Canvas canvas;
-    //entity
 
-    //public static List<Entity> stillObjects = new ArrayList<>();
-    public static MapGen MG;
     public static Controller controller;
     public static EventHandler eventHandler;
-    //public static Bomb bomb;
-    //public  Scene gScene;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -68,21 +63,8 @@ public class BombermanGame extends Application {
             }
         };
         timer.start();
-
-//        new EventHandler();
-//
-//        //createMap();
-//        // test character: speed = 0, character no moving
-//        //Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), 0.05);
-//
-//
-//
-//        entities.add(EventHandler.getPlayer());
-//
-//        controller = new Controller();
         try {
             newGame();
-            //BombermanGame.eventHandler.addEntity( BombermanGame.eventHandler.getPlayer());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -91,13 +73,6 @@ public class BombermanGame extends Application {
 
     }
 
-//    public void createMap()  {
-//        try{
-//            MG.createMap(1);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
     public void newGame() throws FileNotFoundException {
             eventHandler = new EventHandler();
             controller = new Controller();

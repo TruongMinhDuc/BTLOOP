@@ -13,9 +13,9 @@ public class BombRadius extends Entity {
     private boolean removable = false;
     boolean time;
 
-    public BombRadius(double x, double y, int direction) {
-        this.x = x;
-        this.y = y;
+    public BombRadius(double xUnit, double yUnit, int direction) {
+        this.x = xUnit;
+        this.y = yUnit;
         this.direction = direction;
         explosionFrame = new ExplosionRender[radius()];
         explosionSize();
@@ -31,13 +31,14 @@ public class BombRadius extends Entity {
                 yPos--;
             }
             if (direction == 1) {
-                xPos++;
-            }
-            if (direction == 2) {
                 yPos++;
             }
-            if (direction == 3) {
+            if (direction == 2) {
                 xPos--;
+            }
+            if (direction == 3) {
+
+                xPos++;
             }
             if (EventHandler.map[yPos][xPos] == ' ') {
                 blast++;
@@ -48,11 +49,11 @@ public class BombRadius extends Entity {
             if (EventHandler.map[yPos][xPos] == '*') {
                 blast++;
             }
-            if(EventHandler.map[yPos][xPos] == 'B') {
+            if (EventHandler.map[yPos][xPos] == 'B') {
                 blast++;
             }
             if (EventHandler.map[yPos][xPos] != '#' && EventHandler.map[yPos][xPos] != ' ') {
-                for (Entity temp :  BombermanGame.eventHandler.getEntitiesList()) {
+                for (Entity temp : BombermanGame.eventHandler.getEntitiesList()) {
                     if (temp.getX() == xPos && temp.getY() == yPos) {
                         temp.setRemovable(true);
                         break;
@@ -78,16 +79,17 @@ public class BombRadius extends Entity {
                     yPos--;
                     break;
                 case 1:
-                    //right
-                    xPos++;
-                    break;
-                case 2:
                     //down
                     yPos++;
                     break;
-                case 3:
+
+                case 2:
                     //left
                     xPos--;
+                    break;
+                case 3:
+                    //right
+                    xPos++;
                     break;
             }
             explosionFrame[i] = new ExplosionRender(xPos, yPos, direction, time);

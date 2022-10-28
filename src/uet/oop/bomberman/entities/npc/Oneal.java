@@ -48,7 +48,6 @@ public class Oneal extends Enemy{
             duration++;
         } else if (duration < 40) {
             this.setImg(frameDie[3]);
-            //Board.score += 100;
             BombermanGame.eventHandler.removeEnemyAt(this.x, this.y);
         }
 
