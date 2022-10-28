@@ -16,7 +16,7 @@ public abstract class Entity {
     //Tọa độ Y tính từ góc trái trên trong Canvas
     protected double y;
     protected Image img;
-    public static Layered layered;
+    //public static Layered layered;
     public boolean removable = false;
 
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
