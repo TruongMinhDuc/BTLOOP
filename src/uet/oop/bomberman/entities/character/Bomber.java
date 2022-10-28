@@ -9,6 +9,7 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.item.Item;
 import uet.oop.bomberman.entities.item.Portal;
+import uet.oop.bomberman.entities.movement;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
@@ -77,6 +78,22 @@ public class Bomber extends movement {
         frameRight[0] = Sprite.player_right.getFxImage();
         frameRight[1] = Sprite.player_right_1.getFxImage();
         frameRight[2] = Sprite.player_right_2.getFxImage();
+    }
+
+    public boolean isWin() {
+        return win;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
+    }
+
+    public boolean isLose() {
+        return lose;
+    }
+
+    public void setLose(boolean lose) {
+        this.lose = lose;
     }
 
     public Bomber(double x, double y, Image img, double speed) {

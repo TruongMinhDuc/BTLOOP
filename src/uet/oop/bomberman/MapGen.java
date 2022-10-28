@@ -5,9 +5,9 @@ import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.MapEntities.Grass;
 import uet.oop.bomberman.entities.MapEntities.Wall;
 import uet.oop.bomberman.entities.item.*;
-import uet.oop.bomberman.entities.character.npc.Balloom;
-import uet.oop.bomberman.entities.character.npc.Enemy;
-import uet.oop.bomberman.entities.character.npc.Oneal;
+import uet.oop.bomberman.entities.npc.Balloom;
+import uet.oop.bomberman.entities.npc.Enemy;
+import uet.oop.bomberman.entities.npc.Oneal;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;

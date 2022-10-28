@@ -3,7 +3,7 @@ package uet.oop.bomberman;
 import uet.oop.bomberman.entities.Bomb.Bomb;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
-import uet.oop.bomberman.entities.character.npc.Enemy;
+import uet.oop.bomberman.entities.npc.Enemy;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.FileNotFoundException;

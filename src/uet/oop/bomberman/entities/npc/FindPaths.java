@@ -1,4 +1,4 @@
-package uet.oop.bomberman.entities.character.npc;
+package uet.oop.bomberman.entities.npc;
 
 import uet.oop.bomberman.BombermanGame;
 
