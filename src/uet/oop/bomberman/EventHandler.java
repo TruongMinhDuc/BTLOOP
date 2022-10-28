@@ -3,14 +3,12 @@ package uet.oop.bomberman;
 import uet.oop.bomberman.entities.Bomb.Bomb;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
-import uet.oop.bomberman.entities.npc.Enemy;
+import uet.oop.bomberman.entities.character.npc.Enemy;
 import uet.oop.bomberman.graphics.Sprite;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class EventHandler {
     public static final int WIDTH = 31;
@@ -58,9 +56,9 @@ public class EventHandler {
 //        wallPass = false;
         Bomb.maxBomb = 1;
         Bomb.blastLength = 1;
-        Bomber.bombPassItem = false;
-        Bomber.brickPass = false;
-        player.setSpeed(playerSpeed);
+        //Bomber.bombPassItem = false;
+        //Bomber.brickPass = false;
+        //player.setSpeed(playerSpeed);
         this.level = level;
     }
 
@@ -164,6 +162,7 @@ public class EventHandler {
         for (int i = 0; i < entitiesList.size(); i++) {
             entitiesList.get(i).update();
         }
+        System.out.println(getPlayer().getSpeed());
         for (int i = 0; i < enemyList.size(); i++) {
             //System.out.println(enemyList.size());
             enemyList.get(i).update();
@@ -173,8 +172,8 @@ public class EventHandler {
     public void render() {
         BombermanGame.gc.clearRect(0, 0, BombermanGame.canvas.getWidth(), BombermanGame.canvas.getHeight());
         stillObjects.forEach(g -> g.render(BombermanGame.gc));
-        getEntitiesList().forEach(g -> g.render(BombermanGame.gc));
-        getEnemyList().forEach(g -> g.render(BombermanGame.gc));
+        BombermanGame.eventHandler.getEntitiesList().forEach(g -> g.render(BombermanGame.gc));
+        BombermanGame.eventHandler.getEnemyList().forEach(g -> g.render(BombermanGame.gc));
     }
 
 //    public void loadLevel() {

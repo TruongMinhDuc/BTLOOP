@@ -80,7 +80,7 @@ public class BombermanGame extends Application {
 //        controller = new Controller();
         try {
             newGame();
-            BombermanGame.eventHandler.addEntity( BombermanGame.eventHandler.getPlayer());
+            //BombermanGame.eventHandler.addEntity( BombermanGame.eventHandler.getPlayer());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -99,6 +99,7 @@ public class BombermanGame extends Application {
     public void newGame() throws FileNotFoundException {
             eventHandler = new EventHandler();
             controller = new Controller();
+            eventHandler.getPlayer().setHealth(1);
             eventHandler.setLevel(1);
             eventHandler.getGameLevel().createMap(1);
     }

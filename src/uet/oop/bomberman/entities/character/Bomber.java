@@ -8,12 +8,8 @@ import uet.oop.bomberman.entities.Bomb.Bomb;
 import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.item.Item;
 import uet.oop.bomberman.entities.item.Portal;
-import uet.oop.bomberman.entities.movement;
 import uet.oop.bomberman.graphics.Sprite;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +21,7 @@ public class Bomber extends movement {
 
     public static int left = 3;
     public static boolean flamePass = false;
-
+    private int health;
     public static boolean brickPass = false;
     public static boolean bombPassItem = false;
 
@@ -46,6 +42,13 @@ public class Bomber extends movement {
 
     private List<Bomb> bombsList = new ArrayList<>();
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     public void setFrameUp() {
         // đặt các frame di chuyên vào mảng đặt sẵn
@@ -72,7 +75,7 @@ public class Bomber extends movement {
         frameRight[2] = Sprite.player_right_2.getFxImage();
     }
 
-    public Bomber(int x, int y, Image img, double speed) {
+    public Bomber(double x, double y, Image img, double speed) {
         super(x, y, img, speed);
 
         setFrameDown();
