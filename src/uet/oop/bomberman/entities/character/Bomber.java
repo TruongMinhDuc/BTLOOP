@@ -54,26 +54,26 @@ public class Bomber extends movement {
         this.health = health;
     }
 
-    public void setFrameUp() {
+    public void setImgUp() {
         // đặt các frame di chuyên vào mảng đặt sẵn
         frameUp[0] = Sprite.player_up.getFxImage();
         frameUp[1] = Sprite.player_up_1.getFxImage();
         frameUp[2] = Sprite.player_up_2.getFxImage();
     }
 
-    public void setFrameDown() {
+    public void setImgDown() {
         frameDown[0] = Sprite.player_down.getFxImage();
         frameDown[1] = Sprite.player_down_1.getFxImage();
         frameDown[2] = Sprite.player_down_2.getFxImage();
     }
 
-    public void setFrameLeft() {
+    public void setImgLeft() {
         frameLeft[0] = Sprite.player_left.getFxImage();
         frameLeft[1] = Sprite.player_left_1.getFxImage();
         frameLeft[2] = Sprite.player_left_2.getFxImage();
     }
 
-    public void setFrameRight() {
+    public void setImgRight() {
         frameRight[0] = Sprite.player_right.getFxImage();
         frameRight[1] = Sprite.player_right_1.getFxImage();
         frameRight[2] = Sprite.player_right_2.getFxImage();
@@ -82,10 +82,10 @@ public class Bomber extends movement {
     public Bomber(double x, double y, Image img, double speed) {
         super(x, y, img, speed);
 
-        setFrameDown();
-        setFrameUp();
-        setFrameLeft();
-        setFrameRight();
+        setImgDown();
+        setImgUp();
+        setImgLeft();
+        setImgRight();
         setImgDie();
     }
     public void setImgDie() {
