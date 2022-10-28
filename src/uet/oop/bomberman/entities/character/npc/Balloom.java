@@ -1,4 +1,4 @@
-package uet.oop.bomberman.entities.npc;
+package uet.oop.bomberman.entities.character.npc;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;

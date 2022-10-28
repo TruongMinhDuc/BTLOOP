@@ -1,4 +1,4 @@
-package uet.oop.bomberman.entities;
+package uet.oop.bomberman.entities.character;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.entities.Entity;
@@ -11,10 +11,10 @@ public abstract class movement extends Entity {
     public int leftFrameCount = 0;
     public int rightFrameCount = 0;
     public final int maxFrame = 10;
-    public static double speed;
+    protected double speed;
     public boolean isAlive = true;
 
-    public movement(int xUnit, int yUnit, Image img, double speed) {
+    public movement(double xUnit, double yUnit, Image img, double speed) {
         super(xUnit, yUnit, img);
         this.speed = speed;
     }

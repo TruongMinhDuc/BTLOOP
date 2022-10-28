@@ -1,10 +1,9 @@
-package uet.oop.bomberman.entities.npc;
+package uet.oop.bomberman.entities.character.npc;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.EventHandler;
 import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.movement;
-import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.entities.character.movement;
 
 import java.util.HashSet;
 

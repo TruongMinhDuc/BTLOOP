@@ -1,9 +1,7 @@
-package uet.oop.bomberman.entities.npc;
+package uet.oop.bomberman.entities.character.npc;
 
 import uet.oop.bomberman.BombermanGame;
-import uet.oop.bomberman.graphics.Sprite;
 
-import java.util.Map;
 import java.util.Random;
 
 public class FindPaths {

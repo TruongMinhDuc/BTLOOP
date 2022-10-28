@@ -34,7 +34,7 @@ public class Controller {
                     break;
                 case SPACE:
                     space = true;
-                    System.out.println("space");
+                    //System.out.println("space");
                     break;
             }
         });
