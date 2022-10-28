@@ -16,7 +16,7 @@ public abstract class Entity {
     //Tọa độ Y tính từ góc trái trên trong Canvas
     protected double y;
     protected Image img;
-
+    public static Layered layered;
     public boolean removable = false;
 
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
@@ -79,26 +79,24 @@ public abstract class Entity {
 
     public abstract void update();
 
-    public HashSet<String> blockEntity(Entity obj) {
-        Image imgObj = obj.getImg();
+    public HashSet<String> blockEntity(Entity ent) {
+        Image imgObj = ent.getImg();
         HashSet<String> block = null;
         if (imgObj != null) {
             block = new HashSet<String>();
             int W = (int) imgObj.getWidth();
             int H = (int) imgObj.getHeight();
-
             PixelReader reader = imgObj.getPixelReader();
             int tmp;
             for (int i = 0; i < H; i++) {
                 for (int j = 0; j < W; j++) {
-                    tmp = (reader.getArgb(j,i) >> 24) & 0xff;
+                    tmp = (reader.getArgb(j, i) >> 24) & 0xff;
                     if (tmp != 0) {
-                        block.add((int) (obj.getX() * 32) + j + "," + ((int) (obj.getY() * 32) - i));
+                        block.add((int) (ent.getX() * 32 + j) + " " + ((int) (ent.getY() * 32) - i));
                     }
                 }
             }
         }
         return block;
     }
-
 }
