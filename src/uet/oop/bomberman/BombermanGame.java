@@ -68,7 +68,6 @@ public class BombermanGame extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         controller.handle(scene);
 
     }
@@ -76,7 +75,7 @@ public class BombermanGame extends Application {
     public void newGame() throws FileNotFoundException {
             eventHandler = new EventHandler();
             controller = new Controller();
-            EventHandler.getPlayer().setLife(3);
+            eventHandler.getPlayer().setLife(3);
             eventHandler.setLevel(1);
             eventHandler.getGameLevel().createMap(1);
     }

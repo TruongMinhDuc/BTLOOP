@@ -554,4 +554,8 @@ public class Bomber extends movement {
             }
         }
     }
+
+    public void clearBombList(){
+        bombsList.clear();
+    }
 }

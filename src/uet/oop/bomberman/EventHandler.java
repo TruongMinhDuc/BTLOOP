@@ -38,6 +38,7 @@ public class EventHandler {
     public void levelUp(int level) {
         entitiesList.clear();
         enemyList.clear();
+        player.clearBombList();
         stillObjects.clear();
         try {
             game.createMap(level);
@@ -85,7 +86,7 @@ public class EventHandler {
         return stillObjects;
     }
 
-    public static Bomber getPlayer() {
+    public  Bomber getPlayer() {
         return player;
     }
 
