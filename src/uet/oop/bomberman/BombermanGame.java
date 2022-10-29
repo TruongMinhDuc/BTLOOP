@@ -1,6 +1,7 @@
 package uet.oop.bomberman;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -12,11 +13,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import uet.oop.bomberman.entities.Bomb.Bomb;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
+import javafx.scene.shape.Rectangle;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +38,12 @@ public class BombermanGame extends Application {
     public static EventHandler eventHandler;
 
 
-    private Text playerLife;
-    private Text showLevel;
-    private Text showBomb;
-    private Text showScore;
+    public Text playerLife;
+    public Text showLevel;
+    public Text showBomb;
+    public Text showScore;
     private List<Text> textList = new ArrayList<>();
+    public static Group root = new Group();
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -53,11 +58,12 @@ public class BombermanGame extends Application {
 
 
         // Tao root container
-        Group root = new Group();
         root.getChildren().add(canvas);
+
 
         // Tao scene
         Scene scene = new Scene(root, (WIDTH + 6) * Sprite.SCALED_SIZE, HEIGHT * Sprite.SCALED_SIZE, Color.GREY);
+
 
         try {
             newGame();
@@ -68,6 +74,7 @@ public class BombermanGame extends Application {
 
 
         // Them scene vao stage
+        stateScene();
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Bomberman");
@@ -86,7 +93,6 @@ public class BombermanGame extends Application {
 
 
         controller.handle(scene);
-
     }
 
     public void newGame() throws FileNotFoundException {
@@ -103,6 +109,32 @@ public class BombermanGame extends Application {
         showLevel.setText(String.valueOf(eventHandler.getShowLevel()));
         showBomb.setText(String.valueOf(Bomb.maxBomb - Bomber.getBombsList().size()));
         showScore.setText(String.valueOf(EventHandler.getScore()));
+    }
+    public static void stateScene() {
+        Font font = Font.font("System Bold", FontWeight.EXTRA_BOLD, 25);
+        Color color = Color.WHITE;
+
+        Rectangle rScene = new Rectangle(0,0,(WIDTH)* Sprite.SCALED_SIZE, HEIGHT* Sprite.SCALED_SIZE);
+        rScene.setFill(Color.BLACK);
+
+        Text levelText = new Text(480,198, "Level");
+        levelText.setFill(color);
+        levelText.setFont(font);
+
+        Text showLevel1 = new Text(550, 198, String.valueOf(eventHandler.getShowLevel()));
+        showLevel1.setFill(color);
+        showLevel1.setFont(font);
+
+        Group lgroup = new Group();
+        lgroup.getChildren().addAll(rScene,levelText, showLevel1);
+
+        root.getChildren().add(lgroup);
+
+        FadeTransition fadeTransition = new FadeTransition(new Duration(1000), lgroup);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(1);
+        fadeTransition.setOnFinished(evt->lgroup.setVisible(false));
+        fadeTransition.play();
     }
 
     public void createBomberStatus() {
@@ -149,4 +181,5 @@ public class BombermanGame extends Application {
         showScore.setFont(font);
         textList.add(showScore);
     }
+
 }

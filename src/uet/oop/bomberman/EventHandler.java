@@ -57,6 +57,7 @@ public class EventHandler {
         enemyList.clear();
         player.clearBombList();
         stillObjects.clear();
+        BombermanGame.stateScene();
         try {
             game.createMap(level);
         } catch (FileNotFoundException e) {
