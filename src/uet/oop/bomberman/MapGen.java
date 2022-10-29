@@ -7,6 +7,7 @@ import uet.oop.bomberman.entities.MapEntities.Wall;
 import uet.oop.bomberman.entities.item.*;
 import uet.oop.bomberman.entities.npc.Balloom;
 import uet.oop.bomberman.entities.npc.Enemy;
+import uet.oop.bomberman.entities.npc.Konodoira;
 import uet.oop.bomberman.entities.npc.Oneal;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -47,25 +48,24 @@ public class MapGen {
 //        int mapWidth = sc.nextInt();
 
 
-
         //map load
         int he = 0;
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String tmp = sc.nextLine();
             //System.out.println(tmp.length());
             //System.out.println(row);
-            for(int j = 0; j < tmp.length(); j++) {
+            for (int j = 0; j < tmp.length(); j++) {
                 BombermanGame.eventHandler.map[he][j] = tmp.charAt(j);
             }
             he++;
         }
         //System.out.println(BombermanGame.map[][16]);
 
-        for(int i = 0; i < BombermanGame.HEIGHT; i++) {
-            for(int j = 0; j < BombermanGame.WIDTH; j++) {
-                if(EventHandler.map[i][j] == '#') {
+        for (int i = 0; i < BombermanGame.HEIGHT; i++) {
+            for (int j = 0; j < BombermanGame.WIDTH; j++) {
+                if (EventHandler.map[i][j] == '#') {
                     Entity obj;
-                    obj = new  Wall(j, i, Sprite.wall.getFxImage());
+                    obj = new Wall(j, i, Sprite.wall.getFxImage());
                     BombermanGame.eventHandler.addStillObject(obj);
                     //EventHandler.addEntity(obj);
                 } else {
@@ -117,13 +117,13 @@ public class MapGen {
                         BombermanGame.eventHandler.addEntity(brickCoverB);
                         brickCoverB.addEntityBelow(bombPluss);
                         break;
-                    case 'u' :
+                    case 'u':
                         Brick brickCoverU = new Brick(j, i, Sprite.brick.getFxImage());
                         FlamePass flamePass = new FlamePass(j, i, Sprite.powerup_flamepass.getFxImage());
                         BombermanGame.eventHandler.addEntity(brickCoverU);
                         brickCoverU.addEntityBelow(flamePass);
                         break;
-                    case 'd' :
+                    case 'd':
                         Brick brickCoverD = new Brick(j, i, Sprite.brick.getFxImage());
                         Detonator detonator = new Detonator(j, i, Sprite.powerup_detonator.getFxImage());
                         BombermanGame.eventHandler.addEntity(brickCoverD);
@@ -131,7 +131,7 @@ public class MapGen {
                         break;
                     case '1':
                         EventHandler.map[i][j] = ' ';
-                        Balloom balloom = new Balloom(j,i,Sprite.balloom_left1.getFxImage(), Enemy.enemySpeed);
+                        Balloom balloom = new Balloom(j, i, Sprite.balloom_left1.getFxImage(), Enemy.enemySpeed);
                         BombermanGame.eventHandler.addEnemy(balloom);
                         break;
                     case '2':
@@ -139,6 +139,12 @@ public class MapGen {
                         Oneal oneal = new Oneal(j, i, Sprite.oneal_left1.getFxImage(), Enemy.enemySpeed);
                         BombermanGame.eventHandler.addEnemy(oneal);
                         break;
+                    case '3':
+                        EventHandler.map[i][j] = ' ';
+                        Konodoira konodoira = new Konodoira(j, i, Sprite.oneal_left1.getFxImage(), Enemy.enemySpeed);
+                        BombermanGame.eventHandler.addEnemy(konodoira);
+                        break;
+
                 }
             }
         }
@@ -148,6 +154,6 @@ public class MapGen {
 //        EventHandler.score = 0;
         eventHandler.getPlayer().setImg(Sprite.player_right.getFxImage());
         eventHandler.addEntity(eventHandler.getPlayer());
-        
+
     }
 }
