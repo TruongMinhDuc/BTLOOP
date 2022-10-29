@@ -5,13 +5,15 @@ import uet.oop.bomberman.EventHandler;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.movement;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 
 public abstract class Enemy extends movement {
-    Image[] frameLeft = new Image[3];
-    Image[] frameRight = new Image[3];
-    Image[] frameDie = new Image[4];
+    List<Image> frameLeft = new ArrayList<>();
+    List<Image> frameRight = new ArrayList<>();
+    List<Image> frameDie = new ArrayList<>();
 
     int direction = 2;
     protected FindPaths findPaths = new FindPaths();
@@ -37,13 +39,13 @@ public abstract class Enemy extends movement {
 
     public void moveUp(double tmpSpeed) {
         if (upFrameCount < maxFrame) {
-            this.setImg(frameRight[0]);
+            this.setImg(frameRight.get(0));
             upFrameCount++;
         } else if (upFrameCount < 2 * maxFrame) {
-            this.setImg(frameRight[1]);
+            this.setImg(frameRight.get(1));
             upFrameCount++;
         } else {
-            this.setImg(frameRight[2]);
+            this.setImg(frameRight.get(2));
             upFrameCount++;
             if (upFrameCount == 3 * maxFrame) {
                 upFrameCount = 0;
@@ -82,13 +84,13 @@ public abstract class Enemy extends movement {
 
     public void moveDown(double tmpSpeed) {
         if (downFrameCount < maxFrame) {
-            this.setImg(frameLeft[0]);
+            this.setImg(frameLeft.get(0));
             downFrameCount++;
         } else if (downFrameCount < 2 * maxFrame) {
-            this.setImg(frameLeft[1]);
+            this.setImg(frameLeft.get(1));
             downFrameCount++;
         } else {
-            this.setImg(frameLeft[2]);
+            this.setImg(frameLeft.get(2));
             downFrameCount++;
             if (downFrameCount == 3 * maxFrame) {
                 downFrameCount = 0;
@@ -126,13 +128,13 @@ public abstract class Enemy extends movement {
 
     public void moveLeft(double tmpSpeed) {
         if (leftFrameCount < maxFrame) {
-            this.setImg(frameLeft[0]);
+            this.setImg(frameLeft.get(0));
             leftFrameCount++;
         } else if (leftFrameCount < 2 * maxFrame) {
-            this.setImg(frameLeft[1]);
+            this.setImg(frameLeft.get(1));
             leftFrameCount++;
         } else {
-            this.setImg(frameLeft[2]);
+            this.setImg(frameLeft.get(2));
             leftFrameCount++;
             if (leftFrameCount == 3 * maxFrame) {
                 leftFrameCount = 0;
@@ -174,13 +176,13 @@ public abstract class Enemy extends movement {
 
     public void moveRight(double tmpSpeed) {
         if (rightFrameCount < maxFrame) {
-            this.setImg(frameRight[0]);
+            this.setImg(frameRight.get(0));
             rightFrameCount++;
         } else if (rightFrameCount < 2 * maxFrame) {
-            this.setImg(frameRight[1]);
+            this.setImg(frameRight.get(1));
             rightFrameCount++;
         } else {
-            this.setImg(frameRight[2]);
+            this.setImg(frameRight.get(2));
             rightFrameCount++;
             if (rightFrameCount == 3 * maxFrame) {
                 rightFrameCount = 0;
