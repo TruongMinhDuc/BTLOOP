@@ -46,7 +46,7 @@ public class Bomber extends movement {
     private final int maxFrame = 10;
 
 
-    private List<Bomb> bombsList = new ArrayList<>();
+    private static List<Bomb> bombsList = new ArrayList<>();
 
     public int getLife() {
         return life;
@@ -439,7 +439,7 @@ public class Bomber extends movement {
         }
     }
 
-    public List<Bomb> getBombsList() {
+    public static List<Bomb> getBombsList() {
         return bombsList;
     }
 
@@ -525,6 +525,7 @@ public class Bomber extends movement {
                 Portal portal = (Portal) obj;
                 if (portal.getActive()) {
                     if (player.size() > 300) {
+                        eventHandler.setShowLevel(eventHandler.getShowLevel() + 1);
                         if (eventHandler.getLevel() == 3) {
                             int newLevel = 1;
                             Enemy.setEnemySpeed(Enemy.enemySpeed * 1.25);

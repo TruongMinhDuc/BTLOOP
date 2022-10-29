@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.npc;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.EventHandler;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Balloom extends  Enemy{
@@ -35,18 +36,18 @@ public class Balloom extends  Enemy{
     }
     @Override
     public void dying() {
-        if (duration < 10) {
+        if (duration < maxFrame) {
             this.setImg(frameDie[0]);
             duration++;
-        } else if (duration < 20) {
+        } else if (duration < maxFrame * 2) {
             this.setImg(frameDie[1]);
             duration++;
-        } else if (duration < 30) {
+        } else if (duration < maxFrame * 3) {
             this.setImg(frameDie[2]);
             duration++;
-        } else if (duration < 40) {
+        } else if (duration < maxFrame * 4) {
             this.setImg(frameDie[3]);
-            //Board.score += 100;
+            EventHandler.setScore(EventHandler.getScore() + 100);
             BombermanGame.eventHandler.removeEnemyAt(this.x, this.y);
         }
     }

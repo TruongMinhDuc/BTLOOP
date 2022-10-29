@@ -108,13 +108,13 @@ public abstract class Enemy extends movement {
         if (tmpX >= 0 && tmpX2 < 31 && tmpY >= 0 && tmpY2 < 13) {
             if (EventHandler.map[tmpY2][tmpX] != ' ' || EventHandler.map[tmpY2][tmpX2] != ' ') {
                 if (EventHandler.map[(int) (y + 1)][tmpX] != ' ') {
-                    if (this.x - (int) x >= 0.71) {
+                    if (this.x - (int) x >= 0.7) {
                         this.x = tmpX2;
                     } else {
                         this.y = tmpY;
                     }
                 } else if (EventHandler.map[(int) (y + 1)][tmpX2] != ' ') {
-                    if (this.x - (int) x <= 0.451) {
+                    if (this.x - (int) x <= 0.45) {
                         this.x = tmpX;
                     } else {
                         this.y = tmpY;
@@ -155,14 +155,14 @@ public abstract class Enemy extends movement {
                     if (this.y == (int) y) {
                         this.x = tmpX + 1;
                     } else {
-                        if (this.y - (int) y >= 0.71) {
+                        if (this.y - (int) y >= 0.7) {
                             this.y = tmpY2;
                         } else {
                             this.x = tmpX2;
                         }
                     }
                 } else if (EventHandler.map[(tmpY2)][tmpX] != ' ') {
-                    if (this.y - (int) y <= 0.31) {
+                    if (this.y - (int) y <= 0.45) {
                         this.y = (int) y;
                     } else {
                         this.x = tmpX2;
@@ -203,14 +203,14 @@ public abstract class Enemy extends movement {
                     if (y == (int) y) {
                         this.x = tmpX2 - width;
                     } else {
-                        if (this.y - (int) y >= 0.71) {
+                        if (this.y - (int) y >= 0.7) {
                             this.y = tmpY2;
                         } else {
                             this.x = tmpX2 - width;
                         }
                     }
                 } else if (EventHandler.map[tmpY2][tmpX2] != 0) {
-                    if (this.y - (int) y <= 0.31) {
+                    if (this.y - (int) y <= 0.45) {
                         this.y = (int) y;
                     } else {
                         this.x = tmpX2 - width;

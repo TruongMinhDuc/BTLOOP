@@ -16,7 +16,7 @@ public class EventHandler {
     public static char[][] map = new char[HEIGHT][WIDTH];
 
 
-    public static int score = 0;
+    private static int score = 0;
 
 
     private static List<Entity> entitiesList = new ArrayList<>();
@@ -28,7 +28,24 @@ public class EventHandler {
     private static Bomber player;
     private MapGen game;
     private int level;
+    private int showLevel;
 
+
+    public static int getScore() {
+        return score;
+    }
+
+    public static void setScore(int score) {
+        EventHandler.score = score;
+    }
+
+    public int getShowLevel() {
+        return showLevel;
+    }
+
+    public void setShowLevel(int showLevel) {
+        this.showLevel = showLevel;
+    }
 
     public EventHandler() {
         player = new Bomber(1, 1, Sprite.player_right.getFxImage(), playerSpeed);
