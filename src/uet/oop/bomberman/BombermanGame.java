@@ -44,7 +44,7 @@ public class BombermanGame extends Application {
     public Text showScore;
     private List<Text> textList = new ArrayList<>();
     public static Group root = new Group();
-
+    public static Scene oScene;
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
     }
@@ -60,10 +60,8 @@ public class BombermanGame extends Application {
         // Tao root container
         root.getChildren().add(canvas);
 
-
         // Tao scene
         Scene scene = new Scene(root, (WIDTH + 6) * Sprite.SCALED_SIZE, HEIGHT * Sprite.SCALED_SIZE, Color.GREY);
-
 
         try {
             newGame();
@@ -71,7 +69,6 @@ public class BombermanGame extends Application {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
 
         // Them scene vao stage
         stateScene();
@@ -86,6 +83,10 @@ public class BombermanGame extends Application {
                 update();
                 eventHandler.render();
                 eventHandler.update();
+                if(Bomber.isLose()){
+                    gameOverScene("game over");
+                    stage.setScene(oScene);
+                }
             }
         };
 
@@ -94,6 +95,7 @@ public class BombermanGame extends Application {
 
         controller.handle(scene);
     }
+
 
     public void newGame() throws FileNotFoundException {
         eventHandler = new EventHandler();
@@ -111,13 +113,13 @@ public class BombermanGame extends Application {
         showScore.setText(String.valueOf(EventHandler.getScore()));
     }
     public static void stateScene() {
-        Font font = Font.font("System Bold", FontWeight.EXTRA_BOLD, 25);
+        Font font = Font.font("System Bold", FontWeight.EXTRA_BOLD, 40);
         Color color = Color.WHITE;
 
         Rectangle rScene = new Rectangle(0,0,(WIDTH)* Sprite.SCALED_SIZE, HEIGHT* Sprite.SCALED_SIZE);
         rScene.setFill(Color.BLACK);
 
-        Text levelText = new Text(480,198, "Level");
+        Text levelText = new Text(420,198, "Level");
         levelText.setFill(color);
         levelText.setFont(font);
 
@@ -182,4 +184,14 @@ public class BombermanGame extends Application {
         textList.add(showScore);
     }
 
+    private void gameOverScene(String string) {
+        Group newGroup = new Group();
+        Text textOver = new Text(420, 198, string);
+
+        textOver.setFont(Font.font("System Bold", FontWeight.BOLD, 80));
+        textOver.setFill(Color.WHITE);
+
+        newGroup.getChildren().add(textOver);
+        oScene = new Scene(newGroup, (WIDTH + 6) * Sprite.SCALED_SIZE, HEIGHT * Sprite.SCALED_SIZE, Color.BLACK);
+    }
 }

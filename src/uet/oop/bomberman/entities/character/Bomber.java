@@ -30,19 +30,18 @@ public class Bomber extends movement {
     public static boolean bombPassItem = false;
 
     //private boolean win = false;
-    private boolean lose = false;
+    private static boolean lose = false;
     private boolean isDie = false;
     private int upFrameCount = 0;
     private int downFrameCount = 0;
     private int leftFrameCount = 0;
     private int rightFrameCount = 0;
 
-    Image[] frameUp = new Image[3];
-    Image[] frameDown = new Image[3];
-    Image[] frameLeft = new Image[3];
-    Image[] frameRight = new Image[3];
-
-    Image[] frameDie = new Image[3];
+    List<Image> frameUp = new ArrayList<>();
+    List<Image> frameDown = new ArrayList<>();
+    List<Image> frameLeft = new ArrayList<>();
+    List<Image> frameRight = new ArrayList<>();
+    List<Image> frameDie = new ArrayList<>();
     private final int maxFrame = 10;
 
 
@@ -58,27 +57,27 @@ public class Bomber extends movement {
 
     public void setImgUp() {
         // đặt các frame di chuyên vào mảng đặt sẵn
-        frameUp[0] = Sprite.player_up.getFxImage();
-        frameUp[1] = Sprite.player_up_1.getFxImage();
-        frameUp[2] = Sprite.player_up_2.getFxImage();
+        frameUp.add(Sprite.player_up.getFxImage());
+        frameUp.add(Sprite.player_up_1.getFxImage());
+        frameUp.add(Sprite.player_up_2.getFxImage());
     }
 
     public void setImgDown() {
-        frameDown[0] = Sprite.player_down.getFxImage();
-        frameDown[1] = Sprite.player_down_1.getFxImage();
-        frameDown[2] = Sprite.player_down_2.getFxImage();
+        frameDown.add(Sprite.player_down.getFxImage());
+        frameDown.add(Sprite.player_down_1.getFxImage());
+        frameDown.add(Sprite.player_down_2.getFxImage());
     }
 
     public void setImgLeft() {
-        frameLeft[0] = Sprite.player_left.getFxImage();
-        frameLeft[1] = Sprite.player_left_1.getFxImage();
-        frameLeft[2] = Sprite.player_left_2.getFxImage();
+        frameLeft.add(Sprite.player_left.getFxImage());
+        frameLeft.add(Sprite.player_left_1.getFxImage());
+        frameLeft.add(Sprite.player_left_2.getFxImage());
     }
 
     public void setImgRight() {
-        frameRight[0] = Sprite.player_right.getFxImage();
-        frameRight[1] = Sprite.player_right_1.getFxImage();
-        frameRight[2] = Sprite.player_right_2.getFxImage();
+        frameRight.add( Sprite.player_right.getFxImage());
+        frameRight.add(Sprite.player_right_1.getFxImage());
+        frameRight.add( Sprite.player_right_2.getFxImage());
     }
 
 //    public boolean isWin() {
@@ -89,7 +88,7 @@ public class Bomber extends movement {
 //        this.win = win;
 //    }
 
-    public boolean isLose() {
+    public static boolean isLose() {
         return lose;
     }
 
@@ -108,9 +107,9 @@ public class Bomber extends movement {
     }
 
     public void setImgDie() {
-        frameDie[0] = Sprite.player_dead1.getFxImage();
-        frameDie[1] = Sprite.player_dead2.getFxImage();
-        frameDie[2] = Sprite.player_dead3.getFxImage();
+        frameDie.add(Sprite.player_dead1.getFxImage());
+        frameDie.add( Sprite.player_dead2.getFxImage());
+        frameDie.add(Sprite.player_dead3.getFxImage());
     }
 
     @Override
@@ -148,13 +147,13 @@ public class Bomber extends movement {
     @Override
     public void moveUp(double tmpSpeed) {
         if (upFrameCount < maxFrame) {
-            this.setImg(frameUp[0]);
+            this.setImg(frameUp.get(0));
             upFrameCount++;
         } else if (upFrameCount < 2 * maxFrame) {
-            this.setImg(frameUp[1]);
+            this.setImg(frameUp.get(1));
             upFrameCount++;
         } else {
-            this.setImg(frameUp[2]);
+            this.setImg(frameUp.get(2));
             upFrameCount++;
             if (upFrameCount == 3 * maxFrame) {
                 upFrameCount = 0;
@@ -201,13 +200,13 @@ public class Bomber extends movement {
     @Override
     public void moveDown(double tmpSpeed) {
         if (downFrameCount < maxFrame) {
-            this.setImg(frameDown[0]);
+            this.setImg(frameDown.get(0));
             downFrameCount++;
         } else if (downFrameCount < 2 * maxFrame) {
-            this.setImg(frameDown[1]);
+            this.setImg(frameDown.get(1));
             downFrameCount++;
         } else {
-            this.setImg(frameDown[2]);
+            this.setImg(frameDown.get(2));
             downFrameCount++;
             if (downFrameCount == 3 * maxFrame) {
                 downFrameCount = 0;
@@ -257,13 +256,13 @@ public class Bomber extends movement {
     @Override
     public void moveLeft(double tmpSpeed) {
         if (leftFrameCount < maxFrame) {
-            this.setImg(frameLeft[0]);
+            this.setImg(frameLeft.get(0));
             leftFrameCount++;
         } else if (leftFrameCount < 2 * maxFrame) {
-            this.setImg(frameLeft[1]);
+            this.setImg(frameLeft.get(1));
             leftFrameCount++;
         } else {
-            this.setImg(frameLeft[2]);
+            this.setImg(frameLeft.get(2));
             leftFrameCount++;
             if (leftFrameCount == 3 * maxFrame) {
                 leftFrameCount = 0;
@@ -318,13 +317,13 @@ public class Bomber extends movement {
     @Override
     public void moveRight(double tmpSpeed) {
         if (rightFrameCount < maxFrame) {
-            this.setImg(frameRight[0]);
+            this.setImg(frameRight.get(0));
             rightFrameCount++;
         } else if (rightFrameCount < 2 * maxFrame) {
-            this.setImg(frameRight[1]);
+            this.setImg(frameRight.get(1));
             rightFrameCount++;
         } else {
-            this.setImg(frameRight[2]);
+            this.setImg(frameRight.get(2));
             rightFrameCount++;
             if (rightFrameCount == 3 * maxFrame) {
                 rightFrameCount = 0;
@@ -374,13 +373,13 @@ public class Bomber extends movement {
 
     public void bomberDying() {
         if (dieDuration < maxFrame) {
-            this.setImg(frameDie[0]);
+            this.setImg(frameDie.get(0));
             dieDuration++;
         } else if (dieDuration < maxFrame * 2) {
-            this.setImg(frameDie[1]);
+            this.setImg(frameDie.get(1));
             dieDuration++;
         } else if (dieDuration < maxFrame * 3) {
-            this.setImg(frameDie[2]);
+            this.setImg(frameDie.get(2));
             dieDuration++;
         } else if (dieDuration < maxFrame * 4) {
             this.setImg(null);
@@ -556,7 +555,7 @@ public class Bomber extends movement {
         }
     }
 
-    public void clearBombList(){
+    public void clearBombList() {
         bombsList.clear();
     }
 }
