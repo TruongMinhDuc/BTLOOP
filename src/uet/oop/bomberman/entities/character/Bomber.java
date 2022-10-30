@@ -22,14 +22,11 @@ import static uet.oop.bomberman.BombermanGame.eventHandler;
 
 public class Bomber extends movement {
 
-    public static int left = 3;
     private int dieDuration = 0;
     public static boolean flamePass = false;
     private int life;
     public static boolean brickPass = false;
     public static boolean bombPassItem = false;
-
-    //private boolean win = false;
     private static boolean lose = false;
     private boolean isDie = false;
     private int upFrameCount = 0;

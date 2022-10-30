@@ -58,7 +58,6 @@ public class ExplosionRender extends Entity {
                 case 1:
                     img = last ? Sprite.explosion_vertical_down_last1.getFxImage() : Sprite.explosion_vertical1.getFxImage();
                     break;
-
                 case 2:
                     img = last ? Sprite.explosion_horizontal_left_last1.getFxImage() : Sprite.explosion_horizontal1.getFxImage();
                     break;

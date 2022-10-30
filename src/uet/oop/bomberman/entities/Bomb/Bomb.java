@@ -11,8 +11,8 @@ import java.util.HashSet;
 import java.util.stream.IntStream;
 
 public class Bomb extends Entity {
-    public static int maxBomb = 2;
-    public static int blastLength = 10;
+    public static int maxBomb = 1;
+    public static int blastLength = 1;
     public static boolean bombPass = false;
     protected double timeToExplode = 130;
 
