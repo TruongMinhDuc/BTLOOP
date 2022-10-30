@@ -84,7 +84,7 @@ public class BombermanGame extends Application {
                 eventHandler.render();
                 eventHandler.update();
                 if(Bomber.isLose()){
-                    gameOverScene("game over");
+                    gameOverScene("Game Over");
                     stage.setScene(oScene);
                 }
             }
