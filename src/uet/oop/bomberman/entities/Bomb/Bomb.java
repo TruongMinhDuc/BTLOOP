@@ -70,7 +70,7 @@ public class Bomb extends Entity {
             }
         }
         if (!removable && timeExplode == 0) {
-            BombermanGame.eventHandler.getPlayer().removeBombAt(this.x, this.y);
+            BombermanGame.eventHandler.getBomber().removeBombAt(this.x, this.y);
             //System.out.println("remove");
 
         }

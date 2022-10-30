@@ -36,9 +36,9 @@ public class ExplosionRender extends Entity {
 
     public void update(int BlastDirection, int duration) {
 
-        int sizeBomb = eventHandler.getPlayer().getBombsList().size();
+        int sizeBomb = eventHandler.getBomber().getBombsList().size();
         for (int i = 0; i < sizeBomb; i++) {
-            eventHandler.getPlayer().getBombsList().get(i).blastImpactBomb(this);
+            eventHandler.getBomber().getBombsList().get(i).blastImpactBomb(this);
         }
 
         int sizeEnemy = eventHandler.getEnemyList().size();
@@ -46,7 +46,7 @@ public class ExplosionRender extends Entity {
             eventHandler.getEnemyList().get(i).collideWithExplosion(this);
         }
         if (!Bomber.flamePass) {
-            eventHandler.getPlayer().bomberDie(this);
+            eventHandler.getBomber().bomberDie(this);
         }
 
         duration %= 30;

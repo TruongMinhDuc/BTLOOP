@@ -23,8 +23,8 @@ public class FindPaths {
     }
 
     public int chasingPlayer(Enemy enemy, int direction) {
-        double bomberPosX = (double) Math.round(BombermanGame.eventHandler.getPlayer().getX() * 100) / 100;
-        double bomberPosY = (double) Math.round(BombermanGame.eventHandler.getPlayer().getY() * 100) / 100;
+        double bomberPosX = (double) Math.round(BombermanGame.eventHandler.getBomber().getX() * 100) / 100;
+        double bomberPosY = (double) Math.round(BombermanGame.eventHandler.getBomber().getY() * 100) / 100;
 
         double enemyPosX = (double) Math.round(enemy.getX() * 100) / 100;
         double enemyPosY = (double) Math.round(enemy.getY() * 100) / 100;

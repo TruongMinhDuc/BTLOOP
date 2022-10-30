@@ -100,14 +100,14 @@ public class BombermanGame extends Application {
     public void newGame() throws FileNotFoundException {
         eventHandler = new EventHandler();
         controller = new Controller();
-        eventHandler.getPlayer().setLife(3);
+        eventHandler.getBomber().setLife(3);
         eventHandler.setLevel(1);
         eventHandler.getGameLevel().createMap(1);
         eventHandler.setShowLevel(eventHandler.getLevel());
     }
 
     public void update() {
-        playerLife.setText(String.valueOf(eventHandler.getPlayer().getLife()));
+        playerLife.setText(String.valueOf(eventHandler.getBomber().getLife()));
         showLevel.setText(String.valueOf(eventHandler.getShowLevel()));
         showBomb.setText(String.valueOf(Bomb.maxBomb - Bomber.getBombsList().size()));
         showScore.setText(String.valueOf(EventHandler.getScore()));
@@ -148,7 +148,7 @@ public class BombermanGame extends Application {
         lifeText.setFont(font);
         textList.add(lifeText);
 
-        playerLife = new Text(1110, 90, String.valueOf(eventHandler.getPlayer().getLife()));
+        playerLife = new Text(1110, 90, String.valueOf(eventHandler.getBomber().getLife()));
         playerLife.setFill(color);
         playerLife.setFont(font);
         textList.add(playerLife);

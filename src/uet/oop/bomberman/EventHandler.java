@@ -24,8 +24,8 @@ public class EventHandler {
 
     private static List<Enemy> enemyList = new ArrayList<>();
 
-    private double playerSpeed = 0.05;
-    private static Bomber player;
+    private double bomberSpeed = 0.05;
+    private static Bomber bomber;
     private MapGen game;
     private int level;
     private int showLevel;
@@ -48,14 +48,14 @@ public class EventHandler {
     }
 
     public EventHandler() {
-        player = new Bomber(1, 1, Sprite.player_right.getFxImage(), playerSpeed);
+        bomber = new Bomber(1, 1, Sprite.player_right.getFxImage(), bomberSpeed);
         game = new MapGen(this);
     }
 
     public void levelUp(int level) {
         entitiesList.clear();
         enemyList.clear();
-        player.clearBombList();
+        bomber.clearBombList();
         stillObjects.clear();
         BombermanGame.stateScene();
         try {
@@ -104,12 +104,12 @@ public class EventHandler {
         return stillObjects;
     }
 
-    public  Bomber getPlayer() {
-        return player;
+    public Bomber getBomber() {
+        return bomber;
     }
 
-    public void setPlayer(Bomber player) {
-        this.player = player;
+    public void setBomber(Bomber player) {
+        this.bomber = player;
     }
 
     public List<Enemy> getEnemyList() {

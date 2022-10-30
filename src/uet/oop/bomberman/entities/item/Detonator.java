@@ -28,7 +28,7 @@ public class Detonator extends Item {
     public void update() {
         if (obtain) {
             removable = true;
-            eventHandler.getPlayer().setLife(eventHandler.getPlayer().getLife() + 1);
+            eventHandler.getBomber().setLife(eventHandler.getBomber().getLife() + 1);
             eventHandler.removeEntityAt(this.x, this.y);
         }
     }
