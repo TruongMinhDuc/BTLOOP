@@ -5,10 +5,7 @@ import uet.oop.bomberman.entities.MapEntities.Brick;
 import uet.oop.bomberman.entities.MapEntities.Grass;
 import uet.oop.bomberman.entities.MapEntities.Wall;
 import uet.oop.bomberman.entities.item.*;
-import uet.oop.bomberman.entities.npc.Balloom;
-import uet.oop.bomberman.entities.npc.Enemy;
-import uet.oop.bomberman.entities.npc.Konodoira;
-import uet.oop.bomberman.entities.npc.Oneal;
+import uet.oop.bomberman.entities.npc.*;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
@@ -143,6 +140,11 @@ public class MapGen {
                         EventHandler.map[i][j] = ' ';
                         Konodoira konodoira = new Konodoira(j, i, Sprite.oneal_left1.getFxImage(), Enemy.enemySpeed);
                         BombermanGame.eventHandler.addEnemy(konodoira);
+                        break;
+                    case '4':
+                        EventHandler.map[i][j] = ' ';
+                        Doll doll = new Doll(j, i, Sprite.doll_left1.getFxImage(),Enemy.enemySpeed);
+                        BombermanGame.eventHandler.addEntity(doll);
                         break;
 
                 }
