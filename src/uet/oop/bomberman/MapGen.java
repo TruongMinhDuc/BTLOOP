@@ -128,23 +128,23 @@ public class MapGen {
                         break;
                     case '1':
                         EventHandler.map[i][j] = ' ';
-                        Balloom balloom = new Balloom(j, i, Sprite.balloom_left1.getFxImage(), Enemy.enemySpeed);
+                        Enemy balloom = new Balloom(j, i, Sprite.balloom_left1.getFxImage(), Enemy.enemySpeed);
                         BombermanGame.eventHandler.addEnemy(balloom);
                         break;
                     case '2':
                         EventHandler.map[i][j] = ' ';
-                        Oneal oneal = new Oneal(j, i, Sprite.oneal_left1.getFxImage(), Enemy.enemySpeed);
+                        Enemy oneal = new Oneal(j, i, Sprite.oneal_left1.getFxImage(), Enemy.enemySpeed);
                         BombermanGame.eventHandler.addEnemy(oneal);
                         break;
                     case '3':
                         EventHandler.map[i][j] = ' ';
-                        Konodoira konodoira = new Konodoira(j, i, Sprite.oneal_left1.getFxImage(), Enemy.enemySpeed);
+                        Enemy konodoira = new Konodoira(j, i, Sprite.oneal_left1.getFxImage(), Enemy.enemySpeed);
                         BombermanGame.eventHandler.addEnemy(konodoira);
                         break;
                     case '4':
                         EventHandler.map[i][j] = ' ';
-                        Doll doll = new Doll(j, i, Sprite.doll_left1.getFxImage(),Enemy.enemySpeed);
-                        BombermanGame.eventHandler.addEntity(doll);
+                        Enemy doll = new Doll(j, i, Sprite.doll_left1.getFxImage(),Enemy.enemySpeed);
+                        BombermanGame.eventHandler.addEnemy(doll);
                         break;
 
                 }
