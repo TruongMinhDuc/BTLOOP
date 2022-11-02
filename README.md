@@ -31,7 +31,7 @@ Các *Item* cũng được giấu phía sau Brick và chỉ hiện ra khi Brick 
 Các loại Enemy:
 - ![](res/sprites/balloom_left1.png) *Balloom* là Enemy đơn giản nhất, di chuyển ngẫu nhiên với vận tốc cố định
 - ![](res/sprites/oneal_left1.png) *Oneal* tương tự như Balloom chúng di chuyển ngẫu nhiên,tuy nhiên khi Bomber đến gần chúng sẽ đuổi theo Bomber
-- ![](res/sprites/doll_left1.png) *Doll* là Enemy di chuyển ngẫu nhiên
+- ![](res/sprites/doll_left1.png) *Doll* là Enemy di chuyển ngẫu nhiên với vận tốc ngẫu nhiên.
 - ![](res/sprites/kondoria_left1.png) *Kondoria*  là Enemy di chuyển ngẫu nhiên với khả năng đi xuyên qua đối tượng Brick
 
 ## Mô tả game play, xử lý va chạm và xử lý bom nổ
