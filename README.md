@@ -20,12 +20,12 @@ Nếu bạn đã từng chơi Bomberman, bạn sẽ cảm thấy quen thuộc v�
 - ![](res/sprites/portal.png) *Portal* là đối tượng được giấu phía sau một đối tượng Brick. Khi Brick đó bị phá hủy, Portal sẽ hiện ra và nếu tất cả Enemy đã bị tiêu diệt thì người chơi có thể qua Level khác bằng cách di chuyển vào vị trí của Portal.
 
 Các *Item* cũng được giấu phía sau Brick và chỉ hiện ra khi Brick bị phá hủy. Bomber có thể sử dụng Item bằng cách di chuyển vào vị trí của Item. Thông tin về chức năng của các Item được liệt kê như dưới đây:
-- ![](res/sprites/powerup_speed.png) *SpeedItem* Khi sử dụng Item này, Bomber sẽ được tăng vận tốc di chuyển thêm một giá trị thích hợp
-- ![](res/sprites/powerup_flames.png) *FlameItem* Item này giúp tăng phạm vi ảnh hưởng của Bomb khi nổ (độ dài các Flame lớn hơn)
-- ![](res/sprites/powerup_bombs.png) *BombItem* Thông thường, nếu không có đối tượng Bomb nào đang trong trạng thái kích hoạt, Bomber sẽ được đặt và kích hoạt duy nhất một đối tượng Bomb. Item này giúp tăng số lượng Bomb có thể đặt thêm một
-- ![](res/sprites/powerup_bombpass.png) *BomPassItem* Item này giúp Bomber có thể di chuyển xuyên qua đối tượng Bomb
-- ![](res/sprites/powerup_flamepass.png) *FlamePass* Item này tăng sức chống chịu của Bomber, Bomber có thể tự do di chuyển trong phạm vi Flame của Bomb mà không bị giết
-- ![](res/sprites/powerup_wallpass.png) *WallPass* Item cho Bomber khả năng đi xuyên tường(Brick).
+- ![](res/sprites/powerup_speed.png) *SpeedItem* Khi sử dụng Item này, Bomber sẽ được tăng vận tốc di chuyển thêm một giá trị thích hợp.
+- ![](res/sprites/powerup_flames.png) *FlameItem* Item giúp tăng độ dài của lửa.
+- ![](res/sprites/powerup_bombs.png) *BombItem* Tăng số lượng bomb có thể đặt cho Bomber thêm 1.
+- ![](res/sprites/powerup_bombpass.png) *BomPassItem* Item này giúp Bomber không bị bomb chặn.
+- ![](res/sprites/powerup_flamepass.png) *FlamePass* Item giúp Bomber không chết khi tiếp xúc với lửa.
+- ![](res/sprites/powerup_wallpass.png) *WallPass* Item cho Bomber khả năng đi xuyên gạch(Brick).
 - ![](res/sprites/powerup_detonator.png) *Detonaor* Item tăng thêm mạng cho Bomber.
 
 Các loại Enemy:
